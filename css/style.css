@@ -155,6 +155,17 @@ textarea:focus {
 	border-top: 1px solid #d1d1d1;
 }
 
+.grid-social img {
+	transition: all 150ms ease-in-out;
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+}
+
+.grid-social img:hover {
+	opacity:.8;
+}
+
 .social-icons {
 	width: 80px;
 	height: 80px;

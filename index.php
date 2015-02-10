@@ -107,7 +107,10 @@ if(mobileDevice() == true)
             
 			<div class=<?php /*Removes div if selected id*/ if(isset($_GET['id'])){echo '"grid2-large"';}else {echo '"grid2"';} ?>>
 
-				<a href="#"><img src="img/ad.png"8></a>
+				<div style="max-width:100%;background-color:#f9f9f9;padding:15px;text-align:center;">
+					<p><small>UK have now got a new android app which contains contact info and a calender</small></p><br>
+					<a href="https://play.google.com/store/apps/details?id=com.Trickflipz.Trickzflipz" target="_blank" style="width:100%;background-color:#2287E5;color:#fff;padding:15px;">Download Now</a>
+				</div>
 
 				<p style="font-size:10px; border-top:1px solid #d3d3d3;" align="center"><span style="font-family: arial;">&copy;</span> Copyright 2014 WEBDEV</p>
 
