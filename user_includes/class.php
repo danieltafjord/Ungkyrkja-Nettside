@@ -168,7 +168,7 @@ if(!class_exists('Joomba')){
                 $redirect = str_replace('indexa.php', 'login.php', $url);
                 //Redirect to the home page
                 //header("Location: $redirect?msg=login");
-                echo "Restricted area, <a href='goBack()'>Go back</a>";
+                echo "Restricted area, <a href='index.php'>Go back</a>";
                 exit;
             }
             return $results;
