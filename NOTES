@@ -1,0 +1,9 @@
+
+
+- Add_post.php
+	- detect editor
+	- send editors name to database
+
+- index.php,lindexadmin.php
+	- display editors name in every post(class="post")
+	- (Future-project) merge index.php and lindexadmin.php
