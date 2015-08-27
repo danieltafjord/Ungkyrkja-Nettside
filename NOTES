@@ -3,6 +3,11 @@
 - Add_post.php
 	- detect editor
 	- send editors name to database
+	- Make link button
+	
+
+- Header
+	- Add Meetings list using xml
 
 - index.php,lindexadmin.php
 	- display editors name in every post(class="post")

@@ -1,0 +1,82 @@
+input {
+	width: 320px;
+	height: 40px;
+	padding: 5px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	border: none;
+	border-bottom: 1px solid #999;
+}
+
+input:focus {
+	outline: none;
+}
+
+input[type=submit] {
+	width: 80px;
+	height: 35px;
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+	background-color: #2979FF;
+	color: #fff;
+	float: right;
+	font-size: 12px;
+}
+
+input[type=submit]:hover {
+	background-color: #4F90FF;
+}
+
+button {
+        width: 80px;
+	height: 35px;
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+	background-color: #2979FF;
+	color: #fff;
+	font-size: 12px;
+}
+
+.log-in-btn {
+	width: 80px;
+	height: 35px;
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+	background-color: #2979FF;
+	color: #fff;
+	float: right;
+	font-size: 12px;
+}
+
+.header-text {
+	border-bottom: 1px solid #999;
+	padding-bottom: 8px;
+	text-align: left;
+}
+
+.git {
+cursor:pointer;
+transition: all 250ms ease-in-out;
+-webkit-transition: all 250ms ease-in-out;
+}
+
+.git:hover {
+fill: #555;
+}
+
+ul {list-style: none;padding: 0px;margin: 0px;}
+ul li {display: block;position: relative;float: left;}
+li ul {display: none;}
+ul li a {display: block;background: #fff;padding: 5px 10px 5px 10px;text-decoration: none;
+				white-space: nowrap;color: #333;}
+ul li a:hover {background: #fff;}
+li:hover ul {display: block; position: absolute;}
+li:hover li {float: none;}
+li:hover a {background: #fff;}
+li:hover li a:hover {background: #fff;}
+#drop-nav li ul li {border-top: 0px;}
+			#drop-nav li ul {border:1px solid #e3e3e3;}
+			#drop-nav li ul li a {float:left;}

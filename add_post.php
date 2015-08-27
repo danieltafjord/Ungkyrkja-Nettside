@@ -1,4 +1,4 @@
-<?php 
+2<?php 
 	include_once('resources/init.php'); 
 	
 	if ( isset($_POST['title'], $_POST['contents'], $_POST['category']) ) {
@@ -6,7 +6,7 @@
 		$errors = array();
 
 		$title 		= trim($_POST['title']);
-		$contents 	= trim($_POST['contents']);
+		//$contents 	= trim($_POST['contents']);
                
 
 		if ( empty($title)) {
@@ -23,6 +23,12 @@
 		if ( ! category_exists('id', $_POST['category']) ){
 			$errors[] = 'That category does not exist';	
 		}
+
+		
+		#slh = stringLinkHeystack
+		//$slh  = $_POST['contents']; 
+		//$stringLink = strstr($slh, 'http', false); 
+		//$contents = trim($stringLink);
 
 		if ( empty($errors) ) {
 			add_post($title, $contents, $_POST['category']);
@@ -42,8 +48,8 @@
 </head>
 
 <body>
-<div class="container">
-	<div class="row">
+<div class="container" align="center">
+	<div class="row" align="center">
 		<div class="span6 offset3">
 			<h1>Add Post</h1>
 				<?php include "includes/_nav.php" ?>
@@ -61,9 +67,13 @@
 
 					<br>
 
+					<!--<div>
+						<button onclick="addLink()">Add link</button>
+					</div>-->
+
 					<div>
 					
-						<textarea name="contents" rows="12" cols="50" placeholder="Content" class="form-contents" ><?php if ( isset($_POST['contents']) ) echo $_POST['contents']; ?></textarea>
+						<textarea name="contents" rows="12" cols="50" placeholder="Content" class="form-contents" id="textarea" ><?php if ( isset($_POST['contents']) ) echo $_POST['contents']; ?></textarea>
 						<span class="countdown"></span>
 					
 					</div>
@@ -92,11 +102,18 @@
 	</div>
 </div>
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!--<script type="text/javascript">
+	function addLink() {
+   		var link = prompt("Add link", "");
+   		var linkText = prompt("link text")
+   		var Field = document.getElementById('textarea');
+   		Field.value += '<' + 'a href="' + link + '"' + '>' + linkText + '</' + 'a' + '>';
+}
+</script>-->
 <script type="text/javascript">
 function updateCountdown() {
-    // 140 is the max message length
+    // 5000 is the max message length
     var remaining = 5000 - jQuery('.form-contents').val().length;
     jQuery('.countdown').text(remaining + ' characters remaining.');
 }

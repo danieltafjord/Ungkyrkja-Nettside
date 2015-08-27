@@ -1,22 +1,24 @@
 @font-face {
 	font-family: awesomeFont;
-        src: url('../font-awesome/fonts/fontawesome-webfont.eot'); 
+        src: url('../font-awesome/fonts/fontawesome-webfont.eot');
         src: url('../font-awesome/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
         	 url('../font-awesome/fonts/fontawesome-webfont.woff') format('woff'),
         	 url('../font-awesome/fonts/fontawesome-webfont.ttf')  format('truetype'),
         	 url('../font-awesome/fonts/fontawesome-webfont.svg#svgFontName') format('svg');
 }
 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
 body {
 	text-rendering: optimizeLegibility;
 	margin: 0;
 	font-family: awesomeFont;
 	color: #414141;
-	background-color: #fff;/*e1e3e4*/
+	background-color: #f7f7f7;/*e1e3e4*/
 	font-size: 21px;
 	font-weight: 200;
 	line-height: 30px;
-	-webkit-font-smoothing: antialiased;    
+	-webkit-font-smoothing: antialiased;
     image-rendering:-moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering:-webkit-optimize-contrast;
@@ -41,15 +43,20 @@ textarea:focus {
 }
 
 .header {
-	width: 100%;
-	height: 70px;
-	background-color: #f9f9f9;
+	font-family: 'Open Sans', sans-serif;
+	border-bottom: 1px solid #eee;
+	background-color: rgba(255,255,255,.95);
 	position: fixed;
-	left: 0;
-	top: 0;
 	z-index: 999;
-	box-shadow: 0px 1px 3px #d8d8d8;
-	opacity: 0.99;
+	height: 50px;
+	width: 100%;
+	top: 0;
+}
+
+.header img {
+	width: 43px;
+	margin-left: 20px;
+	margin-top: 5px;
 }
 
 .logo {
@@ -92,29 +99,17 @@ textarea:focus {
 /* CONTAINER */
 
 .container {
-	padding-top: 110px;
-	margin-right: 60px;
-	margin-left: 60px;
-    height:100%;
-    width: 90%;
+	margin-top: 15%;
+    height:auto;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    position: relative;
+    bottom: 0;
 }
 
 .grid-layout {
-	width: 100%;
-}
-
-.grid {
-	display: inline-block;
-	width: 47%;
-	height: 350px;
-	border: 1px solid #e3e3e3;
-	border-radius: 5px;
-	background-color: #fff;
-	margin-bottom: 40px;
-}
-
-.grid:hover {
-	border: 1px solid #d3d3d3;
+	width: 90%;
 }
 
 .grid-h5 {
@@ -131,10 +126,8 @@ textarea:focus {
 }
 
 .grid1 {
-	float: left;
-	width: 60%;
+	width: 80%;
 	height: auto;
-    border-top: 1px solid #d1d1d1;
 }
 
 .grid2 {
@@ -148,11 +141,10 @@ textarea:focus {
 }
 
 .grid-social {
-	margin-bottom: 30px;
+	margin-bottom: 00px;
 	width: 35%;
 	float: right;
 	height: 100px;
-	border-top: 1px solid #d1d1d1;
 }
 
 .grid-social img {
@@ -182,18 +174,25 @@ textarea:focus {
 }
 
 .title {
-    font-size: 35px;
-    font-family: helvetica, "Helvetica Neue Light";
+    font-size: 30px;
+		font-weight: 300;
+    font-family: Open Sans;
+    line-height: 1;
 }
 
 .title-large {
 	font-size: 50px;
+	line-height: 1;
+	font-family: Open Sans;
+	font-weight: 300;
 }
 
 .post-content {
     font-size: 17px;
-    line-height: 1.4;
+    line-height: 1.6;
     overflow: hidden;
+		font-family: Open Sans;
+		font-weight: 400;
 }
 
 .post-content img {
@@ -239,6 +238,7 @@ textarea:focus {
 	max-height: 700px;
 	text-overflow: ellipsis;
 	text-overflow: ellipsis ellipsis;
+	text-align: left;
 }
 
 .post-container-large div{
@@ -266,12 +266,13 @@ textarea:focus {
 .form-submit-button {
 	width: 100px;
 	height: 40px;
-	background-color: red;
+	background-color: #2287E5;
 	color: #fff;
 	border: none;
 	font-size: 14px;
 	float: right;
-	display: inline-block;
+	display: block;
+	border-radius: 3px;
 	-webkit-filter: grayscale(5%);
 	transition: all 300ms ease-in-out;
 	-webkit-transition: all 300ms ease-in-out;
@@ -288,9 +289,7 @@ textarea:focus {
 	height: 35px;
 	font-size: 18px;
 	border: none;
-	padding-left: 10px;
-	border: 1px solid #888;
-	border-radius: 3px;
+	border: 1px solid #999;
 }
 
 .form-post {
@@ -300,16 +299,14 @@ textarea:focus {
 .form-contents {
 	font-size: 14px;
 	border: none;
-	padding-left: 10px;
-	border: 1px solid #888;
-	border-radius: 3px;
+	border: 1px solid #999;
 }
 
 .form-category {
 	font-size: 20px;
-	width: 100px;
+	width: 120px;
 	float: left;
-	display: inline-block;
+	display: block;
 }
 
 .page-not-found h1 {
@@ -320,6 +317,15 @@ textarea:focus {
 .page-not-found p {
 	font-size: 30px;
 	font-weight: 300;
+}
+
+.countdown {
+	font-size: 15px;
+	float: left;
+}
+
+.close {
+	display: none;
 }
 
 /*
@@ -339,11 +345,16 @@ textarea:focus {
 		display: none;
 	}
 	.grid1 {
-		width: 95%;
+		width: 100%;
+	}
+	.post {
+		border-radius: 2px;
 	}
 	.container {
 		margin-right: 0;
 		margin-left: 0;
+		padding:10px;
+		width: 95%;
 	}
 	.nav {
 		display: none;
@@ -352,8 +363,48 @@ textarea:focus {
 		display: block;
 	}
 	.post-content {
-		font-size: 12px;
+		font-size: 14px;
 	}
+
+
+
+	/* ADD POST */
+
+	.form-submit-button {
+	width: 100%;
+	height: 40px;
+	float: right;
+	display: block;
+	}
+
+	.form-title {
+		height: 35px;
+		font-size: 18px;
+		border: none;
+		border: 1px solid #999;
+	}
+
+	.form-post {
+		width: 90%;
+		text-align: center;
+	}
+
+	.form-contents {
+		font-size: 14px;
+		border: none;
+		border: 1px solid #999;
+	}
+
+	.form-category {
+		font-size: 20px;
+		width: 120px;
+		float: left;
+		display: block;
+	}
+
+
+
+
 }
 
 

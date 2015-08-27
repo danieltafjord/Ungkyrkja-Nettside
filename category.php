@@ -36,6 +36,8 @@ $posts = get_posts(null, $_GET['id']);
 
 						<div class="post">
 
+							<button class=<?php if(isset($_GET['id'])){echo '"post-readall-large"';}else {echo '"post-readall"';} ?> onclick="javascript:location.href='index.php?id=<?php echo $post['post_id']; ?>'">READ ALL ...</button>
+
 							<h2><a href="index.php?id=<?php echo $post['post_id']; ?>" class="title"><?php echo $post['title']; ?></a></h2>
 
 							<small class="date"> Posted on <?php echo date('d-m-Y', strtotime($post['date_posted'])); ?> in 

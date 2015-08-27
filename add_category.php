@@ -45,7 +45,7 @@ if ( isset($_POST['name']) ) {
 				?>
 			<hr>
 			<br>
-			<form action="" method="post">
+			<form action="" method="post" class="form-post">
 					<div>
 						<label class="control-label" for="inputError"> Name </label>
 						<input type="text" name="name" value="">

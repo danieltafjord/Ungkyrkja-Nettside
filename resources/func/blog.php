@@ -45,7 +45,7 @@ function delete($table, $id) {
 
 function get_posts($id = null, $cat_id = null) {
 	$posts = array();
-	$query = "SELECT posts.id AS post_id, categories.id AS category_id, title, contents, date_posted, categories.name FROM posts INNER JOIN categories ON categories.id = posts.cat_id ";
+	$query = "SELECT posts.id AS post_id, categories.id AS category_id, title, contents, date_posted, categories.name FROM posts INNER JOIN categories ON categories.id = posts.cat_id";
 	
 	if ( isset($id) ) {
 		$id = (int) $id;
