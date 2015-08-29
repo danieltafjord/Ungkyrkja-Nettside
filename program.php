@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-	<title>Ungkyrkja | Heim</title>
+	<title>Ungkyrkja | Program</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php //include "includes/_head.php" ?>
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
