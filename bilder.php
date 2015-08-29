@@ -14,7 +14,7 @@ $postid = $_GET['img'];
 <!DOCTYPE html>
 <html lang="no">
 <head>
-	<title>Ungkyrkja | Heim</title>
+	<title>Ungkyrkja | Bilder</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<?php //include "includes/_head.php" ?>
