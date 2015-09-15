@@ -43,11 +43,11 @@ $postid = $_GET['id'];
 
 	<!-- Section 1 -->
 	<?php if(!$postid) { echo '  
-	<section style="background-color:#f1f1f1;background-attachment:fixed;min-height:500px;margin-top:-50px;">
+	<section style="background-color:#f1f1f1;background-image:url(\'img/hero.png\');background-size:cover;background-attachment:fixed;min-height:500px;margin-top:-50px;">
 		<div align="center">
 			<!--<a href=""><img src="img/uk_logo.png" class="logo"></a>-->
-			<h1 style="position:relative;top:100px;font-size:60px;color:#444;text-shadow: 1px 1px 3px rgba(150, 150, 150, 0.88);">website</h1>
-			<p style="position:relative;top:100px;font-size:20px;color:#444;max-width:600px;">For ungdom fr&aring; 8. klasse. Torsdagar kl.19.00-22.00. Interessegrupper, samlingar og ungdomsgudsteneste, kiosk, weekend og andre utflukter.</p>
+			<h1 style="position:relative;top:100px;font-size:60px;color:#fff;text-shadow: 1px 1px 3px rgba(150, 150, 150, 0.88);">website</h1>
+			<p style="position:relative;top:100px;font-size:22px;font-weight:bold;text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.88);color:#fff;max-width:600px;">For ungdom fr&aring; 8. klasse. Torsdagar kl.19.00-22.00. Interessegrupper, samlingar og ungdomsgudsteneste, kiosk, weekend og andre utflukter.</p>
 		</div>
 	</section>
 	';} ?>
@@ -157,7 +157,6 @@ $postid = $_GET['id'];
 	    	<ul>
 	    		<li><a href="index.php">Heim</a></li>
 	    		<li><a href="#kontakt">Kontakt</a></li>
-	    		<li><a href="index.php">Info</a></li>
 	    		<li><a href="index.php">App</a></li>
 	    		<li><a href="program.php">Program</a></li>
 	    		<li><a href="admin.php">Admin</a></li>
