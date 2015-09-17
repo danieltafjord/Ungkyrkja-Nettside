@@ -46,8 +46,13 @@ $postid = $_GET['id'];
 	<section style="background-color:#f1f1f1;background-image:url(\'img/hero.png\');background-size:cover;background-attachment:fixed;min-height:500px;margin-top:-50px;">
 		<div align="center">
 			<!--<a href=""><img src="img/uk_logo.png" class="logo"></a>-->
+<<<<<<< HEAD
 			<h1 style="position:relative;top:100px;font-size:60px;color:#fff;text-shadow: 1px 1px 3px rgba(150, 150, 150, 0.88);">website</h1>
 			<p style="position:relative;top:100px;font-size:22px;font-weight:bold;text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.88);color:#fff;max-width:600px;">For ungdom fr&aring; 8. klasse. Torsdagar kl.19.00-22.00. Interessegrupper, samlingar og ungdomsgudsteneste, kiosk, weekend og andre utflukter.</p>
+=======
+			<h1 style="position:relative;top:100px;font-size:60px;color:#444;text-shadow: 1px 1px 3px rgba(150, 150, 150, 0.88);">Ungkyrkja</h1>
+			<p style="position:relative;top:100px;font-size:20px;color:#444;max-width:600px;">For ungdom fr&aring; 8. klasse. Torsdagar kl.19.00-22.00. Interessegrupper, samlingar og ungdomsgudsteneste, kiosk, weekend og andre utflukter.</p>
+>>>>>>> origin/master
 		</div>
 	</section>
 	';} ?>
