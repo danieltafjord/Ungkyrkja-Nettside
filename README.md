@@ -1,4 +1,4 @@
 # Ungkyrkja-Nettside
 
 # TODO
-- Polymer
+- Add Polymer
