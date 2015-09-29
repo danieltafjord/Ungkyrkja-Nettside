@@ -71,6 +71,7 @@ $postid = $_GET['id'];
 			}
 		
 			$month="";
+			
 			while($rows = mysqli_fetch_array($query)){
 				$title = $rows['title'];
 				$content = $rows['content'];
@@ -84,6 +85,7 @@ $postid = $_GET['id'];
 					createEventPanel($title, $content, $date, $enddate);		
 				}
 				else{
+					//If there is a new month, create a divider
 					?>
 					<div class="month_divider">
 						<p><?php echo $date->format("F");?></p>
@@ -92,10 +94,9 @@ $postid = $_GET['id'];
 				<?php
 					createEventPanel($title, $content, $date, $enddate);
 				}
+				//Update month after every cycle
 				$month = $date->format("m");
-				?>
 				
-			<?php
 			}
 		?>
 		</div>
