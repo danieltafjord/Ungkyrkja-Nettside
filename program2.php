@@ -46,11 +46,11 @@ $postid = $_GET['id'];
 		<?php
 			$dateFormatter = new IntlDateFormatter('no_NN', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT);
 			
-			function createEventPanel($title, $content, $date, $enddate, $dateFormatter){
+			function createEventPanel($id, $title, $content, $date, $enddate, $dateFormatter){
 				//Create panel with event data
 				?>
 				<div class="<?php if(strlen($content) < 300){echo "col-sm-4";}
-					else{echo "col-sm-8";}?>">
+					else{echo "col-sm-8";}?>" id="<?php echo $id; ?>">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3><?php echo $title;?></h3>
@@ -92,6 +92,7 @@ $postid = $_GET['id'];
 			$month="";
 			
 			while($rows = mysqli_fetch_array($query)){
+				$id = $rows['id'];
 				$title = $rows['title'];
 				$content = $rows['content'];
 				$date = new DateTime($rows['date']);
@@ -101,7 +102,7 @@ $postid = $_GET['id'];
 				if($month == $date->format("m")){
 					
 					//Create panel with event data
-					createEventPanel($title, $content, $date, $enddate, $dateFormatter);		
+					createEventPanel($id, $title, $content, $date, $enddate, $dateFormatter);		
 				}
 				else{
 					//If there is a new month, create a divider
@@ -116,7 +117,7 @@ $postid = $_GET['id'];
 			</div>
 		<div class="row">
 				<?php
-					createEventPanel($title, $content, $date, $enddate, $dateFormatter);
+					createEventPanel($id, $title, $content, $date, $enddate, $dateFormatter);
 				}
 				//Update month after every cycle
 				$month = $date->format("m");
