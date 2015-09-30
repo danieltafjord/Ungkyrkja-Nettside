@@ -44,7 +44,7 @@ $postid = $_GET['id'];
 		</div>
 		<div class="row">
 		<?php
-			$dateFormatter = new IntlDateFormatter('no_NN', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT);
+			$dateFormatter = new IntlDateFormatter('no_NB.utf-8', IntlDateFormatter::FULL, IntlDateFormatter::LONG);
 			
 			function createEventPanel($id, $title, $content, $date, $enddate, $dateFormatter){
 				//Create panel with event data
