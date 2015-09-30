@@ -1,4 +1,7 @@
-hr{
+.month_divider hr{
 	background-color: black;
 	height: 1px;
+}
+.event_data img{
+	float:left;
 }

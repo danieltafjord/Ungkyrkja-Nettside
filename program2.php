@@ -44,7 +44,9 @@ $postid = $_GET['id'];
 		</div>
 		<div class="row">
 		<?php
-			function createEventPanel($title, $content, $date, $enddate){
+			$dateFormatter = new IntlDateFormatter('no_NN', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT);
+			
+			function createEventPanel($title, $content, $date, $enddate, $dateFormatter){
 				//Create panel with event data
 				?>
 				<div class="<?php if(strlen($content) < 300){echo "col-sm-4";}
@@ -54,18 +56,32 @@ $postid = $_GET['id'];
 							<h3><?php echo $title;?></h3>
 						</div>
 						<div class="panel-body">
-							<div>
-								<?php if($content != ""){
+							<div class="event_data">
+								<div>
+									<img src="img/ic_event_black.png">
+									<p><?php echo "Veke: " . $date->format("W"); ?></p>
+								</div>
+								<div>
+									<img src="img/ic_access_time_black.png">
+									<p><?php
+										$dateFormatter->setPattern("EEEE dd. MMMM, HH:mm");
+										if($date->format("d.m.Y") == $enddate->format("d.m.Y")){
+											echo $dateFormatter->format($date) . " - " . $enddate->format("H:i");
+										}
+										else{
+											echo $dateFormatter->format($date) . " - <br>" . $dateFormatter->format($enddate);
+										}
+										?></p>
+								</div>
+								<div>
+									<?php if($content != ""){
+										?>
+										<img src="img/ic_label_black.png">
+										<p><?php echo $content;?></p>
+										<?php
+									}
 									?>
-									<img src="img/ic_label_black.png" style="float:left;">
-									<p><?php echo $content;?></p>
-									<?php
-								}
-								?>
-							</div>
-							<div>
-								<img src="img/ic_event_black.png" style="float:left;">
-								<p><?php echo $date->format("d.m.Y");?></p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -79,25 +95,28 @@ $postid = $_GET['id'];
 				$title = $rows['title'];
 				$content = $rows['content'];
 				$date = new DateTime($rows['date']);
-				$enddate = $rows['enddate'];
+				$enddate = new DateTime($rows['enddate']);
 			
 				//Print out stuff
 				if($month == $date->format("m")){
 					
 					//Create panel with event data
-					createEventPanel($title, $content, $date, $enddate);		
+					createEventPanel($title, $content, $date, $enddate, $dateFormatter);		
 				}
 				else{
 					//If there is a new month, create a divider
 					?>
 		</div>			
 			<div class="month_divider">
-				<p><?php echo $date->format("F");?></p>
+				<p><?php 
+					$dateFormatter->setPattern("MMMM");
+					echo $dateFormatter->format($date);
+					?></p>
 				<hr>
 			</div>
 		<div class="row">
 				<?php
-					createEventPanel($title, $content, $date, $enddate);
+					createEventPanel($title, $content, $date, $enddate, $dateFormatter);
 				}
 				//Update month after every cycle
 				$month = $date->format("m");
