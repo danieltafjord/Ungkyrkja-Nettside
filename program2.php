@@ -47,7 +47,8 @@ $postid = $_GET['id'];
 			function createEventPanel($title, $content, $date, $enddate){
 				//Create panel with event data
 					?>
-					<div class="panel panel-default col-sm-4">
+					<div class="panel panel-default <?php if(strlen($content) < 300){echo "col-sm-4";}
+					else{echo "col-sm-8";}?>">
 						<div class="panel-heading">
 							<h3><?php echo $title;?></h3>
 						</div>
