@@ -38,7 +38,7 @@ $postid = $_GET['id'];
 	</div>
 
 	<!--Main bit-->
-	<div class="container">
+	<div class="container-fluid">
 		<div class="jumbotron">
 			<h1>Program</h1>
 		</div>
@@ -46,9 +46,10 @@ $postid = $_GET['id'];
 		<?php
 			function createEventPanel($title, $content, $date, $enddate){
 				//Create panel with event data
-					?>
-					<div class="panel panel-default <?php if(strlen($content) < 300){echo "col-sm-4";}
+				?>
+				<div class="<?php if(strlen($content) < 300){echo "col-sm-4";}
 					else{echo "col-sm-8";}?>">
+					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3><?php echo $title;?></h3>
 						</div>
@@ -68,6 +69,7 @@ $postid = $_GET['id'];
 							</div>
 						</div>
 					</div>
+				</div>
 			<?php		
 			}
 		
@@ -88,10 +90,12 @@ $postid = $_GET['id'];
 				else{
 					//If there is a new month, create a divider
 					?>
-					<div class="month_divider">
-						<p><?php echo $date->format("F");?></p>
-						<hr>
-					</div>
+		</div>			
+			<div class="month_divider">
+				<p><?php echo $date->format("F");?></p>
+				<hr>
+			</div>
+		<div class="row">
 				<?php
 					createEventPanel($title, $content, $date, $enddate);
 				}
