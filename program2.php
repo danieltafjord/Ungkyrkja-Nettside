@@ -91,6 +91,7 @@
 			
 			//Create a divider if there is a new month
 			if($month != $date->format("m")){
+				$row = 0;
 				?>
 	</div>			
 		<div class="month_divider">
