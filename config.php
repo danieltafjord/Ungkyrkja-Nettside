@@ -4,13 +4,13 @@
 # Database Information
 
 /* DB Name */
-define('DB_NAME', 'blog');
+define('DB_NAME', 'ungkyrkja');
 
 /* DB Username */
-define('DB_USER', 'root');
+define('DB_USER', 'ungkyrkja');
 
 /* DB Password */
-define('DB_PASS', '');
+define('DB_PASS', 'ungkyrkja');
 
 
 # SALT Information

@@ -11,7 +11,7 @@ if(!class_exists('Joomba')){
 			$current = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 			//The full URL of the page the form was submitted from
-			$referrer = $_SERVER['HTTP_REFERER'];
+			$referrer = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 			/*
 			 * Check to see if the $_POST array has date (i.e. our form was submitted) and if so,
