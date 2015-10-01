@@ -37,11 +37,10 @@
 	<?php
 		$dateFormatter = new IntlDateFormatter('no_NB.utf-8', IntlDateFormatter::FULL, IntlDateFormatter::LONG);
 		
-		function createEventPanel($id, $title, $content, $date, $enddate, $dateFormatter){
+		function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter){
 			//Create panel with event data
 			?>
-			<div class="<?php if(strlen($content) < 300){echo "col-sm-4";}
-				else{echo "col-sm-8";}?>" id="<?php echo $id; ?>">
+			<div class="<?php echo "col-sm-" . $columns;?>" id="<?php echo $id; ?>">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3><?php echo $title;?></h3>
@@ -81,6 +80,7 @@
 		}
 	
 		$month="";
+		$row = 0;
 		
 		while($rows = mysqli_fetch_array($query)){
 			$id = $rows['id'];
@@ -88,15 +88,9 @@
 			$content = $rows['content'];
 			$date = new DateTime($rows['date']);
 			$enddate = new DateTime($rows['enddate']);
-		
-			//Print out stuff
-			if($month == $date->format("m")){
-				
-				//Create panel with event data
-				createEventPanel($id, $title, $content, $date, $enddate, $dateFormatter);		
-			}
-			else{
-				//If there is a new month, create a divider
+			
+			//Create a divider if there is a new month
+			if($month != $date->format("m")){
 				?>
 	</div>			
 		<div class="month_divider">
@@ -107,12 +101,29 @@
 			<hr>
 		</div>
 	<div class="row">
-			<?php
-				createEventPanel($id, $title, $content, $date, $enddate, $dateFormatter);
+			<?php	
+			}
+			//Create a wide panel if there is more than 500 chars in the content
+			$columns = 4;
+			if(strlen($content) >= 500){
+				$columns = 8;
+			}
+			//Check if the row has enough space
+			if($row + $columns <= 12){
+				$row += $columns;
+				createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter);
+			}
+			//Else, create a new row
+			else{
+				$row = 0;
+				?>
+	</div>
+	<div class="row">
+				<?php
+				createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter);
 			}
 			//Update month after every cycle
 			$month = $date->format("m");
-			
 		}
 	?>
 	</div>
