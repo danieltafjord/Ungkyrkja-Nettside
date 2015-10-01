@@ -1,6 +1,6 @@
 <?php
 	# Connect to database
-	$con = mysqli_connect("localhost","root","","blog");
+	$con = mysqli_connect("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
 	$query = mysqli_query($con, "SELECT * FROM uk_program ORDER BY date ASC");
 
 	# Config
