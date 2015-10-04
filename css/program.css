@@ -2,6 +2,9 @@
 	background-color: black;
 	height: 1px;
 }
-.event_data img{
+.panel-body img{
 	float:left;
+}
+.panel-heading img{
+	float:right;
 }

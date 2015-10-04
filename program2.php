@@ -15,8 +15,9 @@
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/program.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="js/program.js"></script>
 </head>
 <body>
 
@@ -41,8 +42,9 @@
 			//Create panel with event data
 			?>
 			<div class="<?php echo "col-sm-" . $columns;?>" id="<?php echo $id; ?>">
-				<div class="panel panel-default">
+				<div class="event-panel panel panel-default">
 					<div class="panel-heading">
+						<img src="img/ic_edit_black.png" class="img-edit hidden" />
 						<h3><?php echo $title;?></h3>
 					</div>
 					<div class="panel-body">
