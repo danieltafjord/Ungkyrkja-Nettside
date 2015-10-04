@@ -1,7 +1,5 @@
 <?php
 # PHP Login and Register Script
-# By Daniel Tafjord
-# October 3rd 2015
 
 
 # Instantiate register() function if all requirements are set
@@ -15,8 +13,8 @@ require 'hash.php';
 #  var_dump (Hash::check($hashValue, 'pass'));
 #}
 
-# Connect to databse
-$con = mysqli_connect('localhost','root','','ungkyrkja');
+# Connect to database
+$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 
 
 #
