@@ -18,7 +18,7 @@ var main = function(){
 	$('.img-edit').click(function(){
 		var url = window.location.href;
 		var id = $(this).closest('div[id]').attr('id');
-		url = url.replace('program2.php', 'edit_program.php' + "?id=" + id);		
+		url = url.replace('program.php', 'edit_program.php' + "?id=" + id);		
 		//Redirect to the edit-program page
 		window.location.replace(url);
 	})
