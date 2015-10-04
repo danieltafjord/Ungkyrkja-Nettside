@@ -21,9 +21,8 @@
 		$enddate = date_create_from_format("Y-m-d H:i", $enddate . " " . $endtime);
 		
 		if(isset($id)){
-			$sql_query = "UPDATE uk_program SET title='" . $title . "', content='" . $content . 
-			"', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") . 
-			"' WHERE id LIKE '" . $id . "'";
+			$sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") . 
+			"' WHERE id LIKE '$id'";
 			if(mysqli_query($con, $sql_query)){
 				echo "Event updated successfully";
 			} else {
@@ -32,8 +31,7 @@
 		}
 		else{
 			$sql_query = "INSERT INTO uk_program title, content, date, enddate 
-			VALUES '" . $title . "', '" . $content . "', '" . $date->format("Y-m-d H:i:s") . 
-			"', '" . $enddate->format("Y-m-d H:i:s") . "'";
+			VALUES '$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "'";
 			if(mysqli_query($con, $sql_query)){
 				echo "Event updated successfully";
 			} else {
@@ -59,7 +57,7 @@
 	$id = test_input($_GET['id']);	
 	}
 	if($id != ""){
-		$query = mysqli_query($con, "SELECT * FROM uk_program WHERE id LIKE " . $id)->fetch_assoc();
+		$query = mysqli_query($con, "SELECT * FROM uk_program WHERE id LIKE '$id'")->fetch_assoc();
 	}
 
 	# Config
