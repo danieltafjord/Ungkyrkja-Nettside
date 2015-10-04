@@ -1,4 +1,5 @@
 # Ungkyrkja-Nettside
 
 # TODO
-- Add Polymer
+- Add Bootstrap
+
