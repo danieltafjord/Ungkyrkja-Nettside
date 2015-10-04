@@ -58,7 +58,7 @@
 		
 	$id = test_input($_GET['id']);	
 	}
-	if($id != NULL){
+	if($id != ""){
 		$query = mysqli_query($con, "SELECT * FROM uk_program WHERE id LIKE " . $id)->fetch_assoc();
 	}
 
@@ -73,7 +73,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/program.css">
+	<link rel="stylesheet" type="text/css" href="css/edit_program.css">
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="js/edit_program.js"></script>
@@ -111,12 +111,12 @@
 			<form class="main-form form-group" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<fieldset>
 				<legend><img src="img/ic_access_time_black.png" /> Dato og tid: </legend>
-					<p>Startdato: </p><input type="date" class="form-control" id="date" name="date" value="<?php echo $date->format("Y-m-d"); ?>" />
-					<p>Starttid: </p><input type="time" class="form-control" id="time" name="time" value="<?php echo $date->format("H:i"); ?>" />
-					<p>Sluttdato: </p><input type="date" class="form-control" id="enddate" name="enddate" value="<?php echo $enddate->format("Y-m-d"); ?>" />
-					<p>Sluttid: </p><input type="time" class="form-control" id="endtime" name="endtime" value="<?php echo $enddate->format("H:i");?>" />
+					<p>Startdato: </p><input type="date" class="form-control" id="date" name="date" value="<?php if($date!=""){echo $date->format("Y-m-d");} ?>" />
+					<p>Starttid: </p><input type="time" class="form-control" id="time" name="time" value="<?php if($date!=""){echo $date->format("H:i");} ?>" />
+					<p>Sluttdato: </p><input type="date" class="form-control" id="enddate" name="enddate" value="<?php if($enddate!=""){echo $enddate->format("Y-m-d");} ?>" />
+					<p>Sluttid: </p><input type="time" class="form-control" id="endtime" name="endtime" value="<?php if($enddate!=""){echo $enddate->format("H:i");}?>" />
 				</fieldset>
-				<label for="content"><img src="img/ic_label_black.png" /> Innhold: </label>
+				<legend><img src="img/ic_label_black.png" /> Innhold: </legend>
 				<textarea class="form-control" rows="5" id="content" name="content"><?php echo $content; ?></textarea>
 				<input type="text" class="form-control hidden" id="id" name="id" value="<?php echo $id; ?>" />
 				<input type="text" class="title-input form-control hidden" id="title" name="title" value="" />
