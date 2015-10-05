@@ -28,17 +28,15 @@ $postid = $_GET['id'];
 	<link href="dist/css/roboto.min.css" rel="stylesheet">
     <link href="dist/css/material.min.css" rel="stylesheet">
     <link href="dist/css/ripples.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
 </head>
 	<body>
 	<!-- Header -->
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	        <span class="sr-only">Toggle navigation</span>
 	      </button>
 	      <a class="navbar-brand" href="#">Ungkyrkja</a>
 	    </div>
