@@ -14,6 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="dist/css/roboto.min.css" rel="stylesheet">
     <link href="dist/css/material.min.css" rel="stylesheet">
     <link href="dist/css/ripples.min.css" rel="stylesheet">
@@ -47,17 +48,17 @@
 			<div class="<?php echo "col-sm-" . $columns;?>" id="<?php echo $id; ?>">
 				<div class="event-panel panel panel-default">
 					<div class="panel-heading">
-						<img src="img/ic_edit_black.png" class="img-edit hidden" />
+						<i class="material-icons md-light img-edit hidden">edit</i>
 						<h3><?php echo $title;?></h3>
 					</div>
 					<div class="panel-body">
 						<div class="event_data">
 							<div>
-								<img src="img/ic_event_black.png" />
+								<i class="material-icons md-dark">event</i>
 								<p><?php echo "Veke: " . $date->format("W"); ?></p>
 							</div>
 							<div>
-								<img src="img/ic_access_time_black.png" />
+								<i class="material-icons md-dark">access_time</i>
 								<p><?php
 									$dateFormatter->setPattern("EEEE dd. MMMM, HH:mm");
 									if($date->format("d.m.Y") == $enddate->format("d.m.Y")){
@@ -71,7 +72,7 @@
 							<div>
 								<?php if($content != ""){
 									?>
-									<img src="img/ic_label_black.png" />
+									<i class="material-icons md-dark">label</i>
 									<p><?php echo $content;?></p>
 									<?php
 								}

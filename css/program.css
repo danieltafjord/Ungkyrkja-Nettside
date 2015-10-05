@@ -2,9 +2,9 @@
 	background-color: black;
 	height: 1px;
 }
-.panel-body img{
+.panel-body i{
 	float:left;
 }
-.panel-heading img{
+.panel-heading i{
 	float:right;
 }

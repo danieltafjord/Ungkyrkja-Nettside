@@ -71,6 +71,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="dist/css/roboto.min.css" rel="stylesheet">
     <link href="dist/css/material.min.css" rel="stylesheet">
     <link href="dist/css/ripples.min.css" rel="stylesheet">
@@ -111,13 +112,13 @@
 		<div class="panel-body">
 			<form class="main-form form-group" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<fieldset>
-				<legend><img src="img/ic_access_time_black.png" /> Dato og tid: </legend>
+				<legend><i class="material-icons md-dark">access_time</i> Dato og tid: </legend>
 					<p>Startdato: </p><input type="date" class="form-control" id="date" name="date" value="<?php if($date!=""){echo $date->format("Y-m-d");} ?>" />
 					<p>Starttid: </p><input type="time" class="form-control" id="time" name="time" value="<?php if($date!=""){echo $date->format("H:i");} ?>" />
 					<p>Sluttdato: </p><input type="date" class="form-control" id="enddate" name="enddate" value="<?php if($enddate!=""){echo $enddate->format("Y-m-d");} ?>" />
 					<p>Sluttid: </p><input type="time" class="form-control" id="endtime" name="endtime" value="<?php if($enddate!=""){echo $enddate->format("H:i");}?>" />
 				</fieldset>
-				<legend><img src="img/ic_label_black.png" /> Innhold: </legend>
+				<legend><i class="material-icons md-dark">label</i> Innhold: </legend>
 				<textarea class="form-control" rows="5" id="content" name="content"><?php echo $content; ?></textarea>
 				<input type="text" class="form-control hidden" id="id" name="id" value="<?php echo $id; ?>" />
 				<input type="text" class="title-input form-control hidden" id="title" name="title" value="" />
