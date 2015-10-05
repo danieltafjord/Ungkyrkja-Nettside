@@ -177,3 +177,6 @@ $('a[href^="#"]').on('click', function(event) {
 
 </body>
 </html>
+<?php 
+mysqli_close($con);
+?>
