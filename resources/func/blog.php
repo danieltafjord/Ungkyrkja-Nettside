@@ -60,12 +60,13 @@ function get_posts($id = null, $cat_id = null) {
 	$query .= " ORDER BY `posts` . `id` DESC";
 
 	$query = mysql_query($query);
-
-	while ($row = mysql_fetch_assoc($query) ) {
+	
+	if($query){
+		while ($row = mysql_fetch_assoc($query) ) {
 		$posts[] = $row;
+		}
 	}
-
-
+	
 	return $posts;
 }
 
