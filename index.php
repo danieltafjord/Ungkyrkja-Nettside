@@ -25,11 +25,14 @@ $postid = $_GET['id'];
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href="dist/css/roboto.min.css" rel="stylesheet">
+    <link href="dist/css/material.min.css" rel="stylesheet">
+    <link href="dist/css/ripples.min.css" rel="stylesheet">
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
 </head>
 	<body>
 	<!-- Header -->
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -223,7 +226,14 @@ $postid = $_GET['id'];
 
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="js/ripples.min.js"></script>
+	<script src="js/material.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			// This command is used to initialize some elements and make them work properly
+			$.material.init();
+		});
+	</script>
  	</body>
 </html>
