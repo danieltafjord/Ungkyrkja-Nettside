@@ -28,6 +28,7 @@ $postid = $_GET['id'];
 	<link href="dist/css/roboto.min.css" rel="stylesheet">
     <link href="dist/css/material.min.css" rel="stylesheet">
     <link href="dist/css/ripples.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
 </head>
 	<body>
