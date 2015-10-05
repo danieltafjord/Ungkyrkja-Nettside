@@ -95,12 +95,15 @@ if (isset($_POST['login'])) {
 # Check if user is logged in
 #
 $db_pass = mysqli_query($con, "SELECT * FROM users");
-while ($row = mysqli_fetch_array($db_pass,MYSQLI_ASSOC)) {
-	if (!empty($_COOKIE['auth-logged']) && Hash::check($_COOKIE['auth-logged'], $row['pass'])) {
-		$islogged = true;
-		echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is check for logged in!</div>";
+if($db_pass){
+	while ($row = mysqli_fetch_array($db_pass,MYSQLI_ASSOC)) {
+		if (!empty($_COOKIE['auth-logged']) && Hash::check($_COOKIE['auth-logged'], $row['pass'])) {
+			$islogged = true;
+			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is check for logged in!</div>";
+		}
 	}
 }
+
 
 #
 # Logout
