@@ -1,21 +1,10 @@
 <?php
 # PHP Login and Register Script
-
-
-# Instantiate register() function if all requirements are set
 use Project\Helpers\Hash;
-
 require 'hash.php';
-
-#Hash::create($hashValue);
-
-#function hashoutout() {
-#  var_dump (Hash::check($hashValue, 'pass'));
-#}
 
 # Connect to database
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
-
 
 #
 # Register user
@@ -50,7 +39,6 @@ if (isset($_POST['register'])) {
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is registered!</div>";
 			header('Location: index.php');
-
 		}
 
 	} else {
@@ -80,7 +68,6 @@ if (isset($_POST['login'])) {
 				setcookie('auth-u', $user, 0, '', '', '', true);
 				setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 				header('Location: index.php');
-
 			} else {
 				echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Wrong username or password!</div>";
 			}
@@ -108,7 +95,6 @@ if($db_pass){
 #
 # Logout
 #
-
 if (isset($_POST['logout'])) {
 	setcookie("auth", "", time()-3600);
 	setcookie("auth-u", "", time()-3600);
