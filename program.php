@@ -13,7 +13,10 @@
 	<title>Ungkyrkja | Program</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/roboto.min.css" rel="stylesheet">
+    <link href="dist/css/material.min.css" rel="stylesheet">
+    <link href="dist/css/ripples.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/program.css">
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -175,6 +178,16 @@ $('a[href^="#"]').on('click', function(event) {
 
 </script>
 
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="js/ripples.min.js"></script>
+<script src="js/material.min.js"></script>
+<script>
+	$(document).ready(function() {
+		// This command is used to initialize some elements and make them work properly
+		$.material.init();
+	});
+</script>
 </body>
 </html>
 <?php 
