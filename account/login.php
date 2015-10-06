@@ -38,7 +38,7 @@ if (isset($_POST['register'])) {
 		$check_uniqe = mysqli_query($con, "SELECT * FROM users WHERE user='$user' LIMIT 1");
 
 		# If username is found, give error
-		if (mysqli_fetch_array($check_uniqe,MYSQLI_ASSOC) == true) {
+		if ($check_unique && mysqli_fetch_array($check_uniqe,MYSQLI_ASSOC) == true) {
 			echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User allready exist</div>";
 		} 
 
@@ -73,16 +73,18 @@ if (isset($_POST['login'])) {
 		$loggedin = Hash::create('loggedin');
 		
 		# Set cookies for login
-		while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
-			if (Hash::check($pass, $rows['pass']) && $user == $rows['user']) {
-				echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User were logged in!</div>";
-				setcookie('auth', $rows['pass'], 0, '', '', '', true);
-				setcookie('auth-u', $user, 0, '', '', '', true);
-				setcookie('auth-logged', $loggedin, 0, '', '', '', true);
-				header('Location: index.php');
-
-			} else {
-				echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Wrong username or password!</div>";
+		if($db_pass){
+			while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
+				if (Hash::check($pass, $rows['pass']) && $user == $rows['user']) {
+					echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User were logged in!</div>";
+					setcookie('auth', $rows['pass'], 0, '', '', '', true);
+					setcookie('auth-u', $user, 0, '', '', '', true);
+					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
+					header('Location: index.php');
+	
+				} else {
+					echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Wrong username or password!</div>";
+				}
 			}
 		}
 	} else {
