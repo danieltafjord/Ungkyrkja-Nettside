@@ -77,8 +77,6 @@
     <link href="dist/css/ripples.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/edit_program.css">
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="js/edit_program.js"></script>
 </head>
 <body>
 
@@ -146,41 +144,17 @@
 	</div>
 </section>
 
-<script type="text/javascript">
-	$(window).scroll(function(){
-
-	  var wScroll = $(this).scrollTop();
-
-	  $(".123").css({
-	    "transform" : "translate(0px, -"+ wScroll /40 +"%)"
-	  });
-  	});
-
-$("a[href^="#"]").on("click", function(event) {
-
-    var target = $( $(this).attr("href") );
-
-    if( target.length ) {
-        event.preventDefault();
-        $("html, body").animate({
-            scrollTop: target.offset().top
-        }, 800);
-    }
-
-});
-
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-<script src="js/ripples.min.js"></script>
-<script src="js/material.min.js"></script>
+<script src="dist/js/ripples.min.js"></script>
+<script src="dist/js/material.min.js"></script>
 <script>
 	$(document).ready(function() {
 		// This command is used to initialize some elements and make them work properly
 		$.material.init();
 	});
 </script>
+<script src="js/edit_program.js"></script>
 
 <?php 
 mysqli_close($con);

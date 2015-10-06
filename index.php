@@ -57,7 +57,7 @@ $postid = $_GET['id'];
 	          <ul class="dropdown-menu" style="">
 	          <li><a href="account/">Min profil</a></li>
 	            <form style="width:250px;" action="" method="POST">
-				  <button type="submit" name="logout" class="btn btn-default">Logout</button>
+				  <button type="submit" name="logout" class="btn btn-primary">Logout</button>
 				</form>
 	          </ul>
 	        </li>
@@ -76,7 +76,7 @@ $postid = $_GET['id'];
 				    <label for="exampleInputPassword1">Passord</label>
 				    <input type="password" class="form-control" name="pass" placeholder="Passord">
 				  </div>
-				  <button type="submit" name="login" class="btn btn-default">Submit</button>
+				  <button type="submit" name="login" class="btn btn-primary">Submit</button>
 				</form>
 	          </ul>
 	        </li>
@@ -102,7 +102,7 @@ $postid = $_GET['id'];
 				    <label for="exampleInputEmail1">Email</label>
 				    <input type="email" class="form-control" name="email" placeholder="Email">
 				  </div>
-				  <button type="submit" name="register" class="btn btn-default">Submit</button>
+				  <button type="submit" name="register" class="btn btn-primary">Submit</button>
 				</form>
 	          </ul>
 	        </li>
@@ -226,10 +226,10 @@ $postid = $_GET['id'];
 	});
 
 	</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="js/ripples.min.js"></script>
-	<script src="js/material.min.js"></script>
+	<script src="dist/js/ripples.min.js"></script>
+	<script src="dist/js/material.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			// This command is used to initialize some elements and make them work properly
