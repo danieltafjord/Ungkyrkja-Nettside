@@ -9,9 +9,8 @@
 	}
 
 	# Connect to database
-	$con = mysqli_connect("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
-	$query = mysqli_query($con, "SELECT * FROM uk_program ORDER BY date ASC");
-
+	$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
+	$query = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
 	# Config
 	setlocale(LC_ALL, 'no');
 ?>
@@ -40,7 +39,7 @@
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	        <i class="material-icons">more_vert</i><span class="sr-only">Toggle navigation</span>
 	      </button>
-	      <a class="navbar-brand" href="#">Ungkyrkja</a>
+	      <a class="navbar-brand" href="index.php">Ungkyrkja</a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -115,9 +114,7 @@
 
 <!--Main bit-->
 <div class="container-fluid">
-	<div class="jumbotron">
-		<h1>Program</h1>
-	</div>
+
 	<div class="row">
 	<?php
 		$dateFormatter = new IntlDateFormatter('no_NB.utf-8', IntlDateFormatter::FULL, IntlDateFormatter::LONG);
@@ -128,7 +125,7 @@
 			<div class="<?php echo "col-sm-" . $columns;?>" id="<?php echo $id; ?>">
 				<div class="event-panel panel panel-default">
 					<div class="panel-heading">
-						<i class="material-icons md-light img-edit hidden">edit</i>
+						<button type="button" class="btn-edit btn btn-primary btn-fab btn-raised hidden"><i class="material-icons md-light">edit</i></button>
 						<h3><?php echo $title;?></h3>
 					</div>
 					<div class="panel-body">
@@ -168,7 +165,7 @@
 		$month="";
 		$row = 0;
 		
-		while($rows = mysqli_fetch_array($query)){
+		while($rows = $query->fetch_array()){
 			$id = $rows['id'];
 			$title = $rows['title'];
 			$content = $rows['content'];
@@ -238,15 +235,12 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="dist/js/ripples.min.js"></script>
 <script src="dist/js/material.min.js"></script>
+<script src="js/program.js"></script>
 <script>
 	$(document).ready(function() {
 		// This command is used to initialize some elements and make them work properly
 		$.material.init();
 	});
 </script>
-<script src="js/program.js"></script>
 </body>
 </html>
-<?php 
-mysqli_close($con);
-?>

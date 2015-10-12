@@ -5,6 +5,7 @@
 .panel-body i{
 	float:left;
 }
-.panel-heading i{
+.panel-heading button{
 	float:right;
+	box-shadow: none !important;
 }
