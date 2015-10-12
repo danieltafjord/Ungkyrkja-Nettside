@@ -29,6 +29,7 @@ $postid = $_GET['id'];
 	<link href="dist/css/roboto.min.css" rel="stylesheet">
     <link href="dist/css/material.min.css" rel="stylesheet">
     <link href="dist/css/ripples.min.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
 	<link href="http://ungkyrkja.co.nf/logo.png" rel="icon" type="image/png"/>
 </head>
 	<body>
@@ -160,8 +161,85 @@ $postid = $_GET['id'];
 					</div>
 	    </div></section><!-- END CONTAINER -->
 
-
 <!-- Section 2 -->
+	<section style="margin: 100px 0px;" id="program-next">
+		
+		<h1 align="center" style="font-size:32px;">Neste samling</h1>
+		<hr width="1000px" align="center" class="divider">
+		<?php
+		
+		$conn = new mysqli("localhost", "ungkyrkja", "ungkyrkja", "ungkyrkja");
+		$query = false;
+		if($conn){
+			$query = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
+		}
+		else{
+			//Connection to the database has failed
+		}
+		$dateFormatter = new IntlDateFormatter('no_NB.utf-8', IntlDateFormatter::FULL, IntlDateFormatter::LONG);
+		if($query){
+			while($rows = $query->fetch_array()){
+				$id = $rows['id'];
+				$title = $rows['title'];
+				$content = $rows['content'];
+				$date = new DateTime($rows['date']);
+				$enddate = new DateTime($rows['enddate']);
+				$currentDate = new DateTime();
+				if($date >= $currentDate){
+					//Create panel with event data
+			?>
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4" id="<?php echo $id; ?>">
+					<div class="event-panel panel panel-default">
+						<div class="panel-heading">
+							<button type="button" class="btn-edit btn btn-primary btn-fab btn-raised hidden"><i class="material-icons md-light">edit</i></button>
+							<h3><?php echo $title;?></h3>
+						</div>
+						<div class="panel-body">
+							<div class="event_data">
+								<div>
+									<i class="material-icons md-dark">event</i>
+									<p><?php echo "Veke: " . $date->format("W"); ?></p>
+								</div>
+								<div>
+									<i class="material-icons md-dark">access_time</i>
+									<p><?php
+										$dateFormatter->setPattern("EEEE dd. MMMM, HH:mm");
+										if($date->format("d.m.Y") == $enddate->format("d.m.Y")){
+											echo $dateFormatter->format($date) . " - " . $enddate->format("H:i");
+										}
+										else{
+											echo $dateFormatter->format($date) . " - <br>" . $dateFormatter->format($enddate);
+										}
+										?></p>
+								</div>
+								<div>
+									<?php if($content != ""){
+										?>
+										<i class="material-icons md-dark">label</i>
+										<p><?php echo $content;?></p>
+										<?php
+									}
+									?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php
+					break;
+				}
+			}
+		}
+		
+		$conn->close();
+		
+		?>
+
+	</section>
+
+<!-- Section 3 -->
 	<section align="center" style="margin: 100px 0px;" id="kontakt">
 
 		<h1 style="font-size:32px;">Kontakt</h1>
@@ -230,6 +308,7 @@ $postid = $_GET['id'];
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="dist/js/ripples.min.js"></script>
 	<script src="dist/js/material.min.js"></script>
+	<script src="js/program.js"></script>
 	<script>
 		$(document).ready(function() {
 			// This command is used to initialize some elements and make them work properly
