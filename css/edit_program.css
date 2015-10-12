@@ -1,3 +1,17 @@
-.panel-body{
-    overflow: hidden;
+form{
+    width: 100%;
+    margin: 0px;
+    padding-top: 25px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+#title{
+    font-size: 18px;
+}
+textarea{
+    resize: vertical;
+}
+input{
+    margin-bottom: 10px;
 }
