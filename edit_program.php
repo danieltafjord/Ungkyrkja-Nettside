@@ -20,7 +20,7 @@
 		$date = date_create_from_format("Y-m-d H:i", $date . " " . $time);
 		$enddate = date_create_from_format("Y-m-d H:i", $enddate . " " . $endtime);
 		
-		if(isset($id)){
+		if($id != ""){
 			$sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") . 
 			"' WHERE id LIKE '$id'";
 			if(mysqli_query($con, $sql_query)){
@@ -30,8 +30,8 @@
 			}
 		}
 		else{
-			$sql_query = "INSERT INTO uk_program title, content, date, enddate 
-			VALUES '$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "'";
+			$sql_query = "INSERT INTO uk_program (title, content, date, enddate) 
+			VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
 			if(mysqli_query($con, $sql_query)){
 				echo "Event updated successfully";
 			} else {

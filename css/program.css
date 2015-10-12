@@ -9,3 +9,9 @@
 	float:right;
 	box-shadow: none !important;
 }
+#btn-new{
+	position: fixed;
+	bottom: 2%;
+	right: 2%;
+	z-index: 1000;
+}

@@ -111,6 +111,7 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
+<a href="edit_program.php" id="btn-new"><button type="button" class="btn btn-danger btn-fab btn-raised"><i class="material-icons md-light">add</i></button></a>
 
 <!--Main bit-->
 <div class="container-fluid">
