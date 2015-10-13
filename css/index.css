@@ -5,3 +5,6 @@
 .event-panel i{
 	float:left;
 }
+.btn-fab i{
+	line-height: inherit;
+}
