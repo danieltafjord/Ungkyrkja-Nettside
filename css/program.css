@@ -15,3 +15,6 @@
 	right: 2%;
 	z-index: 1000;
 }
+.btn-fab i{
+	line-height: inherit;
+}
