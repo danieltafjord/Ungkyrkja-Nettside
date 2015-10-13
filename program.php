@@ -2,7 +2,7 @@
 	include_once('resources/init.php');
 	include_once('account/login.php');
 
-	if(!empty($_COOKIE['auth-logged'])) {
+	if(empty($_COOKIE['auth-logged'])) {
 		$islogged = false;
 	} else {
 		$islogged = true;
@@ -10,7 +10,14 @@
 
 	# Connect to database
 	$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
-	$query = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
+	$program = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
+	$user = false;
+	if($islogged){
+	$user = $_COOKIE['auth-u'];
+	$user = $conn->query("SELECT user, role FROM users WHERE user LIKE $user");
+	$user = $user->fetch_array();
+	}
+	$conn->close();
 	# Config
 	setlocale(LC_ALL, 'no');
 ?>
@@ -112,7 +119,17 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
+<?php
+	$role = 0;
+	if($user){
+		$role = (int) $user['role'];
+		if($role > 0){
+			?>
 <a href="edit_program.php" id="btn-new"><button type="button" class="btn btn-danger btn-fab btn-raised"><i class="material-icons md-light">add</i></button></a>
+			<?php
+		}
+	}
+?>
 
 <!--Main bit-->
 <div class="container-fluid">
@@ -121,13 +138,13 @@
 	<?php
 		$dateFormatter = new IntlDateFormatter('no_NB.utf-8', IntlDateFormatter::FULL, IntlDateFormatter::LONG);
 		
-		function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter){
+		function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role){
 			//Create panel with event data
 			?>
 			<div class="<?php echo "col-sm-" . $columns;?>" id="<?php echo $id; ?>">
 				<div class="event-panel panel panel-default">
 					<div class="panel-heading withripple">
-						<button type="button" class="btn-edit btn btn-primary btn-fab btn-raised hidden"><i class="material-icons md-light">edit</i></button>
+						<?php if($role > 0){ ?><button type="button" class="btn-edit btn btn-primary btn-fab btn-raised hidden"><i class="material-icons md-light">edit</i></button><?php } ?>
 						<h3><?php echo $title;?></h3>
 					</div>
 					<div class="panel-body">
@@ -167,7 +184,7 @@
 		$month="";
 		$row = 0;
 		
-		while($rows = $query->fetch_array()){
+		while($rows = $program->fetch_array()){
 			$id = $rows['id'];
 			$title = $rows['title'];
 			$content = $rows['content'];
@@ -197,7 +214,7 @@
 			//Check if the row has enough space
 			if($row + $columns <= 12){
 				$row += $columns;
-				createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter);
+				createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role);
 			}
 			//Else, create a new row
 			else{
@@ -206,7 +223,7 @@
 	</div>
 	<div class="row">
 				<?php
-				createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter);
+				createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role);
 			}
 			//Update month after every cycle
 			$month = $date->format("m");
