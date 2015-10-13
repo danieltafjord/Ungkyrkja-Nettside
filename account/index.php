@@ -21,6 +21,7 @@
 <head>
 	<title>Ungkyrkja | Account</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#009688">
 	<link rel="stylesheet" type="text/css" href="../css/teststyle.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link href="../dist/css/roboto.min.css" rel="stylesheet">

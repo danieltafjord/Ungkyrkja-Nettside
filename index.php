@@ -23,6 +23,7 @@ $postid = $_GET['id'];
 <head>
 	<title>Ungkyrkja | Heim</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#009688">
 	<link rel="stylesheet" type="text/css" href="css/teststyle.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
