@@ -126,7 +126,7 @@
 			?>
 			<div class="<?php echo "col-sm-" . $columns;?>" id="<?php echo $id; ?>">
 				<div class="event-panel panel panel-default">
-					<div class="panel-heading">
+					<div class="panel-heading withripple">
 						<button type="button" class="btn-edit btn btn-primary btn-fab btn-raised hidden"><i class="material-icons md-light">edit</i></button>
 						<h3><?php echo $title;?></h3>
 					</div>
