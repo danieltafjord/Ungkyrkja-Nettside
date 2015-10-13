@@ -49,7 +49,7 @@ if (isset($_POST['register'])) {
 			setcookie('auth-u', $user, 0, '', '', '', true);
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is registered!</div>";
-			header('Location: index.php');
+			header('Location: ' . $_SERVER['REQUEST_URI']);
 
 		}
 
@@ -80,7 +80,7 @@ if (isset($_POST['login'])) {
 					setcookie('auth', $rows['pass'], 0, '', '', '', true);
 					setcookie('auth-u', $user, 0, '', '', '', true);
 					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
-					header('Location: index.php');
+					header('Location: ' . $_SERVER['REQUEST_URI']);
 	
 				} else {
 					echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Wrong username or password!</div>";
@@ -115,7 +115,7 @@ if (isset($_POST['logout'])) {
 	setcookie("auth", "", time()-3600);
 	setcookie("auth-u", "", time()-3600);
 	setcookie("auth-logged", "", time()-3600);
-	header('Location: index.php');
+	header('Location: ' . $_SERVER['REQUEST_URI']);
 }
 
 
