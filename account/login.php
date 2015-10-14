@@ -40,7 +40,7 @@ if (isset($_POST['register'])) {
 		# If username is found, give error
 		if ($check_unique && mysqli_fetch_array($check_uniqe,MYSQLI_ASSOC) == true) {
 			echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User allready exist</div>";
-		} 
+		}
 
 		# Add values to database
 		else {
@@ -49,7 +49,7 @@ if (isset($_POST['register'])) {
 			setcookie('auth-u', $user, 0, '', '', '', true);
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is registered!</div>";
-			header('Location: ' . $_SERVER['REQUEST_URI']);
+			header('Location: ' . $_SERVER['PHP_SELF']);
 
 		}
 
@@ -71,7 +71,7 @@ if (isset($_POST['login'])) {
 		$pass = $_POST['pass'];
 		$db_pass = mysqli_query($con, "SELECT * FROM users");
 		$loggedin = Hash::create('loggedin');
-		
+
 		# Set cookies for login
 		if($db_pass){
 			while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
@@ -80,8 +80,8 @@ if (isset($_POST['login'])) {
 					setcookie('auth', $rows['pass'], 0, '', '', '', true);
 					setcookie('auth-u', $user, 0, '', '', '', true);
 					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
-					header('Location: ' . $_SERVER['REQUEST_URI']);
-	
+					header('Location: ' . $_SERVER['PHP_SELF']);
+
 				} else {
 					echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Wrong username or password!</div>";
 				}
@@ -115,7 +115,7 @@ if (isset($_POST['logout'])) {
 	setcookie("auth", "", time()-3600);
 	setcookie("auth-u", "", time()-3600);
 	setcookie("auth-logged", "", time()-3600);
-	header('Location: ' . $_SERVER['REQUEST_URI']);
+	header('Location: ' . $_SERVER['PHP_SELF']);
 }
 
 
