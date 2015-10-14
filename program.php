@@ -14,7 +14,6 @@
     <!--Import navbar-->
     <?php include 'compontents\navbar.php'; ?>
 		<?php
-			include_once('resources/init.php');
 			include_once('account/login.php');
 
 			if(empty($_COOKIE['auth-logged'])) {
