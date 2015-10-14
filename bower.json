@@ -19,6 +19,8 @@
   "dependencies": {
     "bootstrap-material-design": "~0.3.0",
     "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "polymer": "Polymer/polymer#1.1.0",
+    "webcomponentsjs": "~0.7.14"
   }
 }
