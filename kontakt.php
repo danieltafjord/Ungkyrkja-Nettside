@@ -1,15 +1,4 @@
 <?php
-//launch if mobile
-function mobileDevice()
-{
-	$type = $_SERVER['HTTP_USER_AGENT'];
-	if(strpos((string)$type, 'Windows Phone') != false || strpos((string)$type, 'iPhone') != false || strpos((string)$type, 'Android') != false)
-	return true;
-	else
-	return false;
-}
-?>
-<?php
 	include_once('resources/init.php');
 	#$posts = ( isset($_GET['id']) ) ? get_posts($_GET['id']) : get_posts();
 	$posts = get_posts(((isset($_GET['id'])) ? $_GET['id'] : null));
