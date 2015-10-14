@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#009688">
     <title>Heim | Ungkyrkja</title>
-    <script src="bower_components\webcomponentsjs\webcomponents-lite.min.js"></script>
-    <link rel="import" href="compontents\main-css.html">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="components/main-css.html">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/index.css" rel="stylesheet">
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'compontents\navbar.php'; ?>
+    <?php include 'components/navbar.php'; ?>
 		<?php
 	include_once('account/login.php');
 
@@ -106,9 +106,9 @@
 		?>
   </div>
     <!--Import footer-->
-    <?php include 'compontents\footer.php'; ?>
+    <?php include 'components/footer.php'; ?>
 
-    <link rel="import" href="compontents\main-scripts.html">
+    <link rel="import" href="components/main-scripts.html">
 		<script src="js/program.js"></script>
   </body>
 </html>
