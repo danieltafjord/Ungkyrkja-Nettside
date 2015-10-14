@@ -1,4 +1,12 @@
 <!-- Header -->
+<style>
+nav form{
+  margin: 25px;
+}
+.active li > a{
+  pointer-events: none;
+}
+</style>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,14 +16,16 @@
       </button>
       <a class="navbar-brand" href="#">Ungkyrkja</a>
     </div>
-
+    <?php
+    $location = $_SERVER['PHP_SELF'];
+     ?>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.php">Heim</a></li>
-        <li><a href="program.php">Program</a></li>
-        <li><a href="contact.php">Kontakt</a></li>
-        <li><a href="bilder.php">Bilder</a></li>
+        <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="index.php">Heim</a></li>
+        <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="program.php">Program</a></li>
+        <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="kontakt.php">Kontakt</a></li>
+        <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="bilder.php">Bilder</a></li>
 
         <!-- If logged in show username -->
         <?php if(!empty($_COOKIE['auth-u'])) : ?>
