@@ -3,9 +3,6 @@
 nav form{
   margin: 25px;
 }
-.active li > a{
-  pointer-events: none;
-}
 </style>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
