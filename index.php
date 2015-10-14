@@ -80,10 +80,10 @@ $postid = $_GET['id'];
 	</section><!-- END CONTAINER -->
 
 <!-- Section 2 -->
-	<section style="margin: 100px 0px;" id="program-next">
+	<div class="container-fluid" style="margin: 100px 0px;" id="program-next">
 
 		<h1 align="center" style="font-size:32px;">Neste samling</h1>
-		<hr width="1000px" align="center" class="divider">
+		<hr width="100%" align="center" class="divider">
 		<?php
 
 		$conn = new mysqli("localhost", "ungkyrkja", "ungkyrkja", "ungkyrkja");
@@ -152,7 +152,7 @@ $postid = $_GET['id'];
 			}
 		}
 		?>
-		</section>
+  </div>
     <!--Import footer-->
     <?php include 'compontents\footer.php'; ?>
 
