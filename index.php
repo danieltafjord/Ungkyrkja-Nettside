@@ -281,6 +281,18 @@ $postid = $_GET['id'];
 	    	</ul>
 		</div>
 	</section>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="dist/js/ripples.min.js"></script>
+	<script src="dist/js/material.min.js"></script>
+	<script src="js/program.js"></script>
+	<script>
+		$(document).ready(function() {
+			// This command is used to initialize some elements and make them work properly
+			$.material.init();
+		});
+	</script>
 	<script type="text/javascript">
 		$(window).scroll(function(){
 
@@ -303,18 +315,6 @@ $postid = $_GET['id'];
 	    }
 
 	});
-
-	</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="dist/js/ripples.min.js"></script>
-	<script src="dist/js/material.min.js"></script>
-	<script src="js/program.js"></script>
-	<script>
-		$(document).ready(function() {
-			// This command is used to initialize some elements and make them work properly
-			$.material.init();
-		});
 	</script>
  	</body>
 </html>
