@@ -30,6 +30,9 @@
 #footer div{
   display: block;
 }
+#footer ul{
+  padding-left: 0px;
+}
 </style>
 <section id="footer">
 	<div id="copyright">
