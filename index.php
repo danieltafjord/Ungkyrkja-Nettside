@@ -14,7 +14,6 @@
     <!--Import navbar-->
     <?php include 'compontents\navbar.php'; ?>
 		<?php
-	include_once('resources/init.php');
 	include_once('account/login.php');
 
 	if(!empty($_COOKIE['auth-logged'])) {
@@ -22,16 +21,7 @@
 	} else {
 		$islogged = true;
 	}
-
-	$posts = get_posts(((isset($_GET['id'])) ? $_GET['id'] : null));
-	setlocale(LC_ALL, 'no');
 ?>
-
-<div style="display:none;">
-<?php
-$postid = $_GET['id'];
-?>
-</div>
 
 <div class="jumbotron">
 	<div class="container">
@@ -40,44 +30,6 @@ $postid = $_GET['id'];
 		 kiosk, weekend og andre utflukter.</p>
 	</div>
 </div>
-<!-- Section 1 -->
-	<section>
-	<div align="center" id="container">
-
-	  <div class=<?php if(isset($_GET['id'])){echo '"post-container-large"';} else {echo '"post-container"';} ?> id="post">
-			<br>
-	    	<?php
-
-		    	foreach ( $posts as $post ) {
-		      	if ( ! category_exists('name', $post ['name'] ) ){
-		          $post['name'] = 'Uncategorised';
-		      }
-				?>
-
-			<div class="post">
-
-				<!--<button class=<?php if(isset($_GET['id'])){echo '"post-readall-large"';}else {echo '"post-readall"';} ?> onclick="javascript:location.href='index.php?id=<?php echo $post['post_id']; ?>'">READ ALL ...</button>-->
-
-				<h2><a href="category.php?id=<?php echo $post['category_id']; ?>" class="category-post"><img src="<?php if($post['category_id'] == 13) { echo "img/samling.png";} elseif($post['category_id'] == 14) {echo "img/warning.png";} ?>style="width:17px;"></a>
-				<a href="index.php?id=<?php echo $post['post_id']; ?>" class=<?php if(isset($_GET['id'])){echo '"title-large"';}else {echo '"title"';} ?>><?php echo $post['title']; ?></a></h2>
-
-				<small class="date"><img src="img/time.png" style="width:9px;margin-bottom:-1px;"> Postet <?php echo date('d / m / Y h:i', strtotime($post['date_posted'])); ?></small>
-
-				<hr style="border:0;border-bottom:1px solid #e6e6e6;;"></hr>
-
-				<p class="post-content" id="content"><?php echo nl2br($post['contents']);?></p>
-				<br>
-
-	    </div>
-
-			<?php
-				}
-				?>
-			<!-- End Post -->
-
-			</div>
-	  </div>
-	</section><!-- END CONTAINER -->
 
 <!-- Section 2 -->
 	<div class="container-fluid" style="margin: 100px 0px;" id="program-next">
