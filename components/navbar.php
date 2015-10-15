@@ -1,7 +1,10 @@
 <!-- Header -->
 <style>
 nav form{
-  margin: 25px;
+  margin: 25px
+}
+nav {
+  background-color: #f57c00 !important
 }
 </style>
 <nav class="navbar navbar-default">

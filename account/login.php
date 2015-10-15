@@ -118,14 +118,4 @@ if (isset($_POST['logout'])) {
 	header('Location: ' . $_SERVER['PHP_SELF']);
 }
 
-
-
-
-
-
-
-
-
-
-
 ?>
