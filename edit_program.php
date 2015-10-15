@@ -15,16 +15,28 @@
     <?php include 'components/navbar.php'; ?>
 		<!-- Main bit -->
 		<?php
-
 			$con = mysqli_connect("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
 			if (!$con) {
 		    die("Connection failed: " . mysqli_error($con));
 			}
 
+      if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
+        $auth_u = $_COOKIE['auth-u'];
+        $auth = $_COOKIE['auth'];
+        $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'");
+        $user_query = $user_query->fetch_array();
+        if($user_query['user'] != $auth_u && $user_query['pass'] != $auth && !$user_query['role'] > 0){
+          die('Permission denied!');
+        }
+      }
+      else{
+        die('User not logged in!');
+      }
+
 			$id = $title = $date = $time = $enddate = $endtime = $content = "";
 
 			//Get values from post
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 				$id = test_input($_POST['id']);
 				$title = test_input($_POST['title']);
 				$date = test_input($_POST['date']);
@@ -57,11 +69,12 @@
 			}
 
 			function test_input($data) {
-		  		$data = trim($data);
-		  		$data = stripslashes($data);
-		  		$data = htmlspecialchars($data);
-		  		return $data;
-			}
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          $data = str_replace("'", "", $data);
+          return $data;
+      }
 		?>
 
 		<?php
