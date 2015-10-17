@@ -1,12 +1,25 @@
 <?php
 	include_once('account/login.php');
+	error_reporting(0);
+	if (!empty($_COOKIE['auth-u'])) {
+			$authu = $_COOKIE['auth-u'];
+	}
+	if (!empty($_COOKIE['auth-logged'])) {
+			$authlogged = $_COOKIE['auth-logged'];
+	}
 
 	if(empty($_COOKIE['auth-logged'])) {
 		$islogged = true;
 	} else {
 		$islogged = false;
 	}
+
+	# Connect to database
+	$conn = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+	$query = mysqli_query($conn, "SELECT * FROM contact");
+	$queryusers = mysqli_query($conn, "SELECT * FROM users WHERE user = '$authu'");
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,14 +42,24 @@
 		border-bottom: 1px solid #e3e3e3;
 		margin: 10px;
 	}
+
+	.glyphicon {
+		font-size: 12px;
+		color: #444;
+	}
+
+	h6 {
+		color:#777;
+	}
 	</style>
   <body>
     <!--Import navbar-->
     <?php include 'components/navbar.php'; ?>
     <!--Content here-->
-		<div class="container-fluid" align="center" style="max-width:80%;">
+		<div class="container-fluid" align="center" style="max-width:100%;">
 			<div class="row">
 				<?php
+
 				# Connect to database
 				$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 				if(!$con){
@@ -47,13 +70,27 @@
 					#  Loop trough table
 					while ($query && $rows = mysqli_fetch_array($query)) {
 						echo "<div class='col-md-4'>";
+				while ($rows = mysqli_fetch_array($queryusers)) {
+					if ($rows['role'] == 1) {
+						$admin = true;
+					}
+					if ($rows['role'] == 0) {
+						$admin = false;
+
+					}
+				}
+
+					#  Loop trough table
+					while ($rows = mysqli_fetch_array($query)) {
+						echo "<div class='col-md-3'>";
 							echo "<div class='panel panel-default'>";
 								echo "<div class='panel-body'>";
-								if ($islogged = false) {
-									echo "<a href='edit_kontakt.php?id=" . $rows['id'] . "'>EDIT</a>";
+								if ($rows['user'] == $_COOKIE['auth-u'] && $admin == true) {
+									echo "<a style='float:right;font-size:15px;' href='edit_kontakt.php?id=" . $rows['id'] . "'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>";
 								}
 									echo "<div><img class='kontakt-img' src='img/" . $rows['img'] . "'></div>";
 									echo "<div><h3>" . $rows['name'] . "</h3></div>";
+									echo "<div><h6>" . $rows['profession'] . "</h6></div>";
 									echo "<div class='divider'></div>";
 									echo "<div align='left'>";
 										echo "<span class='glyphicon glyphicon-envelope'></span>&nbsp;&nbsp;<a href='mailto:" . $rows['email'] . "'>" . $rows['email'] . "</a><br>";
@@ -62,12 +99,10 @@
 								echo "</div>";
 							echo "</div>";
 						echo "</div>";
-					}
-
+						}
 				?>
 			</div>
 		</div>
-
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
