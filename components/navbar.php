@@ -1,13 +1,5 @@
 <!-- Header -->
-<style>
-nav form{
-  margin: 25px
-}
-nav {
-  background-color: #f57c00 !important
-}
-</style>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" id="nav-main">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -34,8 +26,8 @@ nav {
           <ul class="dropdown-menu" style="">
           <li><a href="account/">Min profil</a></li>
             <form style="width:250px;" action="" method="POST">
-        <button type="submit" name="logout" class="btn btn-primary">Logout</button>
-      </form>
+              <button type="submit" name="logout" class="btn btn-primary">Logout</button>
+            </form>
           </ul>
         </li>
         <?php endif; ?>

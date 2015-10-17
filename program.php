@@ -41,7 +41,7 @@
 				$role = (int) $user['role'];
 				if($role > 0){
 					?>
-		<a href="edit_program.php" id="btn-new"><button type="button" class="btn btn-danger btn-fab btn-raised"><i class="material-icons md-light">add</i></button></a>
+		<a href="edit_program.php" id="btn-new"><button type="button" class="btn btn-danger btn-fab btn-fab-corner btn-raised"><i class="material-icons md-light">add</i></button></a>
 					<?php
 				}
 			}

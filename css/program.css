@@ -1,20 +1,11 @@
 .month_divider hr{
-	background-color: black;
+	background-color: #666;
 	height: 1px;
 }
-.panel-body i{
+.event-panel i{
 	float:left;
 }
-.panel-heading button{
-	float:right;
+.btn-edit{
+	float:right !important;
 	box-shadow: none !important;
-}
-#btn-new{
-	position: fixed;
-	bottom: 10px;
-	right: 10px;
-	z-index: 1000;
-}
-.btn-fab i{
-	line-height: inherit;
 }
