@@ -16,16 +16,15 @@
     <?php include 'components/navbar.php'; ?>
 		<!-- Main bit -->
 		<?php
-			$con = mysqli_connect("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
+			$con = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
 			if (!$con) {
-		    die("Connection failed: " . mysqli_error($con));
+		    die("Connection failed: " . $con->error());
 			}
 
       if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
         $auth_u = $_COOKIE['auth-u'];
         $auth = $_COOKIE['auth'];
-        $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'");
-        $user_query = $user_query->fetch_array();
+        $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
         if($user_query['user'] != $auth_u && $user_query['pass'] != $auth && !$user_query['role'] > 0){
           die('Permission denied!');
         }
@@ -46,8 +45,8 @@
 				$endtime = test_input($_POST['endtime']);
 				$content = test_input($_POST['content']);
 
-				$date = date_create_from_format("Y-m-d H:i", $date . " " . $time);
-				$enddate = date_create_from_format("Y-m-d H:i", $enddate . " " . $endtime);
+				$date = DateTime::createFromFormat("Y-m-d H:i", $date . " " . $time);
+				$enddate = DateTime::createFromFormat("Y-m-d H:i", $enddate . " " . $endtime);
 
 				if($id != ""){
 					$sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") .
@@ -61,10 +60,10 @@
 				else{
 					$sql_query = "INSERT INTO uk_program (title, content, date, enddate)
 					VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
-					if(mysqli_query($con, $sql_query)){
+					if($con->query($sql_query)){
 						echo "Event updated successfully";
 					} else {
-						echo "Error updating Event: " . mysqli_error($con);
+						echo "Error updating Event: " . $con->error();
 					}
 				}
 			}
@@ -87,7 +86,7 @@
 			$id = test_input($_GET['id']);
 			}
 			if($id != ""){
-				$query = mysqli_query($con, "SELECT * FROM uk_program WHERE id LIKE '$id'")->fetch_assoc();
+				$query = $con->query("SELECT * FROM uk_program WHERE id LIKE '$id'")->fetch_assoc();
 			}
 
 			# Config
