@@ -48,7 +48,6 @@ if (isset($_POST['register'])) {
 			setcookie('auth', $rows['pass'], 0, '', '', '', true);
 			setcookie('auth-u', $user, 0, '', '', '', true);
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
-			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is registered!</div>";
 			header('Location: ' . $_SERVER['PHP_SELF']);
 
 		}
@@ -76,7 +75,6 @@ if (isset($_POST['login'])) {
 		if($db_pass){
 			while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
 				if (Hash::check($pass, $rows['pass']) && $user == $rows['user']) {
-					echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User were logged in!</div>";
 					setcookie('auth', $rows['pass'], 0, '', '', '', true);
 					setcookie('auth-u', $user, 0, '', '', '', true);
 					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
