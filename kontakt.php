@@ -6,10 +6,6 @@
 	} else {
 		$islogged = false;
 	}
-
-	# Connect to database
-	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
-	$query = mysqli_query($con, "SELECT * FROM contact");
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,8 +37,15 @@
 		<div class="container-fluid" align="center" style="max-width:80%;">
 			<div class="row">
 				<?php
+				# Connect to database
+				$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+				if(!$con){
+					die('Failed to connect to database: ' . mysqli_error($con));
+				}
+				$query = mysqli_query($con, "SELECT * FROM contact");
+				mysqli_close($con);
 					#  Loop trough table
-					while ($rows = mysqli_fetch_array($query)) {
+					while ($query && $rows = mysqli_fetch_array($query)) {
 						echo "<div class='col-md-4'>";
 							echo "<div class='panel panel-default'>";
 								echo "<div class='panel-body'>";
