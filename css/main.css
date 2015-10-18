@@ -19,6 +19,9 @@ a:hover, a:focus{
 .form-control{
   background-image: linear-gradient(#f57c00,#f57c00),linear-gradient(#d2d2d2,#d2d2d2) !important;
 }
+.form-control:focus~.floating-label{
+  color: #f57c00 !important;
+}
 .btn-fab i{
 	line-height: inherit;
 }
