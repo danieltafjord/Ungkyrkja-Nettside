@@ -8,7 +8,6 @@
     <title>Heim | Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="components/main-css.html">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/index.css" rel="stylesheet">
   </head>
   <body>

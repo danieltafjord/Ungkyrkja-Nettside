@@ -8,7 +8,6 @@
     <title>Rediger Program | Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="components/main-css.html">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="css/edit_program.css" rel="stylesheet">
   </head>
   <body>
