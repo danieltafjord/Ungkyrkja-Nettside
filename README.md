@@ -4,8 +4,8 @@
 
 John Ingve:
 - Program: Sorter etter månadar og år
-- index: redesign (css) og legg til bilder
+- Change color-scheme
 
 Daniel:
-- Kontakt: gjer ferdig
-- bilder: gjer ferdig
+- Bilder: gjer ferdig
+- Style index
