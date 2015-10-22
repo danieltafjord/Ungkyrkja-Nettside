@@ -67,9 +67,7 @@
 				}
 				$query = mysqli_query($con, "SELECT * FROM contact");
 				mysqli_close($con);
-					#  Loop trough table
-					while ($query && $rows = mysqli_fetch_array($query)) {
-						echo "<div class='col-md-4'>";
+
 				while ($rows = mysqli_fetch_array($queryusers)) {
 					if ($rows['role'] == 1) {
 						$admin = true;
