@@ -1,6 +1,6 @@
 <?php
 	include_once('account/login.php');
-	error_reporting(0);
+	//error_reporting(0);
 	if (!empty($_COOKIE['auth-u'])) {
 			$authu = $_COOKIE['auth-u'];
 	}
@@ -56,7 +56,7 @@
     <!--Import navbar-->
     <?php include 'components/navbar.php'; ?>
     <!--Content here-->
-		<div class="container-fluid" align="center" style="max-width:100%;">
+		<div class="container-fluid" align="center" style="max-width:100%;margin-top:15px;font-weight:300;">
 			<div class="row">
 				<?php
 
