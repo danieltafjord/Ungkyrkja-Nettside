@@ -1,41 +1,12 @@
-a{
-  color: #666;
-}
-a:hover, a:focus{
-  color: #f57c00;
-}
-.jumbotron{
-  box-shadow: none !important;
-}
-.panel-primary>.panel-heading{
-  background-color: #f57c00;
-}
-.btn-primary{
-  background-color: #f57c00 !important;
-}
-.btn-primary:hover{
-  background-color: #ff9800 !important;
-}
-.form-control{
-  background-image: linear-gradient(#f57c00,#f57c00),linear-gradient(#d2d2d2,#d2d2d2) !important;
-}
-.form-control:focus~.floating-label{
-  color: #f57c00 !important;
-}
-.btn-fab i{
-	line-height: inherit;
-}
-.btn-fab-corner{
-	position: fixed;
-	bottom: 10px;
-	right: 10px;
-	z-index: 1000;
-}
-#nav-main {
-  background-color: #f57c00;
+#nav-main{
+  border-radius: 0;
 }
 #nav-main form{
   margin: 25px
+}
+.navbar-toggle{
+  border: none;
+  background-color: inherit;
 }
 footer{
   background-color: #fff;

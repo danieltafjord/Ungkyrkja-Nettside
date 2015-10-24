@@ -1,10 +1,10 @@
 <!-- Header -->
-<nav class="navbar navbar-default" id="nav-main">
+<nav class="navbar navbar-inverse" id="nav-main">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <i class="material-icons">more_vert</i><span class="sr-only">Toggle navigation</span>
+        <i class="material-icons md-light">more_vert</i><span class="sr-only">Toggle navigation</span>
       </button>
       <a class="navbar-brand" href="#">Ungkyrkja</a>
     </div>

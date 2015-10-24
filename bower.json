@@ -22,6 +22,8 @@
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
     "polymer": "Polymer/polymer#1.1.0",
-    "webcomponentsjs": "~0.7.14"
+    "webcomponentsjs": "~0.7.14",
+    "iron-elements": "~1.0.4",
+    "paper-elements": "polymerelements/paper-elements#~1.0.5"
   }
 }
