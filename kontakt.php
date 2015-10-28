@@ -25,8 +25,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="theme-color" content="#f57c00">
-    <link rel="icon" href="img/uk_logo.png" sizes="192x192">
+		<link rel="icon" href="http://i.imgur.com/qm15Oaf.png" sizes="192x192">
     <title>Ungkyrkja | kontakt</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="components/main-css.html">

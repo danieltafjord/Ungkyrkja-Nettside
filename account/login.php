@@ -59,9 +59,9 @@ if (isset($_POST['register'])) {
 
 
 
-#
+#############
 # Login user
-#
+#############
 if (isset($_POST['login'])) {
 	if (isset($_POST['user']) && isset($_POST['pass'])) {
 

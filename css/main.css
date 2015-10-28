@@ -8,11 +8,23 @@
   border: none;
   background-color: inherit;
 }
+.navbar {
+  margin-bottom: 0;
+}
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav>li>a {
+  color: #fff;
+}
 footer{
-  background-color: #fff;
+  background-color: #f4f4f4;
   min-height: 100px;
   width: 100%;
+  border-top: 1px solid #e3e3e3;
   text-align: center;
+  position: absolute;
+  bottom: 0;
 }
 footer div{
   display: block;
