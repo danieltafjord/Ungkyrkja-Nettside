@@ -57,7 +57,7 @@
   </a>
 </div>
 
-<!-- Section 2 --
+<!-- Section 2 -->
 <div class="container-fluid" style="margin: 100px 0px;" id="program-next">
 
   <h1 align="center" style="font-size:32px;">Neste samling</h1>
@@ -129,7 +129,7 @@
     }
   }
   ?>
-</div>-->
+</div>
 
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
