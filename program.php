@@ -25,7 +25,7 @@
 			# Connect to database
 			$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
       if($conn->connect_errno()){
-        die("Could not connect to database!" + $conn->connect_error();)
+        die("Could not connect to database!" + $conn->connect_error());
       }
 			$program = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
 			$user = false;
