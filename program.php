@@ -24,12 +24,20 @@
 
 			# Connect to database
 			$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
+      if($conn->connect_errno()){
+        die("Could not connect to database!" + $conn->connect_error();)
+      }
 			$program = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
 			$user = false;
 			if($islogged){
-			$user = $_COOKIE['auth-u'];
-			$user = $conn->query("SELECT user, role FROM users WHERE user LIKE $user");
-			$user = $user->fetch_array();
+  			$user = $_COOKIE['auth-u'];
+  			$user = $conn->query("SELECT user, role FROM users WHERE user LIKE $user");
+        if($conn->error()){
+          $user = false;
+        }
+        else{
+          $user = $user->fetch_array();
+        }
 			}
 			$conn->close();
 		?>
