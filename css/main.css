@@ -58,3 +58,10 @@ footer #footer-links li{
 
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+.fab-main{
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 100;
+}

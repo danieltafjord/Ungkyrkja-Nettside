@@ -9,6 +9,13 @@
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="components/main-css.html">
 		<link rel="stylesheet" type="text/css" href="css/program.css">
+    <!--Element imports-->
+    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="bower_components/iron-icon/iron-icon.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-card/paper-card.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
   </head>
   <body>
     <!--Import navbar-->
@@ -48,7 +55,7 @@
 				$role = (int) $user['role'];
 				if($role > 0){
 					?>
-		<a href="edit_program.php" id="btn-new"><button type="button" class="btn btn-danger btn-fab btn-fab-corner btn-raised"><i class="material-icons md-light">add</i></button></a>
+          <a href="edit_program.php" class="fab-main"><paper-fab icon="add"></paper-fab></a>
 					<?php
 				}
 			}
@@ -64,42 +71,32 @@
 				function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role){
 					//Create panel with event data
 					?>
-					<div class="<?php echo "col-sm-" . $columns;?>" id="<?php echo $id; ?>">
-						<div class="event-panel panel panel-default">
-							<div class="panel-heading withripple">
-								<?php if($role > 0){ ?><button type="button" class="btn-edit btn btn-primary btn-fab btn-raised hidden"><i class="material-icons md-light">edit</i></button><?php } ?>
-								<h3><?php echo $title;?></h3>
-							</div>
-							<div class="panel-body">
-								<div class="event_data">
-									<div>
-										<i class="material-icons md-dark">event</i>
-										<p><?php echo "Veke: " . $date->format("W"); ?></p>
-									</div>
-									<div>
-										<i class="material-icons md-dark">access_time</i>
-										<p><?php
-											$dateFormatter->setPattern("EEEE dd. MMMM, HH:mm");
-											if($date->format("d.m.Y") == $enddate->format("d.m.Y")){
-												echo $dateFormatter->format($date) . " - " . $enddate->format("H:i");
-											}
-											else{
-												echo $dateFormatter->format($date) . " - <br>" . $dateFormatter->format($enddate);
-											}
-											?></p>
-									</div>
-									<div>
-										<?php if($content != ""){
-											?>
-											<i class="material-icons md-dark">label</i>
-											<p><?php echo $content;?></p>
-											<?php
-										}
-										?>
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="<?php echo "container-fluid col-sm-" . $columns;?>" id="<?php echo $id; ?>">
+            <paper-card heading="<?php echo $title;?>">
+              <div class="card-content">
+                <iron-icon icon="event"></iron-icon>
+                <p><?php echo "Veke: " . $date->format("W"); ?></p>
+                <iron-icon icon="schedule"></iron-icon>
+                <p><?php
+                  $dateFormatter->setPattern("EEEE dd. MMMM, HH:mm");
+                  if($date->format("d.m.Y") == $enddate->format("d.m.Y")){
+                    echo $dateFormatter->format($date) . " - " .$enddate->format("H:i");
+                  }
+                  else{
+                    echo $dateFormatter->format($date) . " - " .$dateFormatter->format($enddate);
+                  }
+                  ?></p>
+                  <?php if($content != ""){ ?>
+                  <iron-icon icon="label"></iron-icon>
+                  <p><?php echo $content;?></p>
+                  <?php } ?>
+              </div>
+              <?php if($role > 0){ ?>
+              <div class="card-actions">
+                <paper-icon-button class="btn-edit" icon="create"></paper-icon-button>
+              </div>
+              <?php } ?>
+            </paper-card>
 					</div>
 				<?php
 				}
@@ -115,13 +112,13 @@
 					$enddate = new DateTime($rows['enddate']);
 
 					//Create a divider if there is a new month
-					if($month != $date->format("m")){
+					if($month != $date->format("Ym")){
 						$row = 0;
 						?>
 			</div>
 				<div class="month_divider">
 					<p><?php
-						$dateFormatter->setPattern("MMMM");
+						$dateFormatter->setPattern("MMMM Y");
 						echo $dateFormatter->format($date);
 						?></p>
 					<hr>
@@ -149,7 +146,7 @@
 						createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role);
 					}
 					//Update month after every cycle
-					$month = $date->format("m");
+					$month = $date->format("Ym");
 				}
 			?>
 			</div>
