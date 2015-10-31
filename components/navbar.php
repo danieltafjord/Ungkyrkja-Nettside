@@ -1,5 +1,5 @@
 <!-- Header -->
-<nav class="navbar navbar-inverse" id="nav-main">
+<nav class="navbar navbar-inverse navbar-fixed-top" id="nav-main">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">

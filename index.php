@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#333">
+    <meta name="theme-color" content="#222">
     <link rel="icon" href="http://i.imgur.com/qm15Oaf.png" sizes="192x192">
     <title>Heim | Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -32,17 +32,14 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel-inner" role="listbox" style="max-height:450px;max-width:100%;">
     <div class="item active">
-      <img src="img/hero.jpg" style="max-height:450px;width:100%;">
-      <div class="carousel-caption">
-      </div>
+      <img src="img/hero.jpg" style="width:100%;">
+
     </div>
     <div class="item">
-      <img src="img/standard.jpg" style="max-height:450px;width:100%;">
-      <div class="carousel-caption">
-        <p>cool image</p>
-      </div>
+      <img src="img/standard.jpg" style="width:100%;">
+
     </div>
   </div>
 
@@ -57,7 +54,13 @@
   </a>
 </div>
 
-<!-- Section 2 --
+<<<<<<< HEAD
+
+
+
+
+=======
+<!-- Section 2 -->
 <div class="container-fluid" style="margin: 100px 0px;" id="program-next">
 
   <h1 align="center" style="font-size:32px;">Neste samling</h1>
@@ -129,7 +132,8 @@
     }
   }
   ?>
-</div>-->
+</div>
+>>>>>>> origin/master
 
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>

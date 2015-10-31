@@ -1,3 +1,7 @@
+body {
+margin-top: 51px;
+}
+
 #nav-main{
   border-radius: 0;
 }
@@ -6,7 +10,7 @@
 }
 .navbar-toggle{
   border: none;
-  background-color: inherit;
+  background-color: inherit !important;
 }
 .navbar {
   margin-bottom: 0;
@@ -19,11 +23,11 @@
 }
 footer{
   background-color: #f4f4f4;
-  min-height: 100px;
+  min-height: 80px;
   width: 100%;
   border-top: 1px solid #e3e3e3;
   text-align: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 footer div{
@@ -34,22 +38,22 @@ footer ul{
 }
 footer #copyright{
   padding-top: 25px;
-  border-bottom: 1px solid #e5e5e5;
 }
 footer#copyright li{
   display: inline-block;
   list-style-type: none;
-  line-height: 26px;
+  line-height: 16px;
   vertical-align: middle;
 }
-footer #footer-links a {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 26px;
-  vertical-align: middle;
-  margin: 0 18px 0 0;
-}
-footer #footer-links li{
-  display: inline-block;
-  list-style-type: none;
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+.fab-main{
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 100;
 }
