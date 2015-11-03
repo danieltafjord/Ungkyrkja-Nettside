@@ -71,7 +71,7 @@
 				function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role){
 					//Create panel with event data
 					?>
-					<div class="<?php echo "container-fluid col-sm-" . $columns;?>" id="<?php echo $id; ?>">
+					<div class="<?php echo "event-card container-fluid col-sm-" . $columns;?>" id="<?php echo $id; ?>">
             <paper-card heading="<?php echo $title;?>">
               <div class="card-content">
                 <iron-icon icon="event"></iron-icon>
