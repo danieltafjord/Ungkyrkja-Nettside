@@ -1,5 +1,11 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
 margin-top: 50px;
+margin-bottom: 80px;
 }
 
 #nav-main{
@@ -24,13 +30,13 @@ margin-top: 50px;
   color: #fff;
 }
 footer{
-  background-color: #f4f4f4;
-  min-height: 80px;
+  height: 80px;
   width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #f4f4f4;
   border-top: 1px solid #e3e3e3;
   text-align: center;
-  position: fixed;
-  bottom: 0;
 }
 footer div{
   display: block;
@@ -47,6 +53,7 @@ footer#copyright li{
   line-height: 16px;
   vertical-align: middle;
 }
+
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
