@@ -28,7 +28,7 @@
 	<meta name="theme-color" content="#222">
 	<title>Ungkyrkja | Account</title>
 	<script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<link rel="import" href="../components/main-css.html">
+	<link rel="import" href="../components/header-imports.html">
 </head>
 	<body>
 		<style>
@@ -65,7 +65,6 @@
 </div>
 
 <?php include '../components/footer.php'; ?>
-<link rel="import" href="../components/main-scripts.html">
 
  	</body>
 </html>

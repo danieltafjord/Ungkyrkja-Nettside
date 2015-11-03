@@ -22,7 +22,7 @@
     <meta name="theme-color" content="#222">
     <title>Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="components/main-css.html">
+    <link rel="import" href="component/header-imports.html">
   </head>
   <body>
     <!--Import navbar-->
@@ -30,7 +30,6 @@
     <!--Content here-->
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
-
-    <link rel="import" href="components/main-scripts.html">
+    <!--Import less important things here-->
   </body>
 </html>

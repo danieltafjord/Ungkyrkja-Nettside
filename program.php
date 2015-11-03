@@ -22,7 +22,7 @@
     <meta name="theme-color" content="#222">
     <title>Program | Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="components/main-css.html">
+    <link rel="import" href="components/header-imports.html">
 		<link rel="stylesheet" type="text/css" href="css/program.css">
     <!--Element imports-->
     <link rel="import" href="bower_components/paper-fab/paper-fab.html">
@@ -169,7 +169,6 @@
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
-    <link rel="import" href="components/main-scripts.html">
 		<script src="js/program.js"></script>
   </body>
 </html>

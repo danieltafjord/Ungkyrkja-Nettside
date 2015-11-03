@@ -26,7 +26,7 @@
     <meta name="theme-color" content="#222">
     <title>Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="components/main-css.html">
+    <link rel="import" href="components/header-imports.html">
   </head>
   <style media="screen">
     .photos {
@@ -120,7 +120,6 @@
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
-    <link rel="import" href="components/main-scripts.html">
     <script id="dsq-count-scr" src="//danieltafjord.disqus.com/count.js" async></script>
   </body>
 </html>

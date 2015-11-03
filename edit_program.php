@@ -22,7 +22,7 @@
     <meta name="theme-color" content="#222">
     <title>Rediger Program | Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="components/main-css.html">
+    <link rel="import" href="components/header-imports.html">
 		<link href="css/edit_program.css" rel="stylesheet">
   </head>
   <body>
@@ -146,6 +146,5 @@
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
-    <link rel="import" href="components/main-scripts.html">
   </body>
 </html>
