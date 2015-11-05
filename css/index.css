@@ -3,10 +3,22 @@
 	border:0;
 	border-bottom:1px solid #e5e5e5;
 }
-.event-panel i{
-	float:left;
+.event-card{
+	display: block;
+	margin:auto;
+	width: 100%;
+	max-width: 450px;
 }
-.btn-edit{
-	float:right !important;
-	box-shadow: none !important;
+.event-card paper-card{
+	width: 100%;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+.event-card .card-content p{
+	font-size: 16px;
+	overflow: hidden;
+}
+.event-card .card-content iron-icon{
+	float: left;
+	margin-right: 8px;
 }
