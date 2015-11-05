@@ -69,7 +69,10 @@
 	</style>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
+    <?php
+		$site_location = '/kontakt.php';
+		include 'components/navbar.php';
+		?>
     <!--Content here-->
 		<div class="container-fluid" align="center" style="max-width:100%;margin-top:15px;font-weight:300;">
 			<div class="row">

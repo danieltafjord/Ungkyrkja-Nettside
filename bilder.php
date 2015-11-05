@@ -58,7 +58,10 @@
   </style>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
+    <?php
+    $site_location = '/bilder.php';
+    include 'components/navbar.php';
+    ?>
 
     <!--Content here-->
     <section class="photos" align="center">

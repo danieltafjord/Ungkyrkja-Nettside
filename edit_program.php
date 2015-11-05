@@ -34,7 +34,10 @@ $islogged = true;
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
+    <?php
+    $site_location = '/edit_program.php';
+    include 'components/navbar.php';
+    ?>
 		<!-- Main bit -->
 		<?php
 			$con = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");

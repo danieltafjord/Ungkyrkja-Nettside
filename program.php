@@ -41,7 +41,9 @@ $islogged = true;
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php';
+    <?php
+      $site_location = '/program.php';
+      include 'components/navbar.php';
 			# Connect to database
 			$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
       if($conn->connect_errno){

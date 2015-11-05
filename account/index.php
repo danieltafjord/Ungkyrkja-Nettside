@@ -41,7 +41,10 @@
 		}
 		</style>
 
-<?php include '../components/navbar.php'; ?>
+<?php
+$site_location = '/account/index.php';
+ include '../components/navbar.php';
+?>
 
 <div class="leftside-container">
 	<?php echo $_COOKIE['auth-u']; ?>

@@ -33,7 +33,11 @@ $islogged = true;
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
+    <?php
+    //Specify the location of the file in relation to the root
+    $site_location = '/template.php';
+    include 'components/navbar.php';
+    ?>
     <!--Content here-->
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>

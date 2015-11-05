@@ -39,7 +39,10 @@ $islogged = true;
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
+    <?php
+    $site_location = '/index.php';
+    include 'components/navbar.php';
+    ?>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->

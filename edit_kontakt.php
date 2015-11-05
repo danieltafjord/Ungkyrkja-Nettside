@@ -79,7 +79,10 @@
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
+    <?php
+		$site_location = '/edit_kontakt.php';
+		include 'components/navbar.php';
+		?>
     <!--Content here-->
 				<?php
 					#  Loop trough table
@@ -122,6 +125,6 @@
 
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
-		
+
   </body>
 </html>
