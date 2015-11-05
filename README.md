@@ -3,8 +3,8 @@
 # TODO
 
 John Ingve:
-- Program: Sorter etter månadar og år
-- Change color-scheme
+- Edit-program redesign
+- Navbar fix
 
 Daniel:
 - Bilder: gjer ferdig
