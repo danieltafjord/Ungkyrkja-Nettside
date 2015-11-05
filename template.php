@@ -1,3 +1,10 @@
+<?php
+include_once('account/login.php');
+$islogged = false;
+if(!empty($_COOKIE['auth-logged'])) {
+$islogged = true;
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>

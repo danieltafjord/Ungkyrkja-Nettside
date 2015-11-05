@@ -1,3 +1,10 @@
+<?php
+include_once('account/login.php');
+$islogged = false;
+if(!empty($_COOKIE['auth-logged'])) {
+$islogged = true;
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -34,16 +41,7 @@
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
-		<?php
-			include_once('account/login.php');
-
-			if(empty($_COOKIE['auth-logged'])) {
-				$islogged = false;
-			} else {
-				$islogged = true;
-			}
-
+    <?php include 'components/navbar.php';
 			# Connect to database
 			$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
       if($conn->connect_errno){

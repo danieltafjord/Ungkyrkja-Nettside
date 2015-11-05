@@ -1,3 +1,10 @@
+<?php
+include_once('account/login.php');
+$islogged = false;
+if(!empty($_COOKIE['auth-logged'])) {
+$islogged = true;
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,13 +40,6 @@
   <body>
     <!--Import navbar-->
     <?php include 'components/navbar.php'; ?>
-		<?php
-	include_once('account/login.php');
-  $islogged = false;
-	if(!empty($_COOKIE['auth-logged'])) {
-		$islogged = true;
-	}
-?>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
