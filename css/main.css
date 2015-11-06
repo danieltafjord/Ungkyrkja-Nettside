@@ -1,8 +1,19 @@
+<<<<<<< HEAD
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
 body {
 margin-top: 51px;
 font-family: Open Sans;
+=======
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+margin-top: 50px;
+margin-bottom: 80px;
+>>>>>>> origin/master
 }
 
 #nav-main{
@@ -14,6 +25,8 @@ font-family: Open Sans;
 .navbar-toggle{
   border: none;
   background-color: inherit !important;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .navbar {
   margin-bottom: 0;
@@ -25,13 +38,13 @@ font-family: Open Sans;
   color: #fff;
 }
 footer{
-  background-color: #f4f4f4;
-  min-height: 80px;
+  height: 80px;
   width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #f4f4f4;
   border-top: 1px solid #e3e3e3;
   text-align: center;
-  position: fixed;
-  bottom: 0;
 }
 footer div{
   display: block;
@@ -48,6 +61,7 @@ footer#copyright li{
   line-height: 16px;
   vertical-align: middle;
 }
+
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 

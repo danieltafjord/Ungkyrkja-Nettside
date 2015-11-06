@@ -1,3 +1,17 @@
+<?php
+$location = '/';
+if(isset($site_location)){
+  $location = $site_location;
+}
+$distance_from_root = substr_count($location, '/');
+function navBack($num_nav_back){
+  $navString = '';
+  for($i = 1; $i < $num_nav_back; $i++){
+    $navString .= '../';
+  }
+  return $navString;
+}
+?>
 <!-- Header -->
 <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-main">
   <div class="container-fluid">
@@ -6,22 +20,19 @@
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <i class="material-icons md-light">more_vert</i><span class="sr-only">Toggle navigation</span>
       </button>
-      <a class="navbar-brand" href="#">Ungkyrkja</a>
+      <a class="navbar-brand" href="<?php echo navBack($distance_from_root) . 'index.php'; ?>">Ungkyrkja</a>
     </div>
-    <?php
-    $location = $_SERVER['PHP_SELF'];
-     ?>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="index.php">Heim</a></li>
-        <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="program.php">Program</a></li>
-        <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="kontakt.php">Kontakt</a></li>
-        <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="bilder.php">Bilder</a></li>
+        <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'index.php'; ?>">Heim</a></li>
+        <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'program.php'; ?>">Program</a></li>
+        <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'kontakt.php'; ?>">Kontakt</a></li>
+        <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'bilder.php'; ?>">Bilder</a></li>
 
         <!-- If logged in show username -->
         <?php if(!empty($_COOKIE['auth-u'])) : ?>
-        <li class="dropdown">
+        <li class="dropdown<?php if($location == '/account/index.php'){echo ' active';} ?>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php if(!empty($_COOKIE['auth-u'])) {echo $_COOKIE['auth-u'];} ?> <span class="caret"></span></a>
           <ul class="dropdown-menu" style="">
             <?php if(isset($_POST['minside'])) {header('Location: account/index.php');} ?>

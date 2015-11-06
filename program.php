@@ -1,13 +1,35 @@
+<?php
+include_once('account/login.php');
+$islogged = false;
+if(!empty($_COOKIE['auth-logged'])) {
+$islogged = true;
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#222">
+    <meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
     <meta name="theme-color" content="#222">
-    <link rel="icon" href="img/uk_logo.png" sizes="192x192">
     <title>Program | Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="components/main-css.html">
+    <link rel="import" href="components/header-imports.html">
 		<link rel="stylesheet" type="text/css" href="css/program.css">
     <!--Element imports-->
     <link rel="import" href="bower_components/paper-fab/paper-fab.html">
@@ -19,16 +41,9 @@
   </head>
   <body>
     <!--Import navbar-->
-    <?php include 'components/navbar.php'; ?>
-		<?php
-			include_once('account/login.php');
-
-			if(empty($_COOKIE['auth-logged'])) {
-				$islogged = false;
-			} else {
-				$islogged = true;
-			}
-
+    <?php
+      $site_location = '/program.php';
+      include 'components/navbar.php';
 			# Connect to database
 			$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
       if($conn->connect_errno){
@@ -71,7 +86,7 @@
 				function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role){
 					//Create panel with event data
 					?>
-					<div class="<?php echo "container-fluid col-sm-" . $columns;?>" id="<?php echo $id; ?>">
+					<div class="<?php echo "event-card container-fluid col-sm-" . $columns;?>" id="<?php echo $id; ?>">
             <paper-card heading="<?php echo $title;?>">
               <div class="card-content">
                 <iron-icon icon="event"></iron-icon>
@@ -154,7 +169,6 @@
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
-    <link rel="import" href="components/main-scripts.html">
 		<script src="js/program.js"></script>
   </body>
 </html>
