@@ -1,5 +1,21 @@
 <?php
-  $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+if(!$con){
+  die('Failed to connect to database: ' . mysqli_error($con));
+}
+if (!empty($_COOKIE['auth-u'])) {
+  $authu = $_COOKIE['auth-u'];
+  $queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
+  while ($row = mysqli_fetch_array($queryusers)) {
+    if ($row['role'] == 1) {
+      $isadmin = true;
+    }
+    if ($row['role'] == 0) {
+      $isadmin = false;
+    }
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +51,7 @@
       margin-top: 100px;
     }
     .p-img {
-      max-width: 500px;
+      max-width: 800px;
     }
     .p-div-com {
       background-color:#eee;
@@ -54,8 +70,10 @@
         if(!isset($_GET['img'])) {
           while($rows = mysqli_fetch_array($images)) {
             #if file exist show image
-            if(file_exists('img/' . $rows['img'])) {
-              echo "<a href='?img=" . $rows['id'] . "'><img class='g-img' src='img/" . $rows['img'] . "'></a>";
+            if(file_exists('bilder/' . $rows['img'])) {
+              echo "<a href='?img=" . $rows['id'] . "'><img class='g-img' src='bilder/" . $rows['img'] . "'></a>";
+            } else {
+              echo "<p>Fant ingen bilder!</p>";
             }
           }
         }
@@ -69,9 +87,14 @@
       $sql_image = mysqli_query($con, "SELECT * FROM bilder WHERE id = {$get_image}");
       while($row = mysqli_fetch_array($sql_image, MYSQLI_ASSOC)) :
         echo "<div align='center' class='p-div'>";
-          echo "<img class='p-img' src='img/" . $row['img'] . "'>";
+          echo "<img class='p-img' src='bilder   /" . $row['img'] . "'>";
           echo "<p style='margin-top:40px;background-color:#f4f4f4;padding:30px;width:90%;font-size:18px;'>" . $row['description'] . "</p>";
-        echo "</div>"; ?>
+        echo "</div>";
+        if(!empty($_COOKIE['auth-u'])){
+          if($isadmin == true){
+            echo "<button class='btn btn-danger' data-toggle='modal' data-target='#myModal'>Slett bilde!</button>";
+          }
+        } ?>
         <div align="center" style="background-color:#f4f4f4;">
         <div id="disqus_thread" style="width:90%;margin-top:50px;padding-top:20px;"></div>
           <script>
@@ -102,10 +125,54 @@
 
     ?>
 
+    <?php
+        if(isset($_POST['submit'])) {
+          $getimg = $_POST['img'];
+            mysqli_query($con, "DELETE FROM bilder WHERE id = '$getimg'");
+            echo "it worked" . $_POST['img'];
+          } else {
+            echo "error";
+          }
+    ?>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Advarsel</h4>
+          </div>
+          <div class="modal-body">
+            <p>Er du sikker på at du vil slette dette bilde?</p>
+          </div>
+          <div class="modal-footer">
+            <form class="form-inline" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+              <div class="form-group">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="text" hidden name="img" value="<?php $_GET['img']; ?>">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-danger" name="submit">Ja</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
     <link rel="import" href="components/main-scripts.html">
+    <script type="text/javascript">
+    $('#myModal').on('hidden.bs.modal', function (e) {
+      $('#myModal').modal('hide')
+    })
+    </script>
     <script id="dsq-count-scr" src="//danieltafjord.disqus.com/count.js" async></script>
   </body>
 </html>

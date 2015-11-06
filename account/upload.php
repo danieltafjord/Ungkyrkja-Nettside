@@ -19,7 +19,7 @@ for($i=0; $i<count($_FILES['upload']['name']); $i++) {
 			mysqli_query($con, "INSERT INTO bilder (img, description) VALUES ('$newFilePath', '$desc')");
 			header("Location: ../bilder.php");
     } else {
-			echo "Upload failed!";
+			echo "Upload failed! Picture-name allready exist!";
 		}
   }
 }

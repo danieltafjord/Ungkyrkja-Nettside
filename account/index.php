@@ -27,9 +27,26 @@
 
 <?php include '../components/navbar.php'; ?>
 
-<div class="leftside-container">
-	<?php echo $_COOKIE['auth-u']; ?>
-</div>
+<?php
+	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+	if(!$con){
+		die('Failed to connect to database: ' . mysqli_error($con));
+	}
+	$authu = $_COOKIE['auth-u'];
+	$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
+
+	while ($rows = mysqli_fetch_array($queryusers)) {
+		echo "<div class='leftside-container'>";
+		echo '<b>Navn: </b>' . $rows['name'] . '<br>';
+		echo '<b>Email: </b>' . $rows['email'] . '<br>';
+		echo '<b>Du ble medlem: </b>' . date($rows['registered']) . '<br><br>';
+		if ($rows['role'] == 1) {
+			echo '<small>Denne brukeren har administartor rettigheter!</small><br>';
+		}
+		echo "</div>";
+	}
+
+?>
 
 <div class="leftside-container">
 	<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2>

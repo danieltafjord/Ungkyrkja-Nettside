@@ -1,5 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
 body {
 margin-top: 51px;
+font-family: Open Sans;
 }
 
 #nav-main{
