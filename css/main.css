@@ -1,10 +1,10 @@
-<<<<<<< HEAD
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
 body {
 margin-top: 51px;
 font-family: Open Sans;
-=======
+}
 html {
   position: relative;
   min-height: 100%;
@@ -13,7 +13,6 @@ html {
 body {
 margin-top: 50px;
 margin-bottom: 80px;
->>>>>>> origin/master
 }
 
 #nav-main{
