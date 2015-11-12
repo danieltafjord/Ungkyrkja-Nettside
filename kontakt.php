@@ -79,7 +79,7 @@
 				<?php
 
 				# Connect to database
-				$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+				$con = mysqli_connect('localhost','root','','blog');
 				if(!$con){
 					die('Failed to connect to database: ' . mysqli_error($con));
 				}

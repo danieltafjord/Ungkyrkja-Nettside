@@ -36,9 +36,13 @@ function navBack($num_nav_back){
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php if(!empty($_COOKIE['auth-u'])) {echo $_COOKIE['auth-u'];} ?> <span class="caret"></span></a>
           <ul class="dropdown-menu" style="">
             <?php if(isset($_POST['minside'])) {header('Location: account/index.php');} ?>
-            <form style="width:250px;" action="" method="POST">
-              <button type="submit" name="minside" class="btn btn-default">Min Side</button>
-              <button type="submit" name="logout" class="btn btn-danger">Logout</button>
+            <form style="min-width:160px;" action="" method="POST" class="form-inline">
+              <div class="form-group">
+                <button type="submit" name="minside" class="btn btn-default">Min Side</button>
+              </div>
+              <div class="form-group">
+                <button type="submit" name="logout" class="btn btn-danger">Logg ut</button>
+              </div>
             </form>
           </ul>
         </li>

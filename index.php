@@ -1,5 +1,6 @@
 <?php
 include_once('account/login.php');
+$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 $islogged = false;
 if(!empty($_COOKIE['auth-logged'])) {
 $islogged = true;
@@ -45,23 +46,30 @@ $islogged = true;
     ?>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
+
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox" style="max-height:450px;max-width:100%;">
-    <div class="item active">
-      <img src="img/hero.jpg" style="width:100%;">
+    <?php
 
-    </div>
-    <div class="item">
-      <img src="img/standard.jpg" style="width:100%;">
+      $sqlfront = mysqli_query($con, "SELECT * FROM fremside WHERE active = 0");
+      while ($row = mysqli_fetch_array($sqlfront)) {
+        echo "<div class='item'>";
+        echo "<img src='img/" . $row['name'] . "' style='width:100%;'>";
+        echo "</div>";
+      }
 
-    </div>
+    ?>
+    <?php
+
+      $sqlfront1 = mysqli_query($con, "SELECT * FROM fremside WHERE active = 1");
+      while ($rows = mysqli_fetch_array($sqlfront1)) {
+        echo "<div class='item active'>";
+          echo "<img src='img/" . $rows['name'] . "' style='width:100%;'>";
+        echo "</div>";
+      }
+
+    ?>
   </div>
 
   <!-- Controls -->
@@ -81,7 +89,7 @@ $islogged = true;
   <h1 align="center" style="font-size:32px;">Neste samling</h1>
   <hr width="100%" align="center" class="divider">
   <?php
-  $conn = new mysqli("localhost", "ungkyrkja", "ungkyrkja", "ungkyrkja");
+  $conn = new mysqli("localhost", "root", "", "blog");
   $query = false;
   if($conn){
     $query = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");

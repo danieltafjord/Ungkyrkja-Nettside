@@ -91,7 +91,7 @@ if (!empty($_COOKIE['auth-u'])) {
             if(file_exists('bilder/' . $rows['img'])) {
               echo "<a href='?img=" . $rows['id'] . "'><img class='g-img' src='bilder/" . $rows['img'] . "'></a>";
             } else {
-              echo "<p>Fant ingen bilder!</p>";
+              //echo "<p>Fant ingen bilder!</p>";
             }
           }
         }
@@ -105,7 +105,7 @@ if (!empty($_COOKIE['auth-u'])) {
       $sql_image = mysqli_query($con, "SELECT * FROM bilder WHERE id = {$get_image}");
       while($row = mysqli_fetch_array($sql_image, MYSQLI_ASSOC)) :
         echo "<div align='center' class='p-div'>";
-          echo "<img class='p-img' src='bilder   /" . $row['img'] . "'>";
+          echo "<img class='p-img' src='bilder/" . $row['img'] . "'>";
           echo "<p style='margin-top:40px;background-color:#f4f4f4;padding:30px;width:90%;font-size:18px;'>" . $row['description'] . "</p>";
         echo "</div>";
         if(!empty($_COOKIE['auth-u'])){
@@ -144,13 +144,13 @@ if (!empty($_COOKIE['auth-u'])) {
     ?>
 
     <?php
+    if($isadmin == true) {
         if(isset($_POST['submit'])) {
           $getimg = $_POST['img'];
             mysqli_query($con, "DELETE FROM bilder WHERE id = '$getimg'");
             echo "it worked" . $_POST['img'];
-          } else {
-            echo "error";
           }
+    }
     ?>
 
     <!-- Modal -->

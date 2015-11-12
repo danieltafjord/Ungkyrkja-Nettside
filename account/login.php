@@ -15,6 +15,10 @@ require 'hash.php';
 
 # Connect to database
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+if (!$con) {
+	mysqli_error();
+}
+session_start();
 
 
 #
@@ -28,7 +32,7 @@ if (isset($_POST['register'])) {
 		$user = $_POST['user'];
 		$pass = $_POST['pass'];
 		$email = $_POST['email'];
-		$registered = date('Y-m-d');
+		$registered = date('Y-m-d h:m:s');
 		$ip = $_SERVER['REMOTE_ADDR'];
 
 		# Encypt password
@@ -46,6 +50,7 @@ if (isset($_POST['register'])) {
 		else {
 			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip')");
 			setcookie('auth', $rows['pass'], 0, '', '', '', true);
+			$_SESSION['auth-u'] = $user;
 			setcookie('auth-u', $user, 0, '', '', '', true);
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 			header('Location: ' . $_SERVER['PHP_SELF']);
@@ -76,6 +81,7 @@ if (isset($_POST['login'])) {
 			while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
 				if (Hash::check($pass, $rows['pass']) && $user == $rows['user']) {
 					setcookie('auth', $rows['pass'], 0, '', '', '', true);
+					$_SESSION['auth-u'] = $user;
 					setcookie('auth-u', $user, 0, '', '', '', true);
 					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 					header('Location: ' . $_SERVER['PHP_SELF']);
@@ -97,7 +103,7 @@ if (isset($_POST['login'])) {
 $db_pass = mysqli_query($con, "SELECT * FROM users");
 if($db_pass){
 	while ($row = mysqli_fetch_array($db_pass,MYSQLI_ASSOC)) {
-		if (!empty($_COOKIE['auth-logged']) && Hash::check($_COOKIE['auth-logged'], $row['pass'])) {
+		if (!empty($_COOKIE['auth-logged']) && Hash::check($_COOKIE['auth'], $row['pass'])) {
 			$islogged = true;
 			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is check for logged in!</div>";
 		}
@@ -112,6 +118,7 @@ if($db_pass){
 if (isset($_POST['logout'])) {
 	setcookie("auth", "", time()-3600);
 	setcookie("auth-u", "", time()-3600);
+	session_unset('auth-u');
 	setcookie("auth-logged", "", time()-3600);
 	header('Location: ' . $_SERVER['PHP_SELF']);
 }
