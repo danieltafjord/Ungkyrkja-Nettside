@@ -13,6 +13,7 @@ html {
 body {
 margin-top: 50px;
 margin-bottom: 80px;
+<<<<<<< HEAD
 }
 
 .row {
@@ -65,18 +66,6 @@ footer #copyright li{
   vertical-align: middle;
 }
 
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
-
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
-.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
-
-.fab-main{
-  position: fixed;
-  right: 15px;
-  bottom: 15px;
-  z-index: 100;
-}
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 

@@ -31,6 +31,26 @@ $islogged = true;
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="components/header-imports.html">
 		<link href="css/edit_program.css" rel="stylesheet">
+    <style media="screen">
+    form{
+        width: 100%;
+        margin: 0px;
+        padding-top: 25px;
+        padding-bottom: 15px;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    #title{
+        font-size: 18px;
+    }
+    textarea{
+        resize: vertical;
+        margin-bottom: 10px;
+    }
+    input{
+        margin-bottom: 10px;
+    }
+    </style>
   </head>
   <body>
     <!--Import navbar-->
