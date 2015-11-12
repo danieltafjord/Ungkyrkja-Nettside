@@ -36,6 +36,32 @@ $islogged = true;
     <link rel="import" href="bower_components/iron-icon/iron-icon.html">
     <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
     <link rel="import" href="bower_components/paper-card/paper-card.html">
+    <style media="screen">
+    .divider {
+      margin-bottom:20px;
+      border:0;
+      border-bottom:1px solid #e5e5e5;
+    }
+    .event-card{
+      display: block;
+      margin:auto;
+      width: 100%;
+      max-width: 450px;
+    }
+    .event-card paper-card{
+      width: 100%;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .event-card .card-content p{
+      font-size: 16px;
+      overflow: hidden;
+    }
+    .event-card .card-content iron-icon{
+      float: left;
+      margin-right: 8px;
+    }
+    </style>
   </head>
   <body>
     <!--Import navbar-->
