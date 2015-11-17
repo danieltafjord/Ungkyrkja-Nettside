@@ -4,7 +4,8 @@
 
 John Ingve:
 - Edit-program redesign
-- Navbar fix
+- Make bilder.php work
+- Move delete button to images from Min Side.
 
 Daniel:
 - Bilder: gjer ferdig

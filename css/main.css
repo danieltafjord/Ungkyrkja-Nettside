@@ -1,8 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
-
 body {
 margin-top: 51px;
-font-family: Open Sans;
+font-family: "Helvetica neue", sans-serif;
+-webkit-font-smoothing: antialiased;
 }
 
 html {
@@ -13,7 +12,6 @@ html {
 body {
 margin-top: 50px;
 margin-bottom: 80px;
-<<<<<<< HEAD
 }
 
 .row {

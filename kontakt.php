@@ -15,9 +15,12 @@
 	}
 
 	# Connect to database
-	$conn = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
-	$query = mysqli_query($conn, "SELECT * FROM contact");
-	$queryusers = mysqli_query($conn, "SELECT * FROM users WHERE user = '$authu'");
+	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+	if(!$con){
+		die('Failed to connect to database: ' . mysqli_error($con));
+	}
+	$query = mysqli_query($con, "SELECT * FROM contact");
+	$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
 ?>
 
 <!DOCTYPE html>
@@ -77,12 +80,6 @@
 		<div class="container-fluid" align="center" style="max-width:100%;margin-top:15px;font-weight:300;">
 			<div class="row">
 				<?php
-
-				# Connect to database
-				$con = mysqli_connect('localhost','root','','blog');
-				if(!$con){
-					die('Failed to connect to database: ' . mysqli_error($con));
-				}
 				$query = mysqli_query($con, "SELECT * FROM contact");
 				mysqli_close($con);
 

@@ -115,7 +115,7 @@ $islogged = true;
   <h1 align="center" style="font-size:32px;">Neste samling</h1>
   <hr width="100%" align="center" class="divider">
   <?php
-  $conn = new mysqli("localhost", "root", "", "blog");
+  $conn = new mysqli('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
   $query = false;
   if($conn){
     $query = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");

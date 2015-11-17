@@ -34,9 +34,11 @@
 		<style>
 		.box {
 			margin: 15px;
-			background-color: #f4f4f4;
+			background-color: #fff;
+			/*background-color: #f4f4f4;*/
 			padding:20px;
 			border: 1px solid #e3e3e3;
+			border-radius: 3px;
 		}
 		.modal-body input[type=checkbox] {
 		display:none;
@@ -64,6 +66,30 @@
 		display:inline-block;
 		padding: 0 0 0 0px;
 		}
+		.file-choose {
+			width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;
+		}
+		.file-choose + label {
+    font-size: 16px;
+    font-weight: 400;
+		padding: 10px;
+		width: 100%;
+		border-radius: 5px;
+    color: white;
+    background-color: #d3394c;
+		text-align: center;
+		cursor: pointer;
+    display: inline-block;
+		}
+		.file-choose:focus + label,
+		.file-choose + label:hover {
+		    background-color: #932b38;
+		}
 		</style>
 		<?php
 			$site_location = '/account/index.php';
@@ -75,7 +101,6 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="box">
-						<h2 style="margin:0;margin-bottom:10px;">Info</h2>
 						<?php
 							# connect to database
 							$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
@@ -87,11 +112,12 @@
 							$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
 							# query table
 							while ($rows = mysqli_fetch_array($queryusers)) {
-								echo '<b>Navn: </b>' . $rows['name'] . '<br>';
+								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . $rows['name'] . "!</strong></h2><hr>";
+								echo '<b>Brukernavn: </b>' . $rows['user'] . '<br>';
 								echo '<b>Email: </b>' . $rows['email'] . '<br>';
 								echo '<b>Du ble medlem: </b>' . $rows['registered'] . '<br><br>';
 								if ($rows['role'] == 1) {
-									echo '<small>Denne brukeren har administrator rettigheter!</small><br>';
+									echo '<small>Denne brukeren har <strong>administrator</strong> rettigheter!</small><br>';
 								}
 							}
 						?>
@@ -99,16 +125,17 @@
 				</div>
 				<div class="col-md-4">
 					<div class="box">
-						<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2>
-						<form enctype="multipart/form-data" action="upload.php" method="POST">
+						<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2><hr>
+						<form class="main-form form-group" enctype="multipart/form-data" action="upload.php" method="POST">
 							<div class="form-group">
-								<label>Velg filer her: </lable>
-								<input name="upload[]" type="file" multiple="multiple" style="width:100%;" />
+
+								<input name="upload[]" type="file" id="file" class="file-choose" multiple="multiple" style="width:100%;" data-multiple-caption="{count} filer er valgt" />
+								<label for="file" data-multiple-caption="{count} filer er valgt">
+									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" fill="#fff" viewBox="0 0 18 15"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+									Velg filer</label>
 							</div>
-							<div class="form-group">
-								<label>Undertekst: </lable><br>
-								<textarea name="desc" class="form-control" style="width:100%;" type="text" rows="3" multiple="multiple"></textarea>
-							</div>
+								<lable>Undertekst: </lable><br>
+								<textarea name="desc" class="form-control" style="width:100%;" type="text" rows="3" multiple="multiple"></textarea><br><hr>
 							<div class="form-group">
 								<button type="submit" value="Upload" class="btn btn-primary" style="width:100%;">Last opp</button>
 							</div>
@@ -117,11 +144,13 @@
 				</div>
 				<div class="col-md-4">
 					<div class="box">
-						<h2 style="margin:0;margin-bottom:10px;">Oppdater fremside bilde</h2>
-						<form enctype="multipart/form-data" action="upload.php" method="POST">
+						<h2 style="margin:0;margin-bottom:10px;">Oppdater fremside bilde</h2><hr>
+						<form class="main-form form-group" enctype="multipart/form-data" action="upload.php" method="POST">
 							<div class="form-group">
-								<label>Velg filer her: </lable>
-								<input name="upload[]" type="file" multiple="multiple" style="width:100%;" />
+									<input name="upload[]" type="file" id="file2" class="file-choose" multiple="multiple" style="width:100%;" data-multiple-caption="{count} filer er valgt" />
+									<label for="file" data-multiple-caption="{count} filer er valgt">
+										<svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" fill="#fff" viewBox="0 0 18 15"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+										Velg filer</label>
 								<p class="help-block">Anbefalt størrelse: 1438x450</p>
 							</div>
 							<div class="checkbox">
@@ -129,7 +158,7 @@
 						    <label for="active">
 									<input type="checkbox" id="active" name="active" value="1">Første bilde
 								</label>
-						  </div>
+						  </div><hr>
 							<div class="form-group">
 								<button type="submit" name="submit-front" class="btn btn-primary" style="width:100%;">Last opp</button>
 							</div>
@@ -176,6 +205,28 @@
 		</div>
 
 		<?php include '../components/footer.php'; ?>
+		<script type="text/javascript">
+		var inputs = document.querySelectorAll( 'file' );
+		Array.prototype.forEach.call( inputs, function( input )
+		{
+		var label	 = input.nextElementSibling,
+			labelVal = label.innerHTML;
+
+		input.addEventListener( 'change', function( e )
+		{
+			var fileName = '';
+			if( this.files && this.files.length > 1 )
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+			else
+				fileName = e.target.value.split( '\\' ).pop();
+
+			if( fileName )
+				label.querySelector( 'span' ).innerHTML = fileName;
+			else
+				label.innerHTML = labelVal;
+		});
+		});
+		</script>
  	</body>
 </html>
 <?php } else { header('Location: ../index.php'); } ?>
