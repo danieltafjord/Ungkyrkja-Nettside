@@ -41,54 +41,27 @@
 			border-radius: 3px;
 		}
 		.modal-body input[type=checkbox] {
-		display:none;
+			display:none;
 		}
-
-		.modal-body input[type=checkbox] + label
-		{
-		background: #000;
-		min-height: 80px;
-		max-height: 120px;
-		min-width: 80px;
-		max-width: 150px;
-		display:inline-block;
-		padding: 0 0 0 0px;
-		cursor: pointer;
+		.modal-body input[type=checkbox] + label {
+			background: #000;
+			min-height: 80px;
+			max-height: 120px;
+			min-width: 80px;
+			max-width: 150px;
+			display:inline-block;
+			padding: 0 0 0 0px;
+			cursor: pointer;
 		}
-		.modal-body input[type=checkbox]:checked + label
-		{
-		opacity: .5;
-		min-height: 80px;
-		max-height: 120px;
-		min-width: 80px;
-		max-width: 120px;
-		width: 80px;
-		display:inline-block;
-		padding: 0 0 0 0px;
-		}
-		.file-choose {
-			width: 0.1px;
-			height: 0.1px;
-			opacity: 0;
-			overflow: hidden;
-			position: absolute;
-			z-index: -1;
-		}
-		.file-choose + label {
-    font-size: 16px;
-    font-weight: 400;
-		padding: 10px;
-		width: 100%;
-		border-radius: 5px;
-    color: white;
-    background-color: #d3394c;
-		text-align: center;
-		cursor: pointer;
-    display: inline-block;
-		}
-		.file-choose:focus + label,
-		.file-choose + label:hover {
-		    background-color: #932b38;
+		.modal-body input[type=checkbox]:checked + label {
+			opacity: .5;
+			min-height: 80px;
+			max-height: 120px;
+			min-width: 80px;
+			max-width: 120px;
+			width: 80px;
+			display:inline-block;
+			padding: 0 0 0 0px;
 		}
 		</style>
 		<?php
@@ -112,10 +85,10 @@
 							$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
 							# query table
 							while ($rows = mysqli_fetch_array($queryusers)) {
-								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . $rows['name'] . "!</strong></h2><hr>";
-								echo '<b>Brukernavn: </b>' . $rows['user'] . '<br>';
-								echo '<b>Email: </b>' . $rows['email'] . '<br>';
-								echo '<b>Du ble medlem: </b>' . $rows['registered'] . '<br><br>';
+								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . htmlentities($rows['name']) . "!</strong></h2><hr>";
+								echo '<b>Brukernavn: </b>' . htmlentities($rows['user']) . '<br>';
+								echo '<b>Email: </b>' . htmlentities($rows['email']) . '<br>';
+								echo '<b>Du ble medlem: </b>' . htmlentities($rows['registered']) . '<br><br>';
 								if ($rows['role'] == 1) {
 									echo '<small>Denne brukeren har <strong>administrator</strong> rettigheter!</small><br>';
 								}
@@ -128,18 +101,18 @@
 						<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2><hr>
 						<form class="main-form form-group" enctype="multipart/form-data" action="upload.php" method="POST">
 							<div class="form-group">
-
-								<input name="upload[]" type="file" id="file" class="file-choose" multiple="multiple" style="width:100%;" data-multiple-caption="{count} filer er valgt" />
+								<input name="upload[]" type="file" id="file" class="jfilestyle" data-input="false" multiple="multiple" style="width:100%;"/>
 								<label for="file" data-multiple-caption="{count} filer er valgt">
 									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" fill="#fff" viewBox="0 0 18 15"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
-									Velg filer</label>
+									Velg filer
+								</label>
 							</div>
-								<lable>Undertekst: </lable><br>
-								<textarea name="desc" class="form-control" style="width:100%;" type="text" rows="3" multiple="multiple"></textarea><br><hr>
+							<lable>Undertekst: </lable><br>
+							<textarea name="desc" class="form-control" style="width:100%;" type="text" rows="3" multiple="multiple"></textarea><br><hr>
 							<div class="form-group">
 								<button type="submit" value="Upload" class="btn btn-primary" style="width:100%;">Last opp</button>
 							</div>
-						 </form>
+						</form>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -147,10 +120,7 @@
 						<h2 style="margin:0;margin-bottom:10px;">Oppdater fremside bilde</h2><hr>
 						<form class="main-form form-group" enctype="multipart/form-data" action="upload.php" method="POST">
 							<div class="form-group">
-									<input name="upload[]" type="file" id="file2" class="file-choose" multiple="multiple" style="width:100%;" data-multiple-caption="{count} filer er valgt" />
-									<label for="file" data-multiple-caption="{count} filer er valgt">
-										<svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" fill="#fff" viewBox="0 0 18 15"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
-										Velg filer</label>
+									<input name="upload[]" type="file" id="file2" class="jfilestyle" data-input="false" multiple="multiple" style="width:100%;"/>
 								<p class="help-block">Anbefalt størrelse: 1438x450</p>
 							</div>
 							<div class="checkbox">
@@ -169,9 +139,9 @@
 			</div>
 		</div>
 
+		<!-- this is a modal for deleteing images from fremside-->
 		<div id="myModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
-
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
@@ -182,51 +152,26 @@
 						<form class="form-inline" method="POST" action="../delete.php">
 						<p>Trykk på bildene du vil slette</p>
 						<?php
-						$sqlimg = mysqli_query($con, "SELECT * FROM fremside");
-						while ($row = mysqli_fetch_array($sqlimg)) {
-							#echo "<div>";
-							echo "<input type='checkbox' id='" . $row['id'] . "' name='fremside[]' value='" . $row['id'] . "'><label for='" . $row['id'] . "' style='background-size:cover;background-image:url(../img/" . $row['name'] . ");'></label> ";
-							#echo "</div>";
-						}
+							$sqlimg = mysqli_query($con, "SELECT * FROM fremside");
+							while ($row = mysqli_fetch_array($sqlimg)) {
+								echo "<input type='checkbox' id='" . $row['id'] . "' name='fremside[]' value='" . $row['id'] . "'><label for='" . $row['id'] . "' style='background-size:cover;background-image:url(../img/" . htmlentities($row['name']) . ");'></label> ";
+							}
 						?>
 					</div>
 					<div class="modal-footer">
-							<div class="form-group">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-danger" name="submit-fremside">Slett</button>
-							</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-danger" name="submit-fremside">Slett</button>
+						</div>
 						</form>
 					</div>
 				</div>
-
 			</div>
 		</div>
 
 		<?php include '../components/footer.php'; ?>
-		<script type="text/javascript">
-		var inputs = document.querySelectorAll( 'file' );
-		Array.prototype.forEach.call( inputs, function( input )
-		{
-		var label	 = input.nextElementSibling,
-			labelVal = label.innerHTML;
-
-		input.addEventListener( 'change', function( e )
-		{
-			var fileName = '';
-			if( this.files && this.files.length > 1 )
-				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-			else
-				fileName = e.target.value.split( '\\' ).pop();
-
-			if( fileName )
-				label.querySelector( 'span' ).innerHTML = fileName;
-			else
-				label.innerHTML = labelVal;
-		});
-		});
-		</script>
  	</body>
 </html>
-<?php } else { header('Location: ../index.php'); } ?>
+<?php } else { echo "Du har ikke tilgang til denne siden!"; } ?>

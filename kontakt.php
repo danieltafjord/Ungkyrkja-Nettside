@@ -1,13 +1,15 @@
 <?php
 	include_once('account/login.php');
 	//error_reporting(0);
+	# if username cookie is set
 	if (!empty($_COOKIE['auth-u'])) {
 			$authu = $_COOKIE['auth-u'];
 	}
+	# if logged cookie is set
 	if (!empty($_COOKIE['auth-logged'])) {
 			$authlogged = $_COOKIE['auth-logged'];
 	}
-
+	# if logged cookie is not set, set variable to true
 	if(empty($_COOKIE['auth-logged'])) {
 		$islogged = true;
 	} else {

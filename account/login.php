@@ -18,7 +18,6 @@ $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 if (!$con) {
 	mysqli_error();
 }
-session_start();
 
 
 #
@@ -28,10 +27,10 @@ if (isset($_POST['register'])) {
 	if (isset($_POST['name']) && isset($_POST['user']) && isset($_POST['pass']) && isset($_POST['email'])) {
 
 		# Get values
-		$name = $_POST['name'];
-		$user = $_POST['user'];
-		$pass = $_POST['pass'];
-		$email = $_POST['email'];
+		$name = mysqli_real_escape_string($_POST['name']);
+		$user = mysqli_real_escape_string($_POST['user']);
+		$pass = mysqli_real_escape_string($_POST['pass']);
+		$email = mysqli_real_escape_string($_POST['email']);
 		$registered = date('Y-m-d h:m:s');
 		$ip = $_SERVER['REMOTE_ADDR'];
 
@@ -50,7 +49,6 @@ if (isset($_POST['register'])) {
 		else {
 			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip')");
 			setcookie('auth', $rows['pass'], 0, '', '', '', true);
-			$_SESSION['auth-u'] = $user;
 			setcookie('auth-u', $user, 0, '', '', '', true);
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 			header('Location: ' . $_SERVER['PHP_SELF']);
@@ -71,8 +69,8 @@ if (isset($_POST['login'])) {
 	if (isset($_POST['user']) && isset($_POST['pass'])) {
 
 		# Get values
-		$user = $_POST['user'];
-		$pass = $_POST['pass'];
+		$user = mysqli_real_escape_string($con, $_POST['user']);
+		$pass = mysqli_real_escape_string($con, $_POST['pass']);
 		$db_pass = mysqli_query($con, "SELECT * FROM users");
 		$loggedin = Hash::create('loggedin');
 
@@ -81,7 +79,6 @@ if (isset($_POST['login'])) {
 			while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
 				if (Hash::check($pass, $rows['pass']) && $user == $rows['user']) {
 					setcookie('auth', $rows['pass'], 0, '', '', '', true);
-					$_SESSION['auth-u'] = $user;
 					setcookie('auth-u', $user, 0, '', '', '', true);
 					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 					header('Location: ' . $_SERVER['PHP_SELF']);
@@ -118,7 +115,6 @@ if($db_pass){
 if (isset($_POST['logout'])) {
 	setcookie("auth", "", time()-3600);
 	setcookie("auth-u", "", time()-3600);
-	session_unset('auth-u');
 	setcookie("auth-logged", "", time()-3600);
 	header('Location: ' . $_SERVER['PHP_SELF']);
 }
