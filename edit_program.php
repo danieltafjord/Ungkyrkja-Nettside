@@ -4,6 +4,100 @@ $islogged = false;
 if(!empty($_COOKIE['auth-logged'])) {
 $islogged = true;
 }
+
+$con = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
+if (!$con) {
+  die("Connection failed: " . $con->error());
+}
+
+if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
+  $auth_u = $_COOKIE['auth-u'];
+  $auth = $_COOKIE['auth'];
+  $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
+  if($user_query['user'] != $auth_u && $user_query['pass'] != $auth && !$user_query['role'] > 0){
+    die('Permission denied!');
+  }
+}
+else{
+  die('User not logged in!');
+}
+
+$id = $title = $date = $time = $enddate = $endtime = $content = "";
+$alert = '';
+//Get values from post
+if (isset($_POST['id'])) {
+  $id = test_input($_POST['id']);
+  $title = test_input($_POST['title']);
+  $date = test_input($_POST['date']);
+  $time = test_input($_POST['time']);
+  $enddate = test_input($_POST['enddate']);
+  $endtime = test_input($_POST['endtime']);
+  $content = test_input($_POST['content']);
+
+  $date = DateTime::createFromFormat("Y-m-d H:i", $date . " " . $time);
+  $enddate = DateTime::createFromFormat("Y-m-d H:i", $enddate . " " . $endtime);
+
+  if(isset($_POST['update'])){
+    if($id != ""){
+      $sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") .
+      "' WHERE id LIKE '$id'";
+      if(mysqli_query($con, $sql_query)){
+        header('location: program.php?alert=9002');
+      }
+      else {
+        $alert = 'Kunne ikke oppdatere hendelsen.';
+      }
+    }
+    else{
+      $sql_query = "INSERT INTO uk_program (title, content, date, enddate)
+      VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
+      if($con->query($sql_query)){
+        header('location: program.php?alert=9001');
+      }
+      else {
+        $alert = 'Kunne ikke lagre hendelsen.';
+      }
+    }
+  }
+  else if(isset($_POST['delete']) && isset($_POST['id'])){
+    if($con->query("DELETE FROM uk_program WHERE id LIKE $id")){
+      header('location: program.php?alert=9003');
+    }
+    else{
+      $alert = 'Kunne ikke slette hendelsen.';
+    }
+  }
+
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    $data = str_replace("'", "", $data);
+    return $data;
+}
+
+  $query = null;
+
+    // Get id of event
+  if(isset($_GET['id'])){
+
+  $id = test_input($_GET['id']);
+  }
+  if($id != ""){
+    $query = $con->query("SELECT * FROM uk_program WHERE id LIKE '$id'")->fetch_assoc();
+  }
+
+  # Config
+  setlocale(LC_ALL, "no");
+
+  if($query != null){
+    $title = $query["title"];
+    $content = $query["content"];
+    $date = new DateTime($query["date"]);
+    $enddate = new DateTime($query["enddate"]);
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,100 +144,32 @@ $islogged = true;
     input{
         margin-bottom: 10px;
     }
+    .right{
+      float:right;
+    }
     </style>
   </head>
   <body>
+
+<?php
+if($alert != ''){
+  ?>
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <div class="alert alert-danger">
+  <?php
+  echo $alert;
+  ?>
+  </div>
+<?php
+}
+?>
+
     <!--Import navbar-->
     <?php
     $site_location = '/edit_program.php';
     include 'components/navbar.php';
     ?>
 		<!-- Main bit -->
-		<?php
-			$con = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
-			if (!$con) {
-		    die("Connection failed: " . $con->error());
-			}
-
-      if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
-        $auth_u = $_COOKIE['auth-u'];
-        $auth = $_COOKIE['auth'];
-        $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
-        if($user_query['user'] != $auth_u && $user_query['pass'] != $auth && !$user_query['role'] > 0){
-          die('Permission denied!');
-        }
-      }
-      else{
-        die('User not logged in!');
-      }
-
-			$id = $title = $date = $time = $enddate = $endtime = $content = "";
-
-			//Get values from post
-			if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
-				$id = test_input($_POST['id']);
-				$title = test_input($_POST['title']);
-				$date = test_input($_POST['date']);
-				$time = test_input($_POST['time']);
-				$enddate = test_input($_POST['enddate']);
-				$endtime = test_input($_POST['endtime']);
-				$content = test_input($_POST['content']);
-
-				$date = DateTime::createFromFormat("Y-m-d H:i", $date . " " . $time);
-				$enddate = DateTime::createFromFormat("Y-m-d H:i", $enddate . " " . $endtime);
-
-				if($id != ""){
-					$sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") .
-					"' WHERE id LIKE '$id'";
-					if(mysqli_query($con, $sql_query)){
-						echo "Event updated successfully";
-					} else {
-						echo "Error updating Event: " . mysqli_error($con);
-					}
-				}
-				else{
-					$sql_query = "INSERT INTO uk_program (title, content, date, enddate)
-					VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
-					if($con->query($sql_query)){
-						echo "Event updated successfully";
-					} else {
-						echo "Error updating Event: " . $con->error();
-					}
-				}
-			}
-
-			function test_input($data) {
-          $data = trim($data);
-          $data = stripslashes($data);
-          $data = htmlspecialchars($data);
-          $data = str_replace("'", "", $data);
-          return $data;
-      }
-		?>
-
-		<?php
-			$query = null;
-
-				// Get id of event
-			if(isset($_GET['id'])){
-
-			$id = test_input($_GET['id']);
-			}
-			if($id != ""){
-				$query = $con->query("SELECT * FROM uk_program WHERE id LIKE '$id'")->fetch_assoc();
-			}
-
-			# Config
-			setlocale(LC_ALL, "no");
-		?>
-		<?php
-			if($query != null){
-				$title = $query["title"];
-				$content = $query["content"];
-				$date = new DateTime($query["date"]);
-				$enddate = new DateTime($query["enddate"]);
-			}
-		?>
 
 		<div class="container-fluid">
 			<div class="row">
@@ -166,8 +192,27 @@ $islogged = true;
 							<legend>Innhold:</legend>
 							<textarea class="form-control" rows="5" id="content" name="content"><?php echo $content; ?></textarea>
 							<input type="text" class="form-control hidden" id="id" name="id" value="<?php echo $id; ?>" />
-							<button type="submit" class="btn btn-primary">Lagre</button>
+							<button type="submit" name="update" class="btn btn-primary">Lagre</button>
 							<a href="program.php"><button type="button" class="btn btn-default">Tilbake</button></a>
+              <button type="button" name="delete" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger right">Slett</button>
+              <!--modal-->
+              <div id="modalDelete" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Slett</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Er du sikker? Dette kan ikke gjøres om.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-danger" type="submit" name="delete">Slett</button>
+                      <button class="btn btn-default" type="button" data-dismiss="modal">Lukk</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 						</form>
 					</div>
 				</div>

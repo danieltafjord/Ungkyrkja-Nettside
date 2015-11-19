@@ -81,9 +81,7 @@ $islogged = true;
         }
 			}
 			$conn->close();
-		?>
 
-		<?php
 			$role = 0;
 			if($user){
 				$role = (int) $user['role'];
@@ -93,6 +91,35 @@ $islogged = true;
 					<?php
 				}
 			}
+
+      $alert = '';
+      if(isset($_GET['alert'])){
+        switch ($_GET['alert']) {
+          case '9001':
+            $alert = 'Hendelsen ble lagret.';
+            break;
+
+          case '9002':
+            $alert = 'Hendelsen ble oppdatert.';
+            break;
+
+          case '9003':
+            $alert = 'Hendelsen ble slettet.';
+            break;
+        }
+      }
+      if($alert != ''){
+        ?>
+        <div class="alert alert-success">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <p>
+            <?php
+              echo $alert;
+            ?>
+          </p>
+        </div>
+        <?php
+      }
 		?>
 
 		<!--Main bit-->
