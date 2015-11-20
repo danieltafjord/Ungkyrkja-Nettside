@@ -77,6 +77,9 @@
 			display:inline-block;
 			padding: 0 0 0 0px;
 		}
+		.modal-footer .form-group{
+			display: inline-block;
+		}
 		</style>
 		<?php
 			$site_location = '/account/index.php';
@@ -107,6 +110,9 @@
 						?>
 					</div>
 				</div>
+
+
+
 				<div class="col-md-4">
 					<div class="box">
 						<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2><hr>
@@ -120,6 +126,7 @@
 								<button type="submit" value="Upload" class="btn btn-primary" style="width:100%;">Last opp</button>
 							</div>
 						</form>
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#bilderModal">Slett bilder</button>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -153,7 +160,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Advarsel</h4>
+						<h4 class="modal-title">Slett</h4>
 					</div>
 					<div class="modal-body">
 						<form class="form-inline" method="POST" action="../delete.php">
@@ -167,10 +174,10 @@
 					</div>
 					<div class="modal-footer">
 						<div class="form-group">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+							<button type="submit" class="btn btn-danger" name="submit-fremside">Slett</button>
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-danger" name="submit-fremside">Slett</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
 						</div>
 						</form>
 					</div>
@@ -178,6 +185,38 @@
 			</div>
 		</div>
 
+		<!-- this is a modal for deleteing images from bilder-->
+		<div id="bilderModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Slett bilder</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-inline" method="POST" action="../delete.php">
+						<p>Trykk på bildene du vil slette</p>
+						<?php
+							$sqlimg = mysqli_query($con, "SELECT * FROM bilder");
+							while ($row = mysqli_fetch_array($sqlimg)) {
+								echo "<input type='checkbox' id='" . $row['id'] . "' name='bilder[]' value='" . $row['id'] . "'><label for='" . $row['id'] . "' style='background-size:cover;background-image:url(../bilder/" . htmlentities($row['img']) . ");'></label> ";
+							}
+						?>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">
+							<button type="submit" class="btn btn-danger" name="submit-bilder">Slett</button>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<?php include '../components/footer.php'; ?>
  	</body>
 </html>

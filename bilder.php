@@ -66,7 +66,8 @@ if (!empty($_COOKIE['auth-u'])) {
       margin-top: 100px;
     }
     .p-img {
-      max-width: 800px;
+      width: 100%;
+      max-width: 750px;
     }
     .p-div-com {
       background-color:#eee;

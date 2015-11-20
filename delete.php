@@ -13,4 +13,15 @@ if(isset($_POST['submit-fremside'])){
     }
   }
 }
+if(isset($_POST['submit-bilder'])){
+  if(!empty($_POST['bilder'])){
+    $fremside = $_POST['bilder'];
+    // Loop to store and display values of individual checked checkbox.
+    foreach($_POST['bilder'] as $selected){
+      $fremside_implode = implode($fremside);
+      mysqli_query($con, "DELETE FROM bilder WHERE id = '$fremside_implode'");
+      header('Location: account/index.php');
+    }
+  }
+}
 ?>

@@ -30,31 +30,44 @@ $islogged = true;
     <title>Program | Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="components/header-imports.html">
-		<link rel="stylesheet" type="text/css" href="css/program.css">
-    <!--Element imports-->
-    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
-    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
-    <link rel="import" href="bower_components/iron-icon/iron-icon.html">
-    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="bower_components/paper-card/paper-card.html">
-    <link rel="import" href="bower_components/paper-button/paper-button.html">
     <style media="screen">
+    .box {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      background-color: #fff;
+      padding:20px;
+      border: 1px solid #e3e3e3;
+      border-radius: 3px;
+    }
     .month_divider hr{
       background-color: #666;
       height: 1px;
     }
-    .event-card paper-card{
-      width: 100%;
-      margin-top: 16px;
-      margin-bottom: 16px;
-    }
-    .event-card .card-content p{
+    .event-card .content p{
       font-size: 16px;
       overflow: hidden;
     }
-    .event-card .card-content iron-icon{
+    .event-card .content i{
       float: left;
       margin-right: 8px;
+    }
+    .fab-main{
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+      border: none;
+      background-color: #F44336;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+    .fab-main i{
+      vertical-align: middle;
+    }
+    .btn-icon{
+      border: none;
+      background-color: #fff;
+    }
+    .modal-footer form{
+      display: inline-block;
     }
     </style>
   </head>
@@ -87,7 +100,7 @@ $islogged = true;
 				$role = (int) $user['role'];
 				if($role > 0){
 					?>
-          <a href="edit_program.php" class="fab-main"><paper-fab icon="add"></paper-fab></a>
+          <a href="edit_program.php"><button type="button" class="fab-main"><i class="material-icons md-light">add</i></button></a>
 					<?php
 				}
 			}
@@ -132,32 +145,38 @@ $islogged = true;
 				function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role){
 					//Create panel with event data
 					?>
-					<div class="<?php echo "event-card container-fluid col-sm-" . $columns;?>" id="<?php echo $id; ?>">
-            <paper-card heading="<?php echo $title;?>">
-              <div class="card-content">
-                <iron-icon icon="event"></iron-icon>
+					<div class="<?php echo "event-card col-sm-" . $columns;?>" id="<?php echo $id; ?>">
+            <div class="box">
+              <h3><?php echo $title;?></h3>
+              <hr>
+              <div class="content">
+                <i class="material-icons">event</i>
                 <p><?php echo "Veke: " . $date->format("W"); ?></p>
-                <iron-icon icon="schedule"></iron-icon>
-                <p><?php
+                <i class="material-icons">schedule</i>
+                <p>
+                  <?php
                   $dateFormatter->setPattern("EEEE dd. MMMM, HH:mm");
                   if($date->format("d.m.Y") == $enddate->format("d.m.Y")){
                     echo $dateFormatter->format($date) . " - " .$enddate->format("H:i");
                   }
                   else{
-                    echo $dateFormatter->format($date) . " - " .$dateFormatter->format($enddate);
+                    echo $dateFormatter->format($date) . " - "  .$dateFormatter->format($enddate);
                   }
-                  ?></p>
-                  <?php if($content != ""){ ?>
-                  <iron-icon icon="label"></iron-icon>
+                  ?>
+                </p>
+                <?php if($content != ""){ ?>
+                  <i class="material-icons">label</i>
                   <p><?php echo $content;?></p>
                   <?php } ?>
-              </div>
-              <?php if($role > 0){ ?>
-              <div class="card-actions">
-                <paper-icon-button class="btn-edit" icon="create"></paper-icon-button>
-              </div>
-              <?php } ?>
-            </paper-card>
+                </div>
+                <?php if($role > 0){ ?>
+                  <hr>
+                  <div class="actions">
+                    <button class="btn-icon btn-edit"> <i class="material-icons">create</i></button>
+                    <button class="btn-icon btn-delete"> <i class="material-icons" data-toggle="modal"  data-target="#deleteModal">delete</i></button>
+                  </div>
+                  <?php } ?>
+            </div>
 					</div>
 				<?php
 				}
@@ -212,9 +231,63 @@ $islogged = true;
 			?>
 			</div>
 		</div>
+
+    <div id="deleteModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Slett</h4>
+          </div>
+          <div class="modal-body">
+            <p>Er du sikker? Dette kan ikke gjøres om.</p>
+          </div>
+          <div class="modal-footer">
+            <form id="deleteForm" action="edit_program.php" method="post">
+              <button id="deleteButton" class="btn btn-danger" type="submit" name="delete">Slett</button>
+              <input id="deleteId" hidden type="text" name="id" value="">
+            </form>
+            <button class="btn btn-default" type="button" data-dismiss="modal">Lukk</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
-		<script src="js/program.js"></script>
+		<script>
+    var main = function(){
+    	$('.event-panel').click(function(){
+    		//Highlight the clicked element
+    		if($(this).hasClass('panel-primary')){
+    			$('.event-panel').removeClass('panel-primary').addClass('panel-default');
+    			$('.btn-edit').addClass('hidden');
+    		}
+    		else{
+    			$('.event-panel').removeClass('panel-primary').addClass('panel-default');
+    			$(this).removeClass('panel-default').addClass('panel-primary');
+    			$('.btn-edit').addClass('hidden');
+    			$('.btn-edit', this).removeClass('hidden');
+    		}
+
+    		//show the edit button in the clicked element
+
+    	});
+    	$('.btn-edit').click(function(){
+    		var url = window.location.href;
+    		var id = $(this).closest('div[id]').attr('id');
+    		url = 'edit_program.php' + "?id=" + id;
+    		//Redirect to the edit-program page
+    		window.location.assign(url);
+    	});
+      $('.btn-delete').click(function(){
+        var id = $(this).closest('div[id]').attr('id');
+        $('#deleteId').attr('value', id);
+      })
+    }
+
+    $(document).ready(main);
+    </script>
   </body>
 </html>
