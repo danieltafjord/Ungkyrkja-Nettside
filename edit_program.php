@@ -107,8 +107,18 @@ else{
   die('');
 }
 
+if(isset($_POST['delete']) && isset($_POST['id'])){
+  $id = test_input($_POST['id']);
+  if($con->query("DELETE FROM uk_program WHERE id LIKE $id")){
+    header('location: program.php?alert=9003');
+  }
+  else{
+    $alert = 'Kunne ikke slette hendelsen.' . $con->error;
+  }
+}
+
 //Get values from post
-if (isset($_POST['id'])) {
+if(isset($_POST['update']) && isset($_POST['id'])){
   $id = test_input($_POST['id']);
   $title = test_input($_POST['title']);
   $date = test_input($_POST['date']);
@@ -120,37 +130,26 @@ if (isset($_POST['id'])) {
   $date = DateTime::createFromFormat("Y-m-d H:i", $date . " " . $time);
   $enddate = DateTime::createFromFormat("Y-m-d H:i", $enddate . " " . $endtime);
 
-  if(isset($_POST['update'])){
-    if($id != ""){
-      $sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") .
-      "' WHERE id LIKE '$id'";
-      if(mysqli_query($con, $sql_query)){
-        header('location: program.php?alert=9002');
-      }
-      else {
-        $alert = 'Kunne ikke oppdatere hendelsen.';
-      }
+  if($id != ""){
+    $sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") .
+    "' WHERE id LIKE '$id'";
+    if(mysqli_query($con, $sql_query)){
+      header('location: program.php?alert=9002');
     }
-    else{
-      $sql_query = "INSERT INTO uk_program (title, content, date, enddate)
-      VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
-      if($con->query($sql_query)){
-        header('location: program.php?alert=9001');
-      }
-      else {
-        $alert = 'Kunne ikke lagre hendelsen.';
-      }
+    else {
+      $alert = 'Kunne ikke oppdatere hendelsen.';
     }
   }
-  else if(isset($_POST['delete']) && isset($_POST['id'])){
-    if($con->query("DELETE FROM uk_program WHERE id LIKE $id")){
-      header('location: program.php?alert=9003');
+  else{
+    $sql_query = "INSERT INTO uk_program (title, content, date, enddate)
+    VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
+    if($con->query($sql_query)){
+      header('location: program.php?alert=9001');
     }
-    else{
-      $alert = 'Kunne ikke slette hendelsen.';
+    else {
+      $alert = 'Kunne ikke lagre hendelsen.';
     }
   }
-
 }
 
 $query = null;
@@ -176,11 +175,9 @@ if($query != null){
 
 if($alert != ''){
   ?>
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <div class="alert alert-danger">
-  <?php
-  echo $alert;
-  ?>
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <p><?php echo $alert; ?></p>
   </div>
 <?php
 }
