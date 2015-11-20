@@ -1,6 +1,24 @@
 <?php
 # connect to database
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+if($con->connect_errno){
+  die('Connect Error: '. $con->connect_errno);
+}
+
+// Check user
+if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
+  $auth_u = $_COOKIE['auth-u'];
+  $auth = $_COOKIE['auth'];
+
+  $user = $con->query("SELECT user, pass, role FROM users WHERE user LIKE $auth_u")->fetch_array();
+
+  if($auth_u != $user['user'] || $auth != $user['pass'] || $user['role'] < 1){
+    die('User not authorized!');
+  }
+}
+else{
+  die('User not logged in!');
+}
 
 # if superglobal post['desc'] is set run upload script
 if (isset($_POST['desc'])) {
