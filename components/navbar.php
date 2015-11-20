@@ -1,6 +1,8 @@
 <?php
+//Fixes 'Headers already sendt' issue
 ob_start();
 
+$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 $location = '/';
 if(isset($site_location)){
   $location = $site_location;
@@ -35,7 +37,15 @@ function navBack($num_nav_back){
         <!-- If logged in show username -->
         <?php if(!empty($_COOKIE['auth-u'])) : ?>
         <li class="dropdown<?php if($location == '/account/index.php'){echo ' active';} ?>">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php if(!empty($_COOKIE['auth-u'])) {echo $_COOKIE['auth-u'];} ?> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <?php
+              if(!empty($_COOKIE['auth-u'])) {
+                $authuser = $_COOKIE['auth-u'];
+                $row = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM users WHERE user = '$authuser'"));
+                echo $row['name'];
+              }
+            ?>
+            <span class="caret"></span></a>
           <ul class="dropdown-menu" style="">
             <?php if(isset($_POST['minside'])) {header('Location: account/index.php');} ?>
             <form style="min-width:160px;" action="" method="POST" class="form-inline">

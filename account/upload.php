@@ -1,9 +1,9 @@
 <?php
-
+# connect to database
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 
+# if superglobal post['desc'] is set run upload script
 if (isset($_POST['desc'])) {
-
   $desc = $_POST['desc'];
   //Loop through each file
   for($i=0; $i<count($_FILES['upload']['name']); $i++) {
@@ -27,8 +27,8 @@ if (isset($_POST['desc'])) {
   }
 }
 
+# if superglobal post['desc'] is set run upload script
 if (isset($_POST['submit-front'])) {
-
   $active = $_POST['active'];
 
   for($i=0; $i<count($_FILES['upload']['name']); $i++) {
@@ -43,7 +43,6 @@ if (isset($_POST['submit-front'])) {
       //Upload the file into the temp dir
       $check_uniqe = mysqli_query($con, "SELECT * FROM fremside WHERE name='$newFilePath' LIMIT 1");
       if(move_uploaded_file($tmpFilePath, $newFilePath) && !mysqli_fetch_array($check_uniqe,MYSQLI_ASSOC) == true) {
-        echo $active;
         $sql = mysqli_query($con, "SELECT * FROM fremside WHERE active LIKE '1'");
           if (!empty($active) && mysqli_num_rows($sql) == 0) {
             mysqli_query($con, "INSERT INTO fremside (name, active) VALUES ('$newFilePath', '1')");

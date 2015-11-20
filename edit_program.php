@@ -80,7 +80,7 @@ if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
   $auth_u = $_COOKIE['auth-u'];
   $auth = $_COOKIE['auth'];
   $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
-  if($user_query['user'] != $auth_u || $user_query['pass'] != $auth || $user_query['role'] <= 1){
+  if($user_query['user'] != $auth_u || $user_query['pass'] != $auth || $user_query['role'] < 1){
     ?>
     <div class="alert alert-danger">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
