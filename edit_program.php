@@ -1,4 +1,14 @@
 <?php
+$id = $title = $date = $time = $enddate = $endtime = $content = $alert = '';
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  $data = str_replace("'", "", $data);
+  return $data;
+}
+
 include_once('account/login.php');
 $islogged = false;
 if(!empty($_COOKIE['auth-logged'])) {
@@ -7,97 +17,8 @@ $islogged = true;
 
 $con = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
 if (!$con) {
-  die("Connection failed: " . $con->error());
+  $alert = 'Kunne ikke laste inn data.';
 }
-
-if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
-  $auth_u = $_COOKIE['auth-u'];
-  $auth = $_COOKIE['auth'];
-  $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
-  if($user_query['user'] != $auth_u && $user_query['pass'] != $auth && !$user_query['role'] > 0){
-    die('Permission denied!');
-  }
-}
-else{
-  die('User not logged in!');
-}
-
-$id = $title = $date = $time = $enddate = $endtime = $content = "";
-$alert = '';
-//Get values from post
-if (isset($_POST['id'])) {
-  $id = test_input($_POST['id']);
-  $title = test_input($_POST['title']);
-  $date = test_input($_POST['date']);
-  $time = test_input($_POST['time']);
-  $enddate = test_input($_POST['enddate']);
-  $endtime = test_input($_POST['endtime']);
-  $content = test_input($_POST['content']);
-
-  $date = DateTime::createFromFormat("Y-m-d H:i", $date . " " . $time);
-  $enddate = DateTime::createFromFormat("Y-m-d H:i", $enddate . " " . $endtime);
-
-  if(isset($_POST['update'])){
-    if($id != ""){
-      $sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") .
-      "' WHERE id LIKE '$id'";
-      if(mysqli_query($con, $sql_query)){
-        header('location: program.php?alert=9002');
-      }
-      else {
-        $alert = 'Kunne ikke oppdatere hendelsen.';
-      }
-    }
-    else{
-      $sql_query = "INSERT INTO uk_program (title, content, date, enddate)
-      VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
-      if($con->query($sql_query)){
-        header('location: program.php?alert=9001');
-      }
-      else {
-        $alert = 'Kunne ikke lagre hendelsen.';
-      }
-    }
-  }
-  else if(isset($_POST['delete']) && isset($_POST['id'])){
-    if($con->query("DELETE FROM uk_program WHERE id LIKE $id")){
-      header('location: program.php?alert=9003');
-    }
-    else{
-      $alert = 'Kunne ikke slette hendelsen.';
-    }
-  }
-
-}
-
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data = str_replace("'", "", $data);
-    return $data;
-}
-
-  $query = null;
-
-    // Get id of event
-  if(isset($_GET['id'])){
-
-  $id = test_input($_GET['id']);
-  }
-  if($id != ""){
-    $query = $con->query("SELECT * FROM uk_program WHERE id LIKE '$id'")->fetch_assoc();
-  }
-
-  # Config
-  setlocale(LC_ALL, "no");
-
-  if($query != null){
-    $title = $query["title"];
-    $content = $query["content"];
-    $date = new DateTime($query["date"]);
-    $enddate = new DateTime($query["enddate"]);
-  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -150,8 +71,102 @@ function test_input($data) {
     </style>
   </head>
   <body>
-
+    <!--Import navbar-->
 <?php
+$site_location = '/edit_program.php';
+include 'components/navbar.php';
+
+if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
+  $auth_u = $_COOKIE['auth-u'];
+  $auth = $_COOKIE['auth'];
+  $user_query = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
+  if($user_query['user'] != $auth_u || $user_query['pass'] != $auth || $user_query['role'] <= 1){
+    ?>
+    <div class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <p>Du har ikke tilgang til denne siden.</p>
+    </div>
+    <?php
+    die('');
+  }
+}
+else{
+  ?>
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <p>Du er ikke logget inn.</p>
+  </div>
+  <?php
+  die('');
+}
+
+//Get values from post
+if (isset($_POST['id'])) {
+  $id = test_input($_POST['id']);
+  $title = test_input($_POST['title']);
+  $date = test_input($_POST['date']);
+  $time = test_input($_POST['time']);
+  $enddate = test_input($_POST['enddate']);
+  $endtime = test_input($_POST['endtime']);
+  $content = test_input($_POST['content']);
+
+  $date = DateTime::createFromFormat("Y-m-d H:i", $date . " " . $time);
+  $enddate = DateTime::createFromFormat("Y-m-d H:i", $enddate . " " . $endtime);
+
+  if(isset($_POST['update'])){
+    if($id != ""){
+      $sql_query = "UPDATE uk_program SET title='$title', content='$content', date='" . $date->format("Y-m-d H:i:s") . "', enddate='" . $enddate->format("Y-m-d H:i:s") .
+      "' WHERE id LIKE '$id'";
+      if(mysqli_query($con, $sql_query)){
+        header('location: program.php?alert=9002');
+      }
+      else {
+        $alert = 'Kunne ikke oppdatere hendelsen.';
+      }
+    }
+    else{
+      $sql_query = "INSERT INTO uk_program (title, content, date, enddate)
+      VALUES ('$title', '$content', '" . $date->format("Y-m-d H:i:s") . "', '" . $enddate->format("Y-m-d H:i:s") . "')";
+      if($con->query($sql_query)){
+        header('location: program.php?alert=9001');
+      }
+      else {
+        $alert = 'Kunne ikke lagre hendelsen.';
+      }
+    }
+  }
+  else if(isset($_POST['delete']) && isset($_POST['id'])){
+    if($con->query("DELETE FROM uk_program WHERE id LIKE $id")){
+      header('location: program.php?alert=9003');
+    }
+    else{
+      $alert = 'Kunne ikke slette hendelsen.';
+    }
+  }
+
+}
+
+$query = null;
+
+  // Get id of event
+if(isset($_GET['id'])){
+
+$id = test_input($_GET['id']);
+}
+if($id != ""){
+  $query = $con->query("SELECT * FROM uk_program WHERE id LIKE '$id'")->fetch_assoc();
+}
+
+# Config
+setlocale(LC_ALL, "no");
+
+if($query != null){
+  $title = $query["title"];
+  $content = $query["content"];
+  $date = new DateTime($query["date"]);
+  $enddate = new DateTime($query["enddate"]);
+}
+
 if($alert != ''){
   ?>
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -163,12 +178,6 @@ if($alert != ''){
 <?php
 }
 ?>
-
-    <!--Import navbar-->
-    <?php
-    $site_location = '/edit_program.php';
-    include 'components/navbar.php';
-    ?>
 		<!-- Main bit -->
 
 		<div class="container-fluid">

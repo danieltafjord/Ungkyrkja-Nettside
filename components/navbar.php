@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 $location = '/';
 if(isset($site_location)){
   $location = $site_location;
@@ -65,7 +67,7 @@ function navBack($num_nav_back){
       </form>
           </ul>
         </li>
-      <?php endif;?>
+      <?php endif; ?>
       <?php if(empty($_COOKIE['auth-logged'])) :?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></a>
