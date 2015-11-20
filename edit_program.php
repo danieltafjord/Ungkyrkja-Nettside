@@ -68,6 +68,13 @@ if (!$con) {
     .right{
       float:right;
     }
+    .center-form{
+      width: 100%;
+      max-width: 750px;
+      margin: auto;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
     </style>
   </head>
   <body>
@@ -181,50 +188,46 @@ if($alert != ''){
 		<!-- Main bit -->
 
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-					<div class="well">
-						<form class="main-form form-group" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-							<Legend>Tittel:</legend>
-							<input type="text" class="form-control" id="title" value="<?php echo $title; ?>" name="title"/>
-							<fieldset>
-								<legend>Dato og tid:</legend>
-								<label for="date" class="control-label">Start dato:</label>
-								<input type="date" class="form-control" id="date" name="date" value="<?php if($date!=""){echo $date->format("Y-m-d");} ?>" />
-								<label for="time" class="control-label">Start tid: </label>
-								<input type="time" class="form-control" id="time" name="time" value="<?php if($date!=""){echo $date->format("H:i");} ?>" />
-								<label for="enddate" class="control-label">Slutt dato:</label>
-								<input type="date" class="form-control" id="enddate" name="enddate" value="<?php if($enddate!=""){echo $enddate->format("Y-m-d");} ?>" />
-								<label for="endtime" class="control-label">Slutt tid:</label>
-								<input type="time" class="form-control" id="endtime" name="endtime" value="<?php if($enddate!=""){echo $enddate->format("H:i");}?>" />
-							</fieldset>
-							<legend>Innhold:</legend>
-							<textarea class="form-control" rows="5" id="content" name="content"><?php echo $content; ?></textarea>
-							<input type="text" class="form-control hidden" id="id" name="id" value="<?php echo $id; ?>" />
-							<button type="submit" name="update" class="btn btn-primary">Lagre</button>
-							<a href="program.php"><button type="button" class="btn btn-default">Tilbake</button></a>
-              <button type="button" name="delete" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger right">Slett</button>
-              <!--modal-->
-              <div id="modalDelete" class="modal fade">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Slett</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>Er du sikker? Dette kan ikke gjøres om.</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn btn-danger" type="submit" name="delete">Slett</button>
-                      <button class="btn btn-default" type="button" data-dismiss="modal">Lukk</button>
-                    </div>
-                  </div>
+			<div class="well center-form">
+				<form class="main-form form-group" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+					<Legend>Tittel:</legend>
+					<input type="text" class="form-control" id="title" value="<?php echo $title; ?>" name="title"/>
+					<fieldset>
+						<legend>Dato og tid:</legend>
+						<label for="date" class="control-label">Start dato:</label>
+						<input type="date" class="form-control" id="date" name="date" value="<?php if($date!=""){echo $date->format("Y-m-d");} ?>" />
+						<label for="time" class="control-label">Start tid: </label>
+						<input type="time" class="form-control" id="time" name="time" value="<?php if($date!=""){echo $date->format("H:i");} ?>" />
+						<label for="enddate" class="control-label">Slutt dato:</label>
+						<input type="date" class="form-control" id="enddate" name="enddate" value="<?php if($enddate!=""){echo $enddate->format("Y-m-d");} ?>" />
+						<label for="endtime" class="control-label">Slutt tid:</label>
+						<input type="time" class="form-control" id="endtime" name="endtime" value="<?php if($enddate!=""){echo $enddate->format("H:i");}?>" />
+					</fieldset>
+					<legend>Innhold:</legend>
+					<textarea class="form-control" rows="5" id="content" name="content"><?php echo $content; ?></textarea>
+					<input type="text" class="form-control hidden" id="id" name="id" value="<?php echo $id; ?>" />
+					<button type="submit" name="update" class="btn btn-primary">Lagre</button>
+					<a href="program.php"><button type="button" class="btn btn-default">Tilbake</button></a>
+          <button type="button" name="delete" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger right">Slett</button>
+          <!--modal-->
+          <div id="modalDelete" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Slett</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Er du sikker? Dette kan ikke gjøres om.</p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger" type="submit" name="delete">Slett</button>
+                  <button class="btn btn-default" type="button" data-dismiss="modal">Lukk</button>
                 </div>
               </div>
-						</form>
-					</div>
-				</div>
+            </div>
+          </div>
+				</form>
 			</div>
 		</div>
     <!--Import footer-->
