@@ -145,7 +145,7 @@ $islogged = true;
 				function createEventPanel($id, $title, $content, $date, $enddate, $columns, $dateFormatter, $role){
 					//Create panel with event data
 					?>
-					<div class="<?php echo "event-card col-sm-" . $columns;?>" id="<?php echo $id; ?>">
+					<div class="<?php echo "event-card col-md-" . $columns;?>" id="<?php echo $id; ?>">
             <div class="box">
               <h3><?php echo $title;?></h3>
               <hr>

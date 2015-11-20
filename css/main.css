@@ -24,6 +24,10 @@ margin-bottom: 80px;
 #nav-main form{
   margin: 25px
 }
+#nav-main .dropdown-menu{
+  background-color: #333;
+  color: #fff;
+}
 .navbar-toggle{
   border: none;
   background-color: inherit !important;
