@@ -1,22 +1,19 @@
 <?php
 # PHP Login and Register Script
 
-
-# Instantiate register() function if all requirements are set
+# Import classes
 use Project\Helpers\Hash;
-
+use Project\Error\error;
 require 'hash.php';
+include('error.php');
 
-#Hash::create($hashValue);
 
-#function hashoutout() {
-#  var_dump (Hash::check($hashValue, 'pass'));
-#}
 
 # Connect to database
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 if (!$con) {
-	mysqli_error();
+	error::report($_SERVER['PHP_SELF'],'Failed to connect to database: ' . mysqli_error($con), 'Fatal', $_SERVER['REMOTE_ADDR'], date('Y-m-d h:i:sa'));
+	die(header('Location: index.php'));
 }
 
 
