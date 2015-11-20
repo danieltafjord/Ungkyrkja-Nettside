@@ -6,4 +6,3 @@
     	</ul>
 	</div>
 </footer>
-<script src="../js/jquery-filestyle.min.js"></script>
