@@ -66,6 +66,9 @@ $islogged = true;
       border: none;
       background-color: #fff;
     }
+    .modal-footer form{
+      display: inline-block;
+    }
     </style>
   </head>
   <body>

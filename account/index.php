@@ -63,6 +63,9 @@
 			display:inline-block;
 			padding: 0 0 0 0px;
 		}
+		.modal-footer .form-group{
+			display: inline-block;
+		}
 		</style>
 		<?php
 			$site_location = '/account/index.php';
@@ -96,6 +99,9 @@
 						?>
 					</div>
 				</div>
+
+
+
 				<div class="col-md-4">
 					<div class="box">
 						<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2><hr>
@@ -161,10 +167,10 @@
 					</div>
 					<div class="modal-footer">
 						<div class="form-group">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+							<button type="submit" class="btn btn-danger" name="submit-fremside">Slett</button>
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-danger" name="submit-fremside">Slett</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
 						</div>
 						</form>
 					</div>
@@ -193,18 +199,17 @@
 					</div>
 					<div class="modal-footer">
 						<div class="form-group">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+							<button type="submit" class="btn btn-danger" name="submit-bilder">Slett</button>
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-danger" name="submit-bilder">Slett</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
 						</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
+		
 		<?php include '../components/footer.php'; ?>
  	</body>
 </html>

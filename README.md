@@ -3,10 +3,8 @@
 # TODO
 
 John Ingve:
-- Edit-program redesign
-- Make bilder.php work
-- Move delete button to images from Min Side.
 
 Daniel:
 - Bilder: gjer ferdig
 - Style index
+- Account: upload and delete for images must be hidden from non-admins

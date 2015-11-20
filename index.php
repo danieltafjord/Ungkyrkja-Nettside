@@ -63,6 +63,9 @@ $islogged = true;
       border: none;
       background-color: #fff;
     }
+    .modal-footer form{
+      display: inline-block;
+    }
     </style>
   </head>
   <body>
@@ -185,27 +188,32 @@ $islogged = true;
   ?>
 </div>
 
-<div id="deleteModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Slett</h4>
-      </div>
-      <div class="modal-body">
-        <p>Er du sikker? Dette kan ikke gjøres om.</p>
-      </div>
-      <div class="modal-footer">
-        <form id="deleteForm" action="edit_program.php" method="post">
-          <button id="deleteButton" class="btn btn-danger" type="submit" name="delete">Slett</button>
-          <input id="deleteId" hidden type="text" name="id" value="">
-        </form>
-        <button class="btn btn-default" type="button" data-dismiss="modal">Lukk</button>
+<?php
+if($role > 0){
+?>
+  <div id="deleteModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Slett</h4>
+        </div>
+        <div class="modal-body">
+          <p>Er du sikker? Dette kan ikke gjøres om.</p>
+        </div>
+        <div class="modal-footer">
+          <form id="deleteForm" action="edit_program.php" method="post">
+            <button id="deleteButton" class="btn btn-danger" type="submit" name="delete">Slett</button>
+            <input id="deleteId" hidden type="text" name="id" value="">
+          </form>
+          <button class="btn btn-default" type="button" data-dismiss="modal">Lukk</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
+<?php
+}
+?>
     <!--Import footer-->
     <?php include 'components/footer.php'; ?>
 
