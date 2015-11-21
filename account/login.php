@@ -25,15 +25,17 @@ if (isset($_POST['register'])) {
 	if (isset($_POST['name']) && isset($_POST['user']) && isset($_POST['pass']) && isset($_POST['email'])) {
 
 		# Get values
-		$name = mysqli_real_escape_string($_POST['name']);
-		$user = mysqli_real_escape_string($_POST['user']);
-		$pass = mysqli_real_escape_string($_POST['pass']);
-		$email = mysqli_real_escape_string($_POST['email']);
+		$name = mysqli_real_escape_string($con, $_POST['name']);
+		$user = mysqli_real_escape_string($con, $_POST['user']);
+		$pass = mysqli_real_escape_string($con, $_POST['pass']);
+		$email = mysqli_real_escape_string($con, $_POST['email']);
 		$registered = date('Y-m-d h:m:s');
 		$ip = $_SERVER['REMOTE_ADDR'];
 
 		# Encypt password
 		$encrypted_pass = Hash::create($pass);
+
+		$loggedin = Hash::create('loggedin');
 
 		# Check if username allready exist
 		$check_uniqe = mysqli_query($con, "SELECT * FROM users WHERE user='$user' LIMIT 1");
@@ -46,7 +48,7 @@ if (isset($_POST['register'])) {
 		# Add values to database
 		else {
 			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip')");
-			setcookie('auth', $rows['pass'], 0, '', '', '', true);
+			setcookie('auth', $encrypted_pass, 0, '', '', '', true);
 			setcookie('auth-u', $user, 0, '', '', '', true);
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
 			header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1001');
