@@ -109,32 +109,25 @@ $islogged = true;
       if(isset($_GET['alert'])){
         switch ($_GET['alert']) {
           case '9001':
-            $alert = 'Hendelsen ble lagret.';
+            $alert = 'Hendelsen ble opprettet.';
+            $alert_type = 'success';
             break;
 
           case '9002':
             $alert = 'Hendelsen ble oppdatert.';
+            $alert_type = 'success';
             break;
 
           case '9003':
             $alert = 'Hendelsen ble slettet.';
+            $alert_type = 'success';
             break;
         }
       }
-      if($alert != ''){
-        ?>
-        <div class="alert alert-success">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <p>
-            <?php
-              echo $alert;
-            ?>
-          </p>
-        </div>
-        <?php
-      }
-		?>
 
+      include 'components/alert.php';
+
+  ?>
 		<!--Main bit-->
 		<div class="container-fluid">
 

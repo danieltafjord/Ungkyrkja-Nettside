@@ -37,6 +37,7 @@ $islogged = true;
     //Specify the location of the file in relation to the root
     $site_location = '/template.php';
     include 'components/navbar.php';
+    include 'components/alert.php';
     ?>
     <!--Content here-->
     <!--Import footer-->

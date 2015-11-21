@@ -77,6 +77,7 @@
     <?php
 		$site_location = '/kontakt.php';
 		include 'components/navbar.php';
+		include 'components/alert.php';
 		?>
     <!--Content here-->
 		<div class="container-fluid" align="center" style="max-width:100%;margin-top:15px;font-weight:300;">

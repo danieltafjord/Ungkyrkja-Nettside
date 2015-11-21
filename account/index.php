@@ -84,6 +84,7 @@
 		<?php
 			$site_location = '/account/index.php';
 			include '../components/navbar.php';
+			include 'components/alert.php';
 		?>
 
 		<!-- Container section -->
@@ -216,7 +217,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<?php include '../components/footer.php'; ?>
  	</body>
 </html>

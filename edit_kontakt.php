@@ -82,6 +82,7 @@
     <?php
 		$site_location = '/edit_kontakt.php';
 		include 'components/navbar.php';
+		include 'components/alert.php';
 		?>
     <!--Content here-->
 				<?php

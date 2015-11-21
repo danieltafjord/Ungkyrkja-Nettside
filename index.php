@@ -73,6 +73,7 @@ $islogged = true;
     <?php
     $site_location = '/index.php';
     include 'components/navbar.php';
+    include 'components/alert.php';
     ?>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">

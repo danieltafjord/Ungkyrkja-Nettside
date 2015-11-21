@@ -7,15 +7,16 @@ use Project\Error\error;
 require 'hash.php';
 include('error.php');
 
-
+$alert = '';
+$alert_type = '';
 
 # Connect to database
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 if (!$con) {
 	error::report($_SERVER['PHP_SELF'],'Failed to connect to database: ' . mysqli_error($con), 'Fatal', $_SERVER['REMOTE_ADDR'], date('Y-m-d h:i:sa'));
-	die(header('Location: index.php'));
+	$alert = 'Det har oppstått en feil.';
+	$alert_type = 'danger';
 }
-
 
 #
 # Register user
@@ -39,21 +40,21 @@ if (isset($_POST['register'])) {
 
 		# If username is found, give error
 		if ($check_unique && mysqli_fetch_array($check_uniqe,MYSQLI_ASSOC) == true) {
-			echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User allready exist</div>";
+			$alert = 'Det finnes allerede en bruker med det brukernavnet.';
+      $alert_type = 'warning';
 		}
-
 		# Add values to database
 		else {
 			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip')");
 			setcookie('auth', $rows['pass'], 0, '', '', '', true);
 			setcookie('auth-u', $user, 0, '', '', '', true);
 			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
-			header('Location: ' . $_SERVER['PHP_SELF']);
-
+			header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1001');
 		}
 
 	} else {
-		echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Every field is required</div>";
+		$alert = 'Alle feltene må fylles inn!';
+		$alert_type = 'warning';
 	}
 }
 
@@ -68,7 +69,7 @@ if (isset($_POST['login'])) {
 		# Get values
 		$user = mysqli_real_escape_string($con, $_POST['user']);
 		$pass = mysqli_real_escape_string($con, $_POST['pass']);
-		$db_pass = mysqli_query($con, "SELECT * FROM users");
+		$db_pass = mysqli_query($con, "SELECT * FROM users WHERE user LIKE $user");
 		$loggedin = Hash::create('loggedin');
 
 		# Set cookies for login
@@ -78,15 +79,17 @@ if (isset($_POST['login'])) {
 					setcookie('auth', $rows['pass'], 0, '', '', '', true);
 					setcookie('auth-u', $user, 0, '', '', '', true);
 					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
-					header('Location: ' . $_SERVER['PHP_SELF']);
+					header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1002');
 
 				} else {
-					echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Wrong username or password!</div>";
+					$alert = 'Feil brukernavn eller passord!';
+					$alert_type = 'danger';
 				}
 			}
 		}
 	} else {
-		echo "<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Every field is requried!</div>";
+		$alert = 'Alle feltene må fylles inn!';
+		$alert_type = 'warning';
 	}
 }
 
@@ -94,12 +97,12 @@ if (isset($_POST['login'])) {
 #
 # Check if user is logged in
 #
+
 $db_pass = mysqli_query($con, "SELECT * FROM users");
 if($db_pass){
 	while ($row = mysqli_fetch_array($db_pass,MYSQLI_ASSOC)) {
 		if (!empty($_COOKIE['auth-logged']) && Hash::check($_COOKIE['auth'], $row['pass'])) {
 			$islogged = true;
-			echo "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User is check for logged in!</div>";
 		}
 	}
 }
@@ -113,7 +116,7 @@ if (isset($_POST['logout'])) {
 	setcookie("auth", "", time()-3600);
 	setcookie("auth-u", "", time()-3600);
 	setcookie("auth-logged", "", time()-3600);
-	header('Location: ' . $_SERVER['PHP_SELF']);
+	header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1003');
 }
 
 ?>

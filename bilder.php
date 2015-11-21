@@ -78,6 +78,7 @@ if (!empty($_COOKIE['auth-u'])) {
     <?php
     $site_location = '/bilder.php';
     include 'components/navbar.php';
+    include 'components/alert.php';
     ?>
 
     <!--Content here-->

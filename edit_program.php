@@ -18,6 +18,7 @@ $islogged = true;
 $con = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
 if (!$con) {
   $alert = 'Kunne ikke laste inn data.';
+  $alert_type = 'danger';
 }
 ?>
 <!DOCTYPE html>
@@ -82,6 +83,7 @@ if (!$con) {
 <?php
 $site_location = '/edit_program.php';
 include 'components/navbar.php';
+include 'components/alert.php';
 
 if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
   $auth_u = $_COOKIE['auth-u'];
@@ -94,6 +96,7 @@ if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
       <p>Du har ikke tilgang til denne siden.</p>
     </div>
     <?php
+    include 'components/footer.php';
     die('');
   }
 }
@@ -104,6 +107,7 @@ else{
     <p>Du er ikke logget inn.</p>
   </div>
   <?php
+  include 'components/footer.php';
   die('');
 }
 
@@ -113,7 +117,8 @@ if(isset($_POST['delete']) && isset($_POST['id'])){
     header('location: program.php?alert=9003');
   }
   else{
-    $alert = 'Kunne ikke slette hendelsen.' . $con->error;
+    $alert = 'Kunne ikke slette hendelsen.';
+    $alert_type = 'danger';
   }
 }
 
@@ -138,6 +143,7 @@ if(isset($_POST['update']) && isset($_POST['id'])){
     }
     else {
       $alert = 'Kunne ikke oppdatere hendelsen.';
+      $alert_type = 'danger';
     }
   }
   else{
@@ -148,6 +154,7 @@ if(isset($_POST['update']) && isset($_POST['id'])){
     }
     else {
       $alert = 'Kunne ikke lagre hendelsen.';
+      $alert_type = 'danger';
     }
   }
 }
@@ -173,14 +180,8 @@ if($query != null){
   $enddate = new DateTime($query["enddate"]);
 }
 
-if($alert != ''){
-  ?>
-  <div class="alert alert-danger">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <p><?php echo $alert; ?></p>
-  </div>
-<?php
-}
+
+include 'components/alert.php';
 ?>
 		<!-- Main bit -->
 
