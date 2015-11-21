@@ -99,7 +99,7 @@
 							}
 							$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
 							# query table
-							while ($rows = mysqli_fetch_array($queryusers)) {
+							$rows = mysqli_fetch_array($queryusers);
 								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . htmlentities($rows['name']) . "!</strong></h2><hr>";
 								echo '<b>Brukernavn: </b>' . htmlentities($rows['user']) . '<br>';
 								echo '<b>Email: </b>' . htmlentities($rows['email']) . '<br>';
@@ -107,7 +107,6 @@
 								if ($rows['role'] == 1) {
 									echo '<small>Denne brukeren har <strong>administrator</strong> rettigheter!</small><br>';
 								}
-							}
 						?>
 					</div>
 				</div>
