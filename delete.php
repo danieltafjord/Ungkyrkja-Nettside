@@ -13,7 +13,7 @@ if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
   }
 }
 else{
-  die('User not logged in!')
+  die('User not logged in!');
 }
 
 # Delete images from fremside
