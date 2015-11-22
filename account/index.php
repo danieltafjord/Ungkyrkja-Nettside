@@ -112,7 +112,7 @@
 				</div>
 
 
-
+				<?php if($rows['role'] == 1): ?>
 				<div class="col-md-4">
 					<div class="box">
 						<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2><hr>
@@ -150,6 +150,7 @@
 						 <button class='btn btn-danger' data-toggle='modal' data-target='#myModal'>Slett bilder!</button>
 					</div>
 				</div>
+			<?php endif; ?>
 			</div>
 		</div>
 
