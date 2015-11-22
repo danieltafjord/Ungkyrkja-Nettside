@@ -140,7 +140,7 @@ $islogged = true;
 					?>
 					<div class="<?php echo "event-card col-md-" . $columns;?>" id="<?php echo $id; ?>">
             <div class="box">
-              <h3><?php echo $title;?></h3>
+              <h3><?php echo htmlentities($title);?></h3>
               <hr>
               <div class="content">
                 <i class="material-icons">event</i>
@@ -159,7 +159,7 @@ $islogged = true;
                 </p>
                 <?php if($content != ""){ ?>
                   <i class="material-icons">label</i>
-                  <p><?php echo $content;?></p>
+                  <p><?php echo htmlentities($content);?></p>
                   <?php } ?>
                 </div>
                 <?php if($role > 0){ ?>

@@ -42,7 +42,7 @@ function navBack($num_nav_back){
               if(!empty($_COOKIE['auth-u'])) {
                 $authuser = $_COOKIE['auth-u'];
                 $row = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM users WHERE user = '$authuser'"));
-                echo $row['name'];
+                echo htmlentities($row['name']);
               }
             ?>
             <span class="caret"></span></a>

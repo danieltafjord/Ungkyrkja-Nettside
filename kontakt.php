@@ -104,13 +104,13 @@
 								if ($rows['user'] == $_COOKIE['auth-u'] && $admin == true) {
 									echo "<a style='float:right;font-size:15px;' href='edit_kontakt.php?id=" . $rows['id'] . "'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>";
 								}
-									echo "<div><img class='kontakt-img' src='img/" . $rows['img'] . "'></div>";
-									echo "<div><h3>" . $rows['name'] . "</h3></div>";
-									echo "<div><h6>" . $rows['profession'] . "</h6></div>";
+									echo "<div><img class='kontakt-img' src='img/" . htmlentities($rows['img']) . "'></div>";
+									echo "<div><h3>" . htmlentities($rows['name']) . "</h3></div>";
+									echo "<div><h6>" . htmlentities($rows['profession']) . "</h6></div>";
 									echo "<div class='divider'></div>";
 									echo "<div align='left'>";
-										echo "<span class='glyphicon glyphicon-envelope'></span>&nbsp;&nbsp;<a href='mailto:" . $rows['email'] . "'>" . $rows['email'] . "</a><br>";
-										echo "<p><span class='glyphicon glyphicon-earphone'></span>&nbsp;&nbsp;" . $rows['phone'] . "</p>";
+										echo "<span class='glyphicon glyphicon-envelope'></span>&nbsp;&nbsp;<a href='mailto:" . htmlentities($rows['email']) . "'>" . htmlentities($rows['email']) . "</a><br>";
+										echo "<p><span class='glyphicon glyphicon-earphone'></span>&nbsp;&nbsp;" . htmlentities($rows['phone']) . "</p>";
 									echo "</div>";
 								echo "</div>";
 							echo "</div>";

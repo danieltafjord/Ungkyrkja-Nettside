@@ -22,7 +22,7 @@ if($alert != '' && $alert_type != ''){
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <p>
       <?php
-        echo $alert;
+        echo htmlentities($alert);
       ?>
     </p>
   </div>

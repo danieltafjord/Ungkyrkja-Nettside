@@ -103,17 +103,17 @@
 							<Legend>Rediger kontakt</legend>
 							<div class="form-group">
 								<label for="email" class="control-label">Email:</label>
-								<input type="email" name="email" class="form-control floating-label" id="email" value="<?php echo $contentemail ?>">
+								<input type="email" name="email" class="form-control floating-label" id="email" value="<?php echo htmlentities($contentemail); ?>">
 							</div>
 
 							<div class="form-group">
 								<label for="number" class="control-label">Telefon:</label>
-								<input type="number" name="phone" class="form-control floating-label" id="number" value="<?php echo $contentphone ?>">
+								<input type="number" name="phone" class="form-control floating-label" id="number" value="<?php echo htmlentities($contentphone); ?>">
 							</div>
 
 							<div class="form-group">
 								<label for="text" class="control-label">Stilling:</label>
-								<input type="text" name="profession" class="form-control floating-label" value="<?php echo $contentprofession ?>">
+								<input type="text" name="profession" class="form-control floating-label" value="<?php echo htmlentities($contentprofession); ?>">
 							</div>
 
 							<button type="submit" class="btn btn-primary" name="submit">Lagre</button>

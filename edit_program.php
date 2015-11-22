@@ -189,7 +189,7 @@ include 'components/alert.php';
 			<div class="well center-form">
 				<form class="main-form form-group" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<Legend>Tittel:</legend>
-					<input type="text" class="form-control" id="title" value="<?php echo $title; ?>" name="title"/>
+					<input type="text" class="form-control" id="title" value="<?php echo htmlentities($title); ?>" name="title"/>
 					<fieldset>
 						<legend>Dato og tid:</legend>
 						<label for="date" class="control-label">Start dato:</label>
@@ -202,7 +202,7 @@ include 'components/alert.php';
 						<input type="time" class="form-control" id="endtime" name="endtime" value="<?php if($enddate!=""){echo $enddate->format("H:i");}?>" />
 					</fieldset>
 					<legend>Innhold:</legend>
-					<textarea class="form-control" rows="5" id="content" name="content"><?php echo $content; ?></textarea>
+					<textarea class="form-control" rows="5" id="content" name="content"><?php echo htmlentities($content); ?></textarea>
 					<input type="text" class="form-control hidden" id="id" name="id" value="<?php echo $id; ?>" />
 					<button type="submit" name="update" class="btn btn-primary">Lagre</button>
 					<a href="program.php"><button type="button" class="btn btn-default">Tilbake</button></a>

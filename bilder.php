@@ -1,4 +1,5 @@
 <?php
+include_once('account/login.php');
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 if(!$con){
   die('Failed to connect to database: ' . mysqli_error($con));
@@ -91,7 +92,7 @@ if (!empty($_COOKIE['auth-u'])) {
           while($rows = mysqli_fetch_array($images)) {
             #if file exist show image
             if(file_exists('bilder/' . $rows['img'])) {
-              echo "<a href='?img=" . $rows['id'] . "'><img class='g-img' src='bilder/" . $rows['img'] . "'></a>";
+              echo "<a href='?img=" . $rows['id'] . "'><img class='g-img' src='bilder/" . htmlentities($rows['img']) . "'></a>";
             } else {
               //echo "<p>Fant ingen bilder!</p>";
             }
@@ -107,8 +108,8 @@ if (!empty($_COOKIE['auth-u'])) {
       $sql_image = mysqli_query($con, "SELECT * FROM bilder WHERE id = {$get_image}");
       while($row = mysqli_fetch_array($sql_image, MYSQLI_ASSOC)) :
         echo "<div align='center' class='p-div'>";
-          echo "<img class='p-img' src='bilder/" . $row['img'] . "'>";
-          echo "<p style='margin-top:40px;background-color:#f4f4f4;padding:30px;width:90%;font-size:18px;'>" . $row['description'] . "</p>";
+          echo "<img class='p-img' src='bilder/" . htmlentities($row['img']) . "'>";
+          echo "<p style='margin-top:40px;background-color:#f4f4f4;padding:30px;width:90%;font-size:18px;'>" . htmlentities($row['description']) . "</p>";
         echo "</div>";
         if(!empty($_COOKIE['auth-u'])){
           if($isadmin == true){

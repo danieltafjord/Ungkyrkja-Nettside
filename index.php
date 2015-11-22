@@ -86,7 +86,7 @@ $islogged = true;
       $sqlfront = mysqli_query($con, "SELECT * FROM fremside WHERE active = 0");
       while ($row = mysqli_fetch_array($sqlfront)) {
         echo "<div class='item'>";
-        echo "<img src='img/" . $row['name'] . "' style='width:100%;'>";
+        echo "<img src='img/" . htmlentities($row['name']) . "' style='width:100%;'>";
         echo "</div>";
       }
 
@@ -96,7 +96,7 @@ $islogged = true;
       $sqlfront1 = mysqli_query($con, "SELECT * FROM fremside WHERE active = 1");
       while ($rows = mysqli_fetch_array($sqlfront1)) {
         echo "<div class='item active'>";
-          echo "<img src='img/" . $rows['name'] . "' style='width:100%;'>";
+          echo "<img src='img/" . htmlentities($rows['name']) . "' style='width:100%;'>";
         echo "</div>";
       }
 
@@ -150,7 +150,7 @@ $islogged = true;
     ?>
     <div class="event-card" id="<?php echo $id; ?>">
       <div class="box">
-        <h3><?php echo $title;?></h3>
+        <h3><?php echo htmlentities($title);?></h3>
         <hr>
         <div class="content">
           <i class="material-icons">event</i>
@@ -169,7 +169,7 @@ $islogged = true;
           </p>
           <?php if($content != ""){ ?>
             <i class="material-icons">label</i>
-            <p><?php echo $content;?></p>
+            <p><?php echo htmlentities($content);?></p>
             <?php } ?>
           </div>
           <?php if($role > 0){ ?>
