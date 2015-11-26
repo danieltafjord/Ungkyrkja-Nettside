@@ -122,7 +122,7 @@ function navBack($num_nav_back){
         <p>
           Denne nettsiden bruker <a href="#">Cookies</a> for å lagre informasjon.
           Passordet ditt er kryptert og vi har på ingen måte mulighet til å se passordet ditt.
-          Du har selv avsvar for at du ikke deler din bruker-informasjon.
+          Du har selv ansvar for at du ikke deler din bruker-informasjon.
         </p><br>
       </div>
     </div>
