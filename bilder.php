@@ -10,7 +10,7 @@ if (!empty($_COOKIE['auth-u'])) {
   $queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
   if($queryusers){
   $row = mysqli_fetch_array($queryusers);
-    if ($row['role'] > 0) {
+    if ($row['role'] == 1) {
       $isadmin = true;
     }
   }

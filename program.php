@@ -98,7 +98,7 @@ $islogged = true;
 			$role = 0;
 			if($user){
 				$role = (int) $user['role'];
-				if($role > 0){
+				if($role == 1){
 					?>
           <a href="edit_program.php"><button type="button" class="fab-main"><i class="material-icons md-light">add</i></button></a>
 					<?php
@@ -162,7 +162,7 @@ $islogged = true;
                   <p><?php echo htmlentities($content);?></p>
                   <?php } ?>
                 </div>
-                <?php if($role > 0){ ?>
+                <?php if($role == 1){ ?>
                   <hr>
                   <div class="actions">
                     <button class="btn-icon btn-edit"> <i class="material-icons">create</i></button>
