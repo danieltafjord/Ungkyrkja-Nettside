@@ -1,5 +1,6 @@
 body {
-margin-top: 51px;
+margin-top: 50px;
+margin-bottom: 80px;
 font-family: "Helvetica neue", sans-serif;
 -webkit-font-smoothing: antialiased;
 }
@@ -7,11 +8,6 @@ font-family: "Helvetica neue", sans-serif;
 html {
   position: relative;
   min-height: 100%;
-}
-
-body {
-margin-top: 50px;
-margin-bottom: 80px;
 }
 
 .row {

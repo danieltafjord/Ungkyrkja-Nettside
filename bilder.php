@@ -4,15 +4,14 @@ $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 if(!$con){
   die('Failed to connect to database: ' . mysqli_error($con));
 }
+$isadmin = false;
 if (!empty($_COOKIE['auth-u'])) {
   $authu = $_COOKIE['auth-u'];
   $queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
-  while ($row = mysqli_fetch_array($queryusers)) {
-    if ($row['role'] == 1) {
+  if($queryusers){
+  $row = mysqli_fetch_array($queryusers);
+    if ($row['role'] > 0) {
       $isadmin = true;
-    }
-    if ($row['role'] == 0) {
-      $isadmin = false;
     }
   }
 }
@@ -64,11 +63,15 @@ if (!empty($_COOKIE['auth-u'])) {
       transition: opacity 650ms ease-in-out;
     }
     .p-div {
-      margin-top: 100px;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      max-width: 900px;
     }
     .p-img {
       width: 100%;
-      max-width: 750px;
+      height: 100%;
     }
     .p-div-com {
       background-color:#eee;
