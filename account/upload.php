@@ -32,15 +32,17 @@ if (isset($_POST['desc'])) {
     if ($tmpFilePath != ""){
       //Setup our new file path
       $newFilePath = "../bilder/" . uniqid() . $_FILES['upload']['name'][$i];
-
+      $extension = strrpos($newFilePath, ',');
+      if(in_array($extension, array('.jpg', '.jpeg', '.png', '.gif'))){
       //Upload the file into the temp dir
-  		$check_uniqe = mysqli_query($con, "SELECT * FROM bilder WHERE img='$newFilePath' LIMIT 1");
-      if(move_uploaded_file($tmpFilePath, $newFilePath) && !mysqli_fetch_array($check_uniqe,MYSQLI_ASSOC) == true) {
-  			mysqli_query($con, "INSERT INTO bilder (img, description) VALUES ('$newFilePath', '$desc')");
-  			header("Location: ../bilder.php");
-      } else {
-  			echo "Upload failed!";
-  		}
+  		  $check_uniqe = mysqli_query($con, "SELECT * FROM bilder WHERE img='$newFilePath' LIMIT 1");
+        if(move_uploaded_file($tmpFilePath, $newFilePath) && !mysqli_fetch_array($check_uniqe,MYSQLI_ASSOC) == true) {
+  			  mysqli_query($con, "INSERT INTO bilder (img, description) VALUES ('$newFilePath', '$desc')");
+  			  header("Location: ../bilder.php");
+        } else {
+  			  echo "Upload failed!";
+  		  }
+      }
     }
   }
 }
