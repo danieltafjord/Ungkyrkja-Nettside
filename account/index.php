@@ -409,4 +409,4 @@
 		<?php include '../components/footer.php'; ?>
  	</body>
 </html>
-<?php } else { echo "Du har ikke tilgang til denne siden!"; } ?>
+<?php } else { header('location: ../'); } ?>

@@ -48,9 +48,9 @@ if (isset($_POST['register'])) {
 		# Add values to database
 		else {
 			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip')");
-			setcookie('auth', $encrypted_pass, time() + (86400 * 5), '', '', '', true);
-			setcookie('auth-u', $user, time() + (86400 * 5), '', '', '', true);
-			setcookie('auth-logged', $loggedin, time() + (86400 * 5), '', '', '', true);
+			setcookie('auth', $encrypted_pass, time() + (86400 * 5), '/', '', '', true);
+			setcookie('auth-u', $user, time() + (86400 * 5), '/', '', '', true);
+			setcookie('auth-logged', $loggedin, time() + (86400 * 5), '/', '', '', true);
 			header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1001');
 		}
 
@@ -79,9 +79,9 @@ if (isset($_POST['login'])) {
 			while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
 				if (Hash::check($pass, $rows['pass']) && $user == $rows['user']) {
 					if ($rows['active'] != 0) {
-						setcookie('auth', $rows['pass'], time() + (86400 * 5), '', '', '', true);
-						setcookie('auth-u', $user, time() + (86400 * 5), '', '', '', true);
-						setcookie('auth-logged', $loggedin, time() + (86400 * 5), '', '', '', true);
+						setcookie('auth', $rows['pass'], time() + (86400 * 5), '/', '', '', true);
+						setcookie('auth-u', $user, time() + (86400 * 5), '/', '', '', true);
+						setcookie('auth-logged', $loggedin, time() + (86400 * 5), '/', '', '', true);
 						header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1002');
 					} else {
 						header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1008');
@@ -118,9 +118,9 @@ if($db_pass){
 #
 
 if (isset($_POST['logout'])) {
-	setcookie("auth", "", time()-3600);
-	setcookie("auth-u", "", time()-3600);
-	setcookie("auth-logged", "", time()-3600);
+	setcookie("auth", "", time()-3600, '/');
+	setcookie("auth-u", "", time()-3600, '/');
+	setcookie("auth-logged", "", time()-3600, '/');
 	header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1003');
 }
 
