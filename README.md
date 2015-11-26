@@ -3,11 +3,10 @@
 # TODO
 
 John Ingve:
-- Fix login and register in /account (change setcookie path for /account)
+- bilder overhaul
 
 Daniel:
 - Style index
-- Add reqirements for registrations
 
 # Using error class
 
