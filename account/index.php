@@ -1,7 +1,6 @@
 <?php
 	# Include login.php
 	include_once('login.php');
-	include '../components/alert.php';
 
 	# Turning of basic error reporting
 	#error_reporting(0);
@@ -123,8 +122,8 @@
 				?>
 				<div class="col-md-8">
 					<div class="box">
-						<?php $con = mysqli_connect('localhost','root','','blog'); $errorsqlall = mysqli_query($con, "SELECT * FROM error"); ?>
-						<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Feil meldinger <span class="badge"><?php echo mysqli_num_rows($errorsqlall); ?></span></h2><hr>
+						<?php $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja'); $errorsqlall = mysqli_query($con, "SELECT * FROM error"); ?>
+						<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Feil meldinger <span class="badge"><?php echo $errorsqlall ? mysqli_num_rows($errorsqlall) : '0'; ?></span></h2><hr>
 						<div class="table-responsive">
 							<table class="table table-striped table-hover">
 								<tr>
@@ -139,7 +138,7 @@
 								</tr>
 								<?php
 								$errorsql = mysqli_query($con, "SELECT * FROM error ORDER BY type LIMIT 10");
-								if (mysqli_num_rows($errorsql) == 0) {
+								if (!$errorsql) {
 									echo "<tr><td>Finner ingen feilmeldinger.</td></tr>";
 								} else {
 									while ($row = mysqli_fetch_array($errorsql)) {
@@ -415,4 +414,4 @@
 		<?php include '../components/footer.php'; ?>
  	</body>
 </html>
-<?php } else { echo "Du har ikke tilgang til denne siden!"; } ?>
+<?php } else { header('location: ../'); } ?>
