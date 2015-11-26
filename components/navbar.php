@@ -85,19 +85,19 @@ function navBack($num_nav_back){
             <form style="width:250px;" action="" method="POST">
             <div class="form-group">
           <label for="exampleInputEmail1">Navn</label>
-          <input type="text" class="form-control" name="name" placeholder="Navn">
+          <input type="text" class="form-control" required name="name" placeholder="Navn" pattern="[a-zA-Z0-9\s]+">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Brukernavn</label>
-          <input type="text" class="form-control" name="user" placeholder="Brukernavn">
+          <input type="text" class="form-control" required name="user" placeholder="Brukernavn">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Passord</label>
-          <input type="password" class="form-control" name="pass" placeholder="Passord">
+          <input type="password" class="form-control" required name="pass" placeholder="Passord">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email</label>
-          <input type="email" class="form-control" name="email" placeholder="Email">
+          <input type="email" class="form-control" required name="email" placeholder="Email">
         </div>
         <button type="submit" name="register" class="btn btn-primary">Submit</button>
       </form>

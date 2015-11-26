@@ -13,6 +13,26 @@ if(isset($_GET['alert'])){
       $alert = 'Du har blitt logget ut.';
       $alert_type = 'success';
       break;
+    case '1004':
+      $alert = 'Feilmelding slettet.';
+      $alert_type = 'success';
+      break;
+    case '1005':
+      $alert = 'Bruker slettet.';
+      $alert_type = 'success';
+      break;
+    case '1006':
+      $alert = 'Bruker deaktivert.';
+      $alert_type = 'success';
+      break;
+    case '1007':
+      $alert = 'Bruker aktivert.';
+      $alert_type = 'success';
+      break;
+    case '1008':
+      $alert = 'Denne brukeren er deaktivert.';
+      $alert_type = 'danger';
+      break;
   }
 }
 

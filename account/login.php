@@ -48,9 +48,9 @@ if (isset($_POST['register'])) {
 		# Add values to database
 		else {
 			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip')");
-			setcookie('auth', $encrypted_pass, 0, '', '', '', true);
-			setcookie('auth-u', $user, 0, '', '', '', true);
-			setcookie('auth-logged', $loggedin, 0, '', '', '', true);
+			setcookie('auth', $encrypted_pass, time() + (86400 * 5), '', '', '', true);
+			setcookie('auth-u', $user, time() + (86400 * 5), '', '', '', true);
+			setcookie('auth-logged', $loggedin, time() + (86400 * 5), '', '', '', true);
 			header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1001');
 		}
 
@@ -71,18 +71,21 @@ if (isset($_POST['login'])) {
 		# Get values
 		$user = mysqli_real_escape_string($con, $_POST['user']);
 		$pass = mysqli_real_escape_string($con, $_POST['pass']);
-		$db_pass = mysqli_query($con, "SELECT * FROM users WHERE user LIKE $user");
+		$db_pass = mysqli_query($con, "SELECT * FROM users WHERE user = '$user'");
 		$loggedin = Hash::create('loggedin');
 
 		# Set cookies for login
 		if($db_pass){
 			while ($rows = mysqli_fetch_array($db_pass, MYSQLI_ASSOC)) {
 				if (Hash::check($pass, $rows['pass']) && $user == $rows['user']) {
-					setcookie('auth', $rows['pass'], 0, '', '', '', true);
-					setcookie('auth-u', $user, 0, '', '', '', true);
-					setcookie('auth-logged', $loggedin, 0, '', '', '', true);
-					header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1002');
-
+					if ($rows['active'] != 0) {
+						setcookie('auth', $rows['pass'], time() + (86400 * 5), '', '', '', true);
+						setcookie('auth-u', $user, time() + (86400 * 5), '', '', '', true);
+						setcookie('auth-logged', $loggedin, time() + (86400 * 5), '', '', '', true);
+						header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1002');
+					} else {
+						header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1008');
+					}
 				} else {
 					$alert = 'Feil brukernavn eller passord!';
 					$alert_type = 'danger';
