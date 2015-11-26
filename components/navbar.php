@@ -32,6 +32,7 @@ function navBack($num_nav_back){
         <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'index.php'; ?>">Heim</a></li>
         <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'program.php'; ?>">Program</a></li>
         <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'kontakt.php'; ?>">Kontakt</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#myModal">Informasjon</a></li>
         <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'bilder.php'; ?>">Bilder</a></li>
 
         <!-- If logged in show username -->
@@ -108,3 +109,22 @@ function navBack($num_nav_back){
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Informasjon</h4>
+      </div>
+      <div class="modal-body">
+        <p>Ungkyrkja er en menighet på Bryne for ungdommer i 8.klasse og oppover.</p><hr>
+        <p>
+          Denne nettsiden bruker <a href="#">Cookies</a> for å lagre informasjon.
+          Passordet ditt er kryptert og vi har på ingen måte mulighet til å se passordet ditt.
+          Du har selv avsvar for at du ikke deler din bruker-informasjon.
+        </p><br>
+      </div>
+    </div>
+  </div>
+</div>
