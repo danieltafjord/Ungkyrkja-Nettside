@@ -47,7 +47,7 @@ if (isset($_POST['register'])) {
 		}
 		# Add values to database
 		else {
-			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip')");
+			mysqli_query($con, "INSERT INTO users (name, user, pass, email, registered, ip, active) VALUES ('$name', '$user', '$encrypted_pass', '$email', '$registered', '$ip', '1')");
 			setcookie('auth', $encrypted_pass, time() + (86400 * 5), '/', '', '', true);
 			setcookie('auth-u', $user, time() + (86400 * 5), '/', '', '', true);
 			setcookie('auth-logged', $loggedin, time() + (86400 * 5), '/', '', '', true);
