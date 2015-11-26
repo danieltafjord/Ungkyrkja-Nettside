@@ -1,4 +1,11 @@
 <?php
+
+	if (!empty($_COOKIE['auth-u'])) {
+		$authu = $_COOKIE['auth-u'];
+	} else {
+		header('Location: ../?alert=1009');
+	}
+
 	# Include login.php
 	include_once('login.php');
 
@@ -14,14 +21,15 @@
 	if(!$con){
 		# Repport error
 		error::report($_SERVER['PHP_SELF'],'Failed to connect to database: ' . mysqli_error($con), 'Fatal', $_SERVER['REMOTE_ADDR'], date('Y-m-d h:i:sa'));
-		die('<h3>Feil oppst&aring;dt:</h3><br><a href="#" onclick="window.history.back();">G&aring; tilbake</a> eller <a href="../kontakt.php">kontakt</a> for hjelp!');
+		header('Location: ../?alert=1010');
 	}
 	setlocale(LC_TIME, 'no_NO');
-	$authu = $_COOKIE['auth-u'];
+
 	$usersql = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
+
+	if ($usersql) {
 	$usersqlquery = mysqli_fetch_array($usersql);
 	$admin = $usersqlquery['role'];
-	if ($usersql) {
 ?>
 <!DOCTYPE html>
 <html lang="no">
@@ -168,80 +176,10 @@
 						</div>
 					</div>
 				</div>
-			<?php endif;
-			if($admin >= 1):?>
-				<div class="col-md-12">
-					<div class="box">
-						<?php $brukersql = mysqli_query($con, "SELECT * FROM users"); ?>
-						<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Brukere <span class="badge"><?php echo mysqli_num_rows($brukersql); ?></span></h2><hr>
-						<div class="table-responsive">
-							<table class="table table-striped table-hover">
-								<tr>
-									<th>Id</th>
-									<th>Navn</th>
-									<th>Brukernavn</th>
-									<th>Email</th>
-									<th>Registrert</th>
-									<th>Ip</th>
-									<th>Rolle</th>
-									<th>Aktivert</th>
-									<th>Deaktiver</th>
-									<th>Aktiver</th>
-									<th>Slett</th>
-								</tr>
-								<?php
-
-								while ($userrow = mysqli_fetch_array($brukersql)) {
-									$date = date_create($userrow['registered']);
-									if ($userrow['active'] == 0) {echo "<tr class='danger'>";}
-									elseif ($userrow['role'] == 1) {echo "<tr class='success'>";}
-									elseif ($userrow['role'] == 2) {echo "<tr class='warning'>";}
-									else {echo "<tr>";}
-									echo "<td>" . htmlentities($userrow['id']) . "</td>";
-									echo "<td>" . htmlentities($userrow['name']) . "</td>";
-									echo "<td>" . htmlentities($userrow['user']) . "</td>";
-									echo "<td>" . htmlentities($userrow['email']) . "</td>";
-									echo "<td>" . date_format($date, 'F d, Y') . "</td>";
-									echo "<td>" . htmlentities($userrow['ip']) . "</td>";
-									if ($userrow['role'] == 0) { echo "<td>Bruker</td>";}
-									if ($userrow['role'] == 1) { echo "<td>Administrator</td>";}
-									if ($userrow['role'] == 2) { echo "<td>Utvikler</td>";}
-									if ($userrow['active'] == 1) {echo "<td>Ja</td>";}
-									if ($userrow['active'] == 0) {echo "<td>Nei</td>";}
-									echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='freezeuser'><span class='glyphicon glyphicon-minus' style='color:#555;'></span></button></form></td>";
-									echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='unfreezeuser'><span class='glyphicon glyphicon-plus' style='color:#555;'></span></button></form></td>";
-									echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='deluser'><span class='glyphicon glyphicon-trash' style='color:#d9534f;'></span></button></form></td>";
-									echo "</tr>";
-								}
-
-								if (isset($_POST['deluser'])) {
-									$id = $_POST['deluser'];
-									mysqli_query($con, "DELETE FROM users WHERE id = '$id'");
-									header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1005');
-								}
-								if (isset($_POST['freezeuser'])) {
-									$id = $_POST['freezeuser'];
-									mysqli_query($con, "UPDATE users SET active = '0' WHERE id = '$id'");
-									header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1006');
-								}
-								if (isset($_POST['unfreezeuser'])) {
-									$id = $_POST['unfreezeuser'];
-									mysqli_query($con, "UPDATE users SET active = '1' WHERE id = '$id'");
-									header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1007');
-								}
-
-								?>
-
-							</table>
-						</div>
-					</div>
-				</div>
 			<?php endif; ?>
 
-				<?php if($rows['role'] == 1): ?>
+				<?php if($admin == 1): ?>
 
-				<div class="col-md-4" style="border:none;">
-				</div>
 				<div class="col-md-4">
 					<div class="box">
 						<h2 style="margin:0;margin-bottom:10px;">Oppdater fremside bilde</h2><hr>
@@ -279,71 +217,74 @@
 						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#bilderModal">Slett bilder</button>
 					</div>
 				</div>
-				<div class="col-md-12">
-					<div class="box">
-						<h2 style="margin:0;margin-bottom:10px;">Brukere</h2><hr>
-						<div class="table-responsive">
-							<table class="table table-striped table-hover">
-								<tr>
-									<th>Id</th>
-									<th>Navn</th>
-									<th>Brukernavn</th>
-									<th>Email</th>
-									<th>Registrert</th>
-									<th>Ip</th>
-									<th>Rolle</th>
-									<th>Aktivert</th>
-									<th>Deaktiver</th>
-									<th>Aktiver</th>
-									<th>Slett</th>
-								</tr>
-								<?php
+			<?php endif; if($admin > 0): ?>
+					<div class="col-md-12">
+						<div class="box">
+							<?php $brukersql = mysqli_query($con, "SELECT * FROM users"); ?>
+							<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Brukere <span class="badge"><?php echo mysqli_num_rows($brukersql); ?></span></h2><hr>
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+									<tr>
+										<th>Id</th>
+										<th>Navn</th>
+										<th>Brukernavn</th>
+										<th>Email</th>
+										<th>Registrert</th>
+										<th>Ip</th>
+										<th>Rolle</th>
+										<th>Aktivert</th>
+										<th>Deaktiver</th>
+										<th>Aktiver</th>
+										<th>Slett</th>
+									</tr>
+									<?php
 
-								$brukersql = mysqli_query($con, "SELECT * FROM users");
-								while ($userrow = mysqli_fetch_array($brukersql)) {
-									$date = date_create($userrow['registered']);
-									if ($userrow['active'] == 0) {echo "<tr class='danger'>";}
-									else {echo "<tr class='success'>";}
-									echo "<td>" . htmlentities($userrow['id']) . "</td>";
-									echo "<td>" . htmlentities($userrow['name']) . "</td>";
-									echo "<td>" . htmlentities($userrow['user']) . "</td>";
-									echo "<td>" . htmlentities($userrow['email']) . "</td>";
-									echo "<td>" . date_format($date, 'F d, Y') . "</td>";
-									echo "<td>" . htmlentities($userrow['ip']) . "</td>";
-									if ($userrow['role'] == 0) { echo "<td>Bruker</td>";}
-									if ($userrow['role'] == 1) { echo "<td>Administrator</td>";}
-									if ($userrow['role'] == 2) { echo "<td>Utvikler</td>";}
-									if ($userrow['active'] == 1) {echo "<td>Ja</td>";}
-									if ($userrow['active'] == 0) {echo "<td>Nei</td>";}
-									echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='freezeuser'><span class='glyphicon glyphicon-minus' style='color:#555;'></span></button></form></td>";
-									echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='unfreezeuser'><span class='glyphicon glyphicon-plus' style='color:#555;'></span></button></form></td>";
-									echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='deluser'><span class='glyphicon glyphicon-trash' style='color:#d9534f;'></span></button></form></td>";
-									echo "</tr>";
-								}
+									while ($userrow = mysqli_fetch_array($brukersql)) {
+										$date = date_create($userrow['registered']);
+										if ($userrow['active'] == 0) {echo "<tr class='danger'>";}
+										elseif ($userrow['role'] == 1) {echo "<tr class='success'>";}
+										elseif ($userrow['role'] == 2) {echo "<tr class='warning'>";}
+										else {echo "<tr>";}
+										echo "<td>" . htmlentities($userrow['id']) . "</td>";
+										echo "<td>" . htmlentities($userrow['name']) . "</td>";
+										echo "<td>" . htmlentities($userrow['user']) . "</td>";
+										echo "<td>" . htmlentities($userrow['email']) . "</td>";
+										echo "<td>" . date_format($date, 'F d, Y') . "</td>";
+										echo "<td>" . htmlentities($userrow['ip']) . "</td>";
+										if ($userrow['role'] == 0) { echo "<td>Bruker</td>";}
+										if ($userrow['role'] == 1) { echo "<td>Administrator</td>";}
+										if ($userrow['role'] == 2) { echo "<td>Utvikler</td>";}
+										if ($userrow['active'] == 1) {echo "<td>Ja</td>";}
+										if ($userrow['active'] == 0) {echo "<td>Nei</td>";}
+										echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='freezeuser'><span class='glyphicon glyphicon-minus' style='color:#555;'></span></button></form></td>";
+										echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='unfreezeuser'><span class='glyphicon glyphicon-plus' style='color:#555;'></span></button></form></td>";
+										echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='deluser'><span class='glyphicon glyphicon-trash' style='color:#d9534f;'></span></button></form></td>";
+										echo "</tr>";
+									}
 
-								if (isset($_POST['deluser'])) {
-									$id = $_POST['deluser'];
-									mysqli_query($con, "DELETE FROM users WHERE id = '$id'");
-									header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1005');
-								}
-								if (isset($_POST['freezeuser'])) {
-									$id = $_POST['freezeuser'];
-									mysqli_query($con, "UPDATE users SET active = '0' WHERE id = '$id'");
-									header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1006');
-								}
-								if (isset($_POST['unfreezeuser'])) {
-									$id = $_POST['unfreezeuser'];
-									mysqli_query($con, "UPDATE users SET active = '1' WHERE id = '$id'");
-									header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1007');
-								}
+									if (isset($_POST['deluser'])) {
+										$id = $_POST['deluser'];
+										mysqli_query($con, "DELETE FROM users WHERE id = '$id'");
+										header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1005');
+									}
+									if (isset($_POST['freezeuser'])) {
+										$id = $_POST['freezeuser'];
+										mysqli_query($con, "UPDATE users SET active = '0' WHERE id = '$id'");
+										header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1006');
+									}
+									if (isset($_POST['unfreezeuser'])) {
+										$id = $_POST['unfreezeuser'];
+										mysqli_query($con, "UPDATE users SET active = '1' WHERE id = '$id'");
+										header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1007');
+									}
 
-								?>
+									?>
 
-							</table>
+								</table>
+							</div>
 						</div>
 					</div>
-				</div>
-			<?php endif; ?>
+				<?php endif; ?>
 			</div>
 		</div>
 

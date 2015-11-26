@@ -33,6 +33,13 @@ if(isset($_GET['alert'])){
       $alert = 'Denne brukeren er deaktivert.';
       $alert_type = 'danger';
       break;
+    case '1009':
+      $alert = 'Du må logge inn for å se denne siden.';
+      $alert_type = 'danger';
+      break;
+    case '1010':
+      $alert ='Kunne ikke koble til database';
+      $alert_type = 'danger';
   }
 }
 
