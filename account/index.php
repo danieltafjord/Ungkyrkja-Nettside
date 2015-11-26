@@ -17,7 +17,11 @@
 		die('<h3>Feil oppst&aring;dt:</h3><br><a href="#" onclick="window.history.back();">G&aring; tilbake</a> eller <a href="../kontakt.php">kontakt</a> for hjelp!');
 	}
 	setlocale(LC_TIME, 'no_NO');
-	if (!empty($_COOKIE['auth-u'])) {
+	$authu = $_COOKIE['auth-u'];
+	$usersql = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
+	$usersqlquery = mysqli_fetch_array($usersql);
+	$admin = $usersqlquery['role'];
+	if ($usersql) {
 ?>
 <!DOCTYPE html>
 <html lang="no">
@@ -88,7 +92,6 @@
 		<?php
 			$site_location = '/account/index.php';
 			include '../components/navbar.php';
-			include '../components/alert.php';
 		?>
 
 		<!-- Container section -->
@@ -104,6 +107,7 @@
 							$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
 							# query table
 							$rows = mysqli_fetch_array($queryusers);
+
 							$datetime = date_create($rows['registered']);
 								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . htmlentities($rows['name']) . "!</strong></h2><hr>";
 								echo '<b>Brukernavn: </b>' . htmlentities($rows['user']) . '<br>';
@@ -113,7 +117,9 @@
 					</div>
 				</div>
 
-			<?php if($rows['role'] <= 2): ?>
+				<?php
+					if($admin == 2):
+				?>
 				<div class="col-md-8">
 					<div class="box">
 						<?php $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja'); $errorsqlall = mysqli_query($con, "SELECT * FROM error"); ?>
@@ -162,7 +168,8 @@
 						</div>
 					</div>
 				</div>
-
+			<?php endif;
+			if($admin >= 1):?>
 				<div class="col-md-12">
 					<div class="box">
 						<?php $brukersql = mysqli_query($con, "SELECT * FROM users"); ?>
@@ -184,7 +191,6 @@
 								</tr>
 								<?php
 
-								$brukersql = mysqli_query($con, "SELECT * FROM users");
 								while ($userrow = mysqli_fetch_array($brukersql)) {
 									$date = date_create($userrow['registered']);
 									if ($userrow['active'] == 0) {echo "<tr class='danger'>";}
