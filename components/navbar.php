@@ -48,7 +48,7 @@ function navBack($num_nav_back){
             ?>
             <span class="caret"></span></a>
           <ul class="dropdown-menu" style="">
-            <?php if(isset($_POST['minside'])) {header('Location: account/index.php');} ?>
+            <?php if(isset($_POST['minside'])) {header('Location: ' . navBack($distance_from_root) . 'account/index.php');} ?>
             <form style="min-width:160px;" action="" method="POST" class="form-inline">
               <div class="form-group">
                 <button type="submit" name="minside" class="btn btn-default">Min Side</button>
