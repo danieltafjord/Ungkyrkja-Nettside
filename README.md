@@ -6,7 +6,7 @@ John Ingve:
 - bilder overhaul
 
 Daniel:
-- Style index
+- Add 'change password' option
 
 # Using error class
 
