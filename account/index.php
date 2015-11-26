@@ -1,7 +1,6 @@
 <?php
 	# Include login.php
 	include_once('login.php');
-	include '../components/alert.php';
 
 	# Turning of basic error reporting
 	#error_reporting(0);
