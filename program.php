@@ -1,9 +1,5 @@
 <?php
 include_once('account/login.php');
-$islogged = false;
-if(!empty($_COOKIE['auth-logged'])) {
-$islogged = true;
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,23 +78,18 @@ $islogged = true;
         die("Could not connect to database!" . $conn->connect_error);
       }
 			$program = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
-			$user = false;
-			if($islogged){
-  			$user = $_COOKIE['auth-u'];
-  			$user = $conn->query("SELECT user, role FROM users WHERE user LIKE $user");
-        if($conn->error){
-          $user = false;
-        }
-        else{
-          $user = $user->fetch_array();
-        }
-			}
+      $usersql = false;
+      if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
+        $user = $_COOKIE['auth-u'];
+        $usersql = $conn->query("SELECT pass, role FROM users WHERE user LIKE $user");
+      }
 			$conn->close();
 
-			$role = 0;
-			if($user){
-				$role = (int) $user['role'];
-				if($role == 1){
+			if($usersql){
+        $user = $usersql->fetch_array();
+        $pass = $user['pass'];
+				$role = $user['role'];
+				if($pass = $_COOKIE['auth'] && $role == 1){
 					?>
           <a href="edit_program.php"><button type="button" class="fab-main"><i class="material-icons md-light">add</i></button></a>
 					<?php
