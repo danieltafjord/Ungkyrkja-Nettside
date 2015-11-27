@@ -126,9 +126,12 @@ $islogged = true;
     $query = $conn->query("SELECT * FROM uk_program ORDER BY date ASC");
     $role = 0;
     if($islogged){
-      $user = $conn->query("SELECT * FROM users WHERE user LIKE " . $_COOKIE['auth-u'])->fetch_array();
-      if($user && $user['user'] == $_COOKIE['auth-u'] && $user['pass'] == $_COOKIE['auth']){
-        $role = intval($user['role'], 10);
+      $user = $conn->query("SELECT * FROM users WHERE user LIKE " . $_COOKIE['auth-u']);
+      if($user){
+        $user = $user->fetch_array();
+        if($user && $user['user'] == $_COOKIE['auth-u'] && $user['pass'] == $_COOKIE['auth']){
+          $role = intval($user['role'], 10);
+        }
       }
     }
   }
