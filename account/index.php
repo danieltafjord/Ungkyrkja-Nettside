@@ -66,6 +66,7 @@
 			padding:20px;
 			border: 1px solid #e3e3e3;
 			border-radius: 3px;
+			min-height: 420px;
 		}
 		.row {
 			font-size:14px;
@@ -117,7 +118,9 @@
 							$rows = mysqli_fetch_array($queryusers);
 
 							$datetime = date_create($rows['registered']);
-								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . htmlentities($rows['name']) . "!</strong></h2><hr>";
+								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . htmlentities($rows['name']) . "!</strong>";
+								if($admin > 0) {echo " <span class='glyphicon glyphicon-ok-circle' style='font-size:18px;color:#337ab7;'></span>";}
+								echo "</h2><hr>";
 								echo '<b>Brukernavn: </b>' . htmlentities($rows['user']) . '<br>';
 								echo '<b>Email: </b>' . htmlentities($rows['email']) . '<br>';
 								echo '<b>Du ble medlem: </b>' . date_format($datetime, "F d, Y") . '<br><br>';
@@ -182,7 +185,7 @@
 
 				<div class="col-md-4">
 					<div class="box">
-						<h2 style="margin:0;margin-bottom:10px;">Oppdater fremside bilde</h2><hr>
+						<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Oppdater fremside bilde</h2><hr>
 						<form class="main-form form-group" enctype="multipart/form-data" action="upload.php" method="POST">
 							<div class="form-group">
 									<input name="upload[]" type="file" id="file2" class="jfilestyle" data-input="false" multiple="multiple" style="width:100%;"/>
@@ -203,7 +206,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="box">
-						<h2 style="margin:0;margin-bottom:10px;">Last opp bilder her</h2><hr>
+						<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Last opp bilder her</h2><hr>
 						<form class="main-form form-group" enctype="multipart/form-data" action="upload.php" method="POST">
 							<div class="form-group">
 								<input name="upload[]" type="file" id="file" class="jfilestyle" data-input="false" multiple="multiple" style="width:100%;"/>
@@ -220,7 +223,7 @@
 			<?php endif; if($admin > 0): ?>
 					<div class="col-md-12">
 						<div class="box">
-							<?php $brukersql = mysqli_query($con, "SELECT * FROM users"); ?>
+							<?php $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja'); $brukersql = mysqli_query($con, "SELECT * FROM users"); ?>
 							<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Brukere <span class="badge"><?php echo mysqli_num_rows($brukersql); ?></span></h2><hr>
 							<div class="table-responsive">
 								<table class="table table-striped table-hover">

@@ -32,7 +32,7 @@ function navBack($num_nav_back){
         <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'index.php'; ?>">Heim</a></li>
         <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'program.php'; ?>">Program</a></li>
         <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'kontakt.php'; ?>">Kontakt</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#myModal">Informasjon</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#info">Informasjon</a></li>
         <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'bilder.php'; ?>">Bilder</a></li>
 
         <!-- If logged in show username -->
@@ -110,7 +110,7 @@ function navBack($num_nav_back){
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
