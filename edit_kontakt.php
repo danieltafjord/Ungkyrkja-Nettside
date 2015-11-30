@@ -1,16 +1,16 @@
 <?php
 	include_once('account/login.php');
 
-	error_reporting(0);
+	#error_reporting(0);
 	if (!empty($_COOKIE['auth-u'])) {
 			$authu = $_COOKIE['auth-u'];
-	}
-	if (!empty($_COOKIE['auth-logged'])) {
-			$authlogged = $_COOKIE['auth-logged'];
 	}
 
 	# Connect to database
 	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+	if (!$con) {
+		die('Connection error');
+	}
 	$query = mysqli_query($con, "SELECT * FROM contact");
 	$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
 
@@ -48,6 +48,10 @@
 		}
 		$querycontacts = mysqli_query($con, "SELECT * FROM contact WHERE id = '$userid'");
 
+		$row = mysqli_fetch_array($querycontacts);
+		$contentemail = $row['email'];
+		$contentphone = $row['phone'];
+		$contentprofession = $row['profession'];
 	}
 
 ?>
@@ -85,20 +89,10 @@
 		include 'components/alert.php';
 		?>
     <!--Content here-->
-				<?php
-					#  Loop trough table
-					while ($rows = mysqli_fetch_array($querycontacts)) {
-						$contentemail = $rows['email'];
-						$contentphone = $rows['phone'];
-						$contentprofession = $rows['profession'];
-					}
-
-				?>
-
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-					<div class="well">
+					<div class="well" style="margin-top:20px;">
 						<form class="main-form form-group" method="post" action="">
 							<Legend>Rediger kontakt</legend>
 							<div class="form-group">
@@ -108,7 +102,7 @@
 
 							<div class="form-group">
 								<label for="number" class="control-label">Telefon:</label>
-								<input type="number" name="phone" class="form-control floating-label" id="number" value="<?php echo htmlentities($contentphone); ?>">
+								<input type="text" name="phone" class="form-control floating-label" id="number" value="<?php echo htmlentities($contentphone); ?>">
 							</div>
 
 							<div class="form-group">

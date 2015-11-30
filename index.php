@@ -114,6 +114,21 @@ $islogged = true;
   </a>
 </div>
 
+<div class="container-fluid" style="background-color:#f3f3f3;padding:50px 0;">
+  <div class="container">
+    <h1 class="page-header"><strong>Hva er Ungkyrkja?</strong></h1>
+    <p style="font-size:16px;">
+      Ungkyrkja er en menighet som befinner seg i Bryne kyrkja, her kan du komme å vere med på interessegrupper,<br>
+      samlingar og ungdomsgudstenester. Vi har åpen kiosk med brus, snop og chips.<br>
+      Vær med på weekends og andre utflukter.
+    </p>
+  </div>
+</div>
+
+<div class="conatiner-fluid">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2070.5722187386423!2d5.643130652691946!3d58.73721329053371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x463a4762f8dea037%3A0x2effe3585aa84cef!2sBrynevegen+9%2C+4340+Bryne!5e0!3m2!1sno!2sno!4v1448825378362" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+
 <!-- Section 2 -->
 <div class="container-fluid" style="margin: 100px 0px;" id="program-next">
 

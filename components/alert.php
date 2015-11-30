@@ -38,8 +38,21 @@ if(isset($_GET['alert'])){
       $alert_type = 'danger';
       break;
     case '1010':
-      $alert ='Kunne ikke koble til database';
+      $alert ='Kunne ikke koble til database.';
       $alert_type = 'danger';
+      break;
+    case '1011':
+      $alert ='Passord endret.';
+      $alert_type = 'success';
+      break;
+    case '1012':
+      $alert ='Feil passord.';
+      $alert_type = 'danger';
+      break;
+    case '1013':
+      $alert ='Bruker endret.';
+      $alert_type = 'success';
+      break;
   }
 }
 

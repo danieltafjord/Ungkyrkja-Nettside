@@ -124,4 +124,23 @@ if (isset($_POST['logout'])) {
 	header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1003');
 }
 
+
+#
+# Change password
+#
+
+if (isset($_POST['changepass'])) {
+	$oldpass = $_POST['oldpass'];
+	$newpass = $_POST['newpass'];
+	$username = $_POST['username'];
+	$db_pass = mysqli_query($con, "SELECT * FROM users WHERE user = '$username'");
+	$row = mysqli_fetch_array($db_pass);
+	if (Hash::check($oldpass, $row['pass'])) {
+		$encnewpass = Hash::create($newpass);
+		mysqli_query($con, "UPDATE users SET pass = '$encnewpass' WHERE user = '$username'");
+		header('Location: index.php?alert=1011');
+	} else {
+		header('Location: index.php?alert=1012');
+	}
+}
 ?>

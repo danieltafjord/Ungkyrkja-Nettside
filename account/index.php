@@ -9,6 +9,8 @@
 	# Include login.php
 	include_once('login.php');
 
+	include_once('../components/alert.php');
+
 	# Turning of basic error reporting
 	#error_reporting(0);
 
@@ -121,9 +123,16 @@
 								echo "<h2 style='margin:0;margin-bottom:10px;'>Hei, <strong>" . htmlentities($rows['name']) . "!</strong>";
 								if($admin > 0) {echo " <span class='glyphicon glyphicon-ok-circle' style='font-size:18px;color:#337ab7;'></span>";}
 								echo "</h2><hr>";
-								echo '<b>Brukernavn: </b>' . htmlentities($rows['user']) . '<br>';
-								echo '<b>Email: </b>' . htmlentities($rows['email']) . '<br>';
-								echo '<b>Du ble medlem: </b>' . date_format($datetime, "F d, Y") . '<br><br>';
+								echo '<ul>';
+								echo "<h4><b>Info:</b></h4>";
+								echo '<li><b>Brukernavn: </b>' . htmlentities($rows['user']) . '<br></li>';
+								echo '<li><b>Email: </b>' . htmlentities($rows['email']) . '<br></li>';
+								echo '<li><b>Du ble medlem: </b>' . date_format($datetime, "F d, Y") . '<br><br></li>';
+								echo '</ul>';
+								echo '<hr>';
+								echo '<ul>';
+								echo "<li><a href='#' data-toggle='modal' data-target='#newpass'>Endre passord.</a></li>";
+								echo '</ul>';
 						?>
 					</div>
 				</div>
@@ -254,9 +263,11 @@
 										echo "<td>" . htmlentities($userrow['email']) . "</td>";
 										echo "<td>" . date_format($date, 'F d, Y') . "</td>";
 										echo "<td>" . htmlentities($userrow['ip']) . "</td>";
-										if ($userrow['role'] == 0) { echo "<td>Bruker</td>";}
-										if ($userrow['role'] == 1) { echo "<td>Administrator</td>";}
-										if ($userrow['role'] == 2) { echo "<td>Utvikler</td>";}
+										echo "<td><form class='form form-inline' method='post' action=''><select class='form-control' name='selectRole'>";
+										if ($userrow['role'] == 0) { echo "<option value='0'>Bruker</option><option value='1'>Administrator</option><option value='2'>Utvikler</option>";}
+										if ($userrow['role'] == 1) { echo "<option value='1'>Administrator</option><option value='2'>Utvikler</option><option value='0'>Bruker</option>";}
+										if ($userrow['role'] == 2) { echo "<option value='2'>Utvikler</option><option value='1'>Administrator</option><option value='0'>Bruker</option>";}
+										echo "</select><button name='submitRole' value='" . $userrow['id'] . "' class='btn btn-primary'>Endre</button></form></td>";
 										if ($userrow['active'] == 1) {echo "<td>Ja</td>";}
 										if ($userrow['active'] == 0) {echo "<td>Nei</td>";}
 										echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $userrow['id'] . "' name='freezeuser'><span class='glyphicon glyphicon-minus' style='color:#555;'></span></button></form></td>";
@@ -279,6 +290,12 @@
 										$id = $_POST['unfreezeuser'];
 										mysqli_query($con, "UPDATE users SET active = '1' WHERE id = '$id'");
 										header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1007');
+									}
+									if (isset($_POST['submitRole'])) {
+										$id = $_POST['submitRole'];
+										$role = $_POST['selectRole'];
+										mysqli_query($con, "UPDATE users SET role = '$role' WHERE id = '$id'");
+										header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1013');
 									}
 
 									?>
@@ -345,6 +362,42 @@
 					<div class="modal-footer">
 						<div class="form-group">
 							<button type="submit" class="btn btn-danger" name="submit-bilder">Slett</button>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- this is a modal for chaning password-->
+		<div id="newpass" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Endre passord</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form" method="POST" action="login.php">
+						<div class="form-group">
+							<label for="oldpass">Nåværende passord</label>
+							<input type="password" class="form-control" name="oldpass">
+						</div>
+						<div class="form-group">
+							<label for="newpass">Nytt passord</label>
+							<input type="password" class="form-control" name="newpass">
+						</div>
+						<div class="form-group">
+							<input type="text" hidden name="username" value="<?php echo $_COOKIE['auth-u']; ?>">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary" name="changepass">Ferdig</button>
 						</div>
 						<div class="form-group">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>

@@ -5,16 +5,6 @@
 	if (!empty($_COOKIE['auth-u'])) {
 			$authu = $_COOKIE['auth-u'];
 	}
-	# if logged cookie is set
-	if (!empty($_COOKIE['auth-logged'])) {
-			$authlogged = $_COOKIE['auth-logged'];
-	}
-	# if logged cookie is not set, set variable to true
-	if(empty($_COOKIE['auth-logged'])) {
-		$islogged = true;
-	} else {
-		$islogged = false;
-	}
 
 	# Connect to database
 	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
@@ -22,7 +12,6 @@
 		die('Failed to connect to database: ' . mysqli_error($con));
 	}
 	$query = mysqli_query($con, "SELECT * FROM contact");
-	$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
 ?>
 
 <!DOCTYPE html>
@@ -80,20 +69,14 @@
 		include 'components/alert.php';
 		?>
     <!--Content here-->
-		<div class="container-fluid" align="center" style="max-width:100%;margin-top:15px;font-weight:300;">
+		<div class="container-fluid" align="center" style="max-width:100%;margin-top:65px;font-weight:300;">
 			<div class="row">
 				<?php
-				$query = mysqli_query($con, "SELECT * FROM contact");
-				mysqli_close($con);
-
-				while ($rows = mysqli_fetch_array($queryusers)) {
-					if ($rows['role'] == 1) {
-						$admin = true;
-					}
-					if ($rows['role'] == 0) {
-						$admin = false;
-
-					}
+				if(!empty($_COOKIE['auth-u'])) {
+					$authu = $_COOKIE['auth-u'];
+					$queryusers = mysqli_query($con, "SELECT * FROM users WHERE user = '$authu'");
+					$query = mysqli_query($con, "SELECT * FROM contact");
+					$row = mysqli_fetch_array($queryusers);
 				}
 
 					#  Loop trough table
@@ -101,9 +84,9 @@
 						echo "<div class='col-md-3'>";
 							echo "<div class='panel panel-default'>";
 								echo "<div class='panel-body'>";
-								if ($rows['user'] == $_COOKIE['auth-u'] && $admin == true) {
-									echo "<a style='float:right;font-size:15px;' href='edit_kontakt.php?id=" . $rows['id'] . "'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>";
-								}
+									if ($rows['user'] == $row['user'] && $row['role'] == 1) {
+										echo "<a style='float:right;font-size:15px;' href='edit_kontakt.php?id=" . $row['id'] . "'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>";
+									}
 									echo "<div><img class='kontakt-img' src='img/" . htmlentities($rows['img']) . "'></div>";
 									echo "<div><h3>" . htmlentities($rows['name']) . "</h3></div>";
 									echo "<div><h6>" . htmlentities($rows['profession']) . "</h6></div>";

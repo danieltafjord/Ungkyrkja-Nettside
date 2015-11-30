@@ -10,7 +10,7 @@ if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
   $auth_u = $_COOKIE['auth-u'];
   $auth = $_COOKIE['auth'];
 
-  $user = $con->query("SELECT user, pass, role FROM users WHERE user LIKE $auth_u")->fetch_array();
+  $user = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
 
   if($auth_u != $user['user'] || $auth != $user['pass'] || $user['role'] < 1){
     die('User not authorized!');
