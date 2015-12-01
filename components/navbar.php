@@ -29,11 +29,11 @@ function navBack($num_nav_back){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'index.php'; ?>">Heim</a></li>
-        <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'program.php'; ?>">Program</a></li>
-        <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'kontakt.php'; ?>">Kontakt</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#info">Informasjon</a></li>
-        <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'bilder.php'; ?>">Bilder</a></li>
+        <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'heim'; ?>">Heim</a></li>
+        <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'program'; ?>">Program</a></li>
+        <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'kontakt'; ?>">Kontakt</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#tilbakemelding">Tilbakemelding</a></li>
+        <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'bilder'; ?>">Bilder</a></li>
 
         <!-- If logged in show username -->
         <?php if(!empty($_COOKIE['auth-u'])) : ?>
@@ -48,7 +48,7 @@ function navBack($num_nav_back){
             ?>
             <span class="caret"></span></a>
           <ul class="dropdown-menu" style="">
-            <?php if(isset($_POST['minside'])) {header('Location: ' . navBack($distance_from_root) . 'account/index.php');} ?>
+            <?php if(isset($_POST['minside'])) {header('Location: ' . navBack($distance_from_root) . 'account/');} ?>
             <form style="min-width:160px;" action="" method="POST" class="form-inline">
               <div class="form-group">
                 <button type="submit" name="minside" class="btn btn-default">Min Side</button>
@@ -110,21 +110,45 @@ function navBack($num_nav_back){
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="tilbakemelding" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Informasjon</h4>
+        <h4 class="modal-title" id="myModalLabel">Tilbakemelding</h4>
       </div>
       <div class="modal-body">
-        <p>Ungkyrkja er en menighet på Bryne for ungdommer i 8.klasse og oppover.</p><hr>
-        <p>
-          Denne nettsiden bruker <a href="#">Cookies</a> for å lagre informasjon.
-          Passordet ditt er kryptert og vi har på ingen måte mulighet til å se passordet ditt.
-          Du har selv ansvar for at du ikke deler din bruker-informasjon.
-        </p><br>
+        <p>Gi tilbakemeldinger om hva du syntes er bra eller dårlig med denne nettsiden.</p>
+        <form class="form form-group" action="" method="post">
+          <div class="form-group">
+            <label for="name">Navn</label>
+            <input type="text" class="form-control" name="name" value="">
+          </div>
+          <div class="form-group">
+            <label for="name">Email</label>
+            <input type="text" class="form-control" name="email" value="">
+          </div>
+          <div class="form-group">
+            <label for="name">Melding</label>
+            <textarea name="message" class="form-control" value=""></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" name="tilbakemelding" class="btn btn-primary">Send</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
+<?php
+
+if (isset($_POST['tilbakemelding'])) {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $message = $_POST['message'];
+  mysqli_query($con, "INSERT INTO tilbakemeldinger (name, email, message) VALUES ('$name', '$email', '$message')");
+  header('Location: ' . $_SERVER['PHP_SELF']);
+}
+
+?>

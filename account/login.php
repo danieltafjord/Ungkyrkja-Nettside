@@ -130,6 +130,7 @@ if (isset($_POST['logout'])) {
 #
 
 if (isset($_POST['changepass'])) {
+	# Set variables
 	$oldpass = $_POST['oldpass'];
 	$newpass = $_POST['newpass'];
 	$username = $_POST['username'];

@@ -304,7 +304,50 @@
 							</div>
 						</div>
 					</div>
-				<?php endif; ?>
+				<?php endif; if ($admin == 2):?>
+					<div class="col-md-12">
+						<div class="box">
+							<h2 style="margin:0;margin-bottom:10px;font-weight:bold;">Tilbakemeldinger <span class="badge"><?php echo mysqli_num_rows(mysqli_query($con, "SELECT * FROM tilbakemeldinger")); ?></span></h2><hr>
+							<table class="table table-striped table-hover table-responsive">
+								<tr>
+									<th>Id</th>
+									<th>Navn</th>
+									<th>Email</th>
+									<th>Melding</th>
+									<th>Slett</th>
+								</tr>
+								<?php
+
+								$a = mysqli_query($con, "SELECT * FROM tilbakemeldinger");
+								while ($x = mysqli_fetch_array($a)) {
+									echo "<tr>";
+									echo "<td>" . $x['id'] . "</td>";
+									if ($x['name'] == '') {
+										echo "<td>Anonym</td>";
+									} else {
+										echo "<td>" . $x['name'] . "</td>";
+									}
+									if ($x['email'] == '') {
+										echo "<td>Anonym</td>";
+									} else {
+										echo "<td>" . $x['email'] . "</td>";
+									}
+									echo "<td>" . $x['message'] . "</td>";
+									echo "<td><form method='post' action=''>&nbsp;&nbsp;<button style='border:none;background-color:transparent;' value ='" . $x['id'] . "' name='delmes'><span class='glyphicon glyphicon-trash' style='color:#d9534f;'></span></button></form></td>";
+									echo "</tr>";
+								}
+
+								if (isset($_POST['delmes'])) {
+									$delmes = $_POST['delmes'];
+									mysqli_query($con, "DELETE FROM tilbakemeldinger WHERE id = '$delmes'");
+									header('Location: ' . $_SERVER['PHP_SELF'] . '?alert=1014');
+								}
+
+								?>
+							</table>
+						</div>
+					</div>
+			<?php endif; ?>
 			</div>
 		</div>
 

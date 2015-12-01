@@ -7,7 +7,7 @@
 	}
 
 	# Connect to database
-	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+	$con = mysqli_connect('localhost','root','','blog');
 	if(!$con){
 		die('Failed to connect to database: ' . mysqli_error($con));
 	}
@@ -85,7 +85,7 @@
 							echo "<div class='panel panel-default'>";
 								echo "<div class='panel-body'>";
 									if ($rows['user'] == $row['user'] && $row['role'] == 1) {
-										echo "<a style='float:right;font-size:15px;' href='edit_kontakt.php?id=" . $row['id'] . "'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>";
+										echo "<a style='float:right;font-size:15px;' href='rediger_kontakt?id=" . $row['id'] . "'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>";
 									}
 									echo "<div><img class='kontakt-img' src='img/" . htmlentities($rows['img']) . "'></div>";
 									echo "<div><h3>" . htmlentities($rows['name']) . "</h3></div>";

@@ -1,1 +1,9 @@
 Options -Indexes
+ErrorDocument 404 "<h1>404, Page not found</h1>"
+RewriteEngine On
+RewriteRule    ^heim/?$    index.php    [NC,L]    # Handle requests for "index"
+RewriteRule    ^kontakt/?$    kontakt.php    [NC,L]    # Handle requests for "kontakt"
+RewriteRule    ^program/?$    program.php    [NC,L]    # Handle requests for "program"
+RewriteRule    ^bilder/?$    bilder.php    [NC,L]    # Handle requests for "bilder"
+RewriteRule    ^rediger_kontakt/?$    edit_kontakt.php    [NC,L]    # Handle requests for "rediger_kontakt"
+RewriteRule    ^rediger_program/?$    edit_program.php    [NC,L]    # Handle requests for "rediger_program"

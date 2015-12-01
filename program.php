@@ -73,7 +73,7 @@ include_once('account/login.php');
       $site_location = '/program.php';
       include 'components/navbar.php';
 			# Connect to database
-			$conn = new mysqli("localhost","ungkyrkja","ungkyrkja","ungkyrkja");
+			$conn = new mysqli('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
       if($conn->connect_errno){
         die("Could not connect to database!" . $conn->connect_error);
       }
@@ -91,7 +91,7 @@ include_once('account/login.php');
 				$role = $user['role'];
 				if($pass = $_COOKIE['auth'] && $role == 1){
 					?>
-          <a href="edit_program.php"><button type="button" class="fab-main"><i class="material-icons md-light">add</i></button></a>
+          <a href="rediger_program"><button type="button" class="fab-main"><i class="material-icons md-light">add</i></button></a>
 					<?php
 				}
 			}
@@ -227,7 +227,7 @@ include_once('account/login.php');
             <p>Er du sikker? Dette kan ikke gjøres om.</p>
           </div>
           <div class="modal-footer">
-            <form id="deleteForm" action="edit_program.php" method="post">
+            <form id="deleteForm" action="rediger_program" method="post">
               <button id="deleteButton" class="btn btn-danger" type="submit" name="delete">Slett</button>
               <input id="deleteId" hidden type="text" name="id" value="">
             </form>

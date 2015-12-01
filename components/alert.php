@@ -53,6 +53,10 @@ if(isset($_GET['alert'])){
       $alert ='Bruker endret.';
       $alert_type = 'success';
       break;
+    case '1014':
+      $alert ='Tilbakemelding slettet.';
+      $alert_type = 'success';
+      break;
   }
 }
 
