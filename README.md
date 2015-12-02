@@ -4,9 +4,10 @@
 
 John Ingve:
 - bilder overhaul
+- add something for "min profil" for users
 
 Daniel:
-- Add 'change password' option
+- Make error reporting work again
 
 # Using error class
 
