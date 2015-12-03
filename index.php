@@ -34,8 +34,11 @@ $islogged = true;
     <style media="screen">
     .divider {
       margin-bottom:20px;
+      margin-left: auto;
+      margin-right: auto;
       border:0;
       border-bottom:1px solid #e5e5e5;
+      max-width: 900px;
     }
     .box {
       margin-top: 15px;
@@ -65,6 +68,13 @@ $islogged = true;
     }
     .modal-footer form{
       display: inline-block;
+    }
+    .maps{
+      max-width: 650px;
+      margin: auto;
+    }
+    .maps iframe{
+      pointer-events: none;
     }
     </style>
   </head>
@@ -123,10 +133,6 @@ $islogged = true;
       Vær med på weekends og andre utflukter.
     </p>
   </div>
-</div>
-
-<div class="conatiner-fluid">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2070.5722187386423!2d5.643130652691946!3d58.73721329053371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x463a4762f8dea037%3A0x2effe3585aa84cef!2sBrynevegen+9%2C+4340+Bryne!5e0!3m2!1sno!2sno!4v1448825378362" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 </div>
 
 <!-- Section 2 -->
@@ -207,6 +213,10 @@ $islogged = true;
   ?>
 </div>
 
+<div class="maps">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2070.5722187386423!2d5.643130652691946!3d58.73721329053371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x463a4762f8dea037%3A0x2effe3585aa84cef!2sBrynevegen+9%2C+4340+Bryne!5e0!3m2!1sno!2sno!4v1448825378362" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+
 <?php
 if($role > 0){
 ?>
@@ -265,6 +275,12 @@ if($role > 0){
         var id = $(this).closest('div[id]').attr('id');
         $('#deleteId').attr('value', id);
       })
+      $('.maps').click(function () {
+        $('.maps iframe').css("pointer-events", "auto");
+      });
+      $( ".maps" ).mouseleave(function() {
+        $('.maps iframe').css("pointer-events", "none");
+      });
     }
 
     $(document).ready(main);
