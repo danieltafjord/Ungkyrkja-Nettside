@@ -201,7 +201,7 @@ include 'components/alert.php';
 						<label for="endtime" class="control-label">Slutt tid:</label>
 						<input type="time" class="form-control" id="endtime" name="endtime" value="<?php if($enddate!=""){echo $enddate->format("H:i");}?>" />
 					</fieldset>
-					<legend>Innhold:</legend>
+					<legend>Innhald:</legend>
 					<textarea class="form-control" rows="5" id="content" name="content"><?php echo htmlentities($content); ?></textarea>
 					<input type="text" class="form-control hidden" id="id" name="id" value="<?php echo $id; ?>" />
 					<button type="submit" name="update" class="btn btn-primary">Lagre</button>
@@ -216,7 +216,7 @@ include 'components/alert.php';
                   <h4 class="modal-title">Slett</h4>
                 </div>
                 <div class="modal-body">
-                  <p>Er du sikker? Dette kan ikke gjøres om.</p>
+                  <p>Er du sikker? Dette kan ikkje gjerast om på.</p>
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-danger" type="submit" name="delete">Slett</button>

@@ -218,7 +218,7 @@ if($role > 0){
           <h4 class="modal-title">Slett</h4>
         </div>
         <div class="modal-body">
-          <p>Er du sikker? Dette kan ikke gjøres om.</p>
+          <p>Er du sikker? Dette kan ikkje gjerast om på.</p>
         </div>
         <div class="modal-footer">
           <form id="deleteForm" action="edit_program.php" method="post">
