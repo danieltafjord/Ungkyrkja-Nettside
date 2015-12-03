@@ -12,14 +12,13 @@
 	include_once('../components/alert.php');
 
 	# Turning of basic error reporting
-	#error_reporting(0);
+	error_reporting(0);
 
 	# Get error logging class
-	#use Project\Error\error;
-	#include('error.php');
+	include('error.php');
 
 	# connect to database
-	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
+	$con = mysqli_connect('localhost','root','','blog');
 	if(!$con){
 		# Repport error
 		error::report($_SERVER['PHP_SELF'],'Failed to connect to database: ' . mysqli_error($con), 'Fatal', $_SERVER['REMOTE_ADDR'], date('Y-m-d h:i:sa'));

@@ -1,9 +1,11 @@
 <?php
 # PHP Login and Register Script
 
+# Turning of basic error reporting
+error_reporting(0);
+
 # Import classes
 use Project\Helpers\Hash;
-use Project\Error\error;
 require 'hash.php';
 include('error.php');
 
@@ -14,8 +16,7 @@ $alert_type = '';
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 if (!$con) {
 	error::report($_SERVER['PHP_SELF'],'Failed to connect to database: ' . mysqli_error($con), 'Fatal', $_SERVER['REMOTE_ADDR'], date('Y-m-d h:i:sa'));
-	$alert = 'Det har oppstått en feil.';
-	$alert_type = 'danger';
+	echo "<h2>Fatal error!</h2>";
 }
 
 #
