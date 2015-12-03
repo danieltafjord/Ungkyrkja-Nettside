@@ -23,7 +23,7 @@ include_once('account/login.php');
     <meta name="msapplication-TileColor" content="#222">
     <meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
     <meta name="theme-color" content="#222">
-    <title>Program | Ungkyrkja</title>
+    <title>Ungkyrkja | Program</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="components/header-imports.html">
     <style media="screen">
@@ -34,6 +34,9 @@ include_once('account/login.php');
       padding:20px;
       border: 1px solid #e3e3e3;
       border-radius: 3px;
+    }
+    #program{
+      padding-top: 20px;
     }
     .month_divider hr{
       background-color: #666;
@@ -84,7 +87,7 @@ include_once('account/login.php');
         $usersql = $conn->query("SELECT pass, role FROM users WHERE user LIKE $user");
       }
 			$conn->close();
-
+      $role = 0;
 			if($usersql){
         $user = $usersql->fetch_array();
         $pass = $user['pass'];
@@ -120,7 +123,7 @@ include_once('account/login.php');
 
   ?>
 		<!--Main bit-->
-		<div class="container-fluid">
+		<div id="program" class="container-fluid">
 
 			<div class="row">
 			<?php
