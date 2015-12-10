@@ -38,7 +38,7 @@ if(isset($_GET['alert'])){
       $alert_type = 'danger';
       break;
     case '1010':
-      $alert ='Kunne ikke koble til database.';
+      $alert ='Kunne ikke koble til databasen.';
       $alert_type = 'danger';
       break;
     case '1011':
@@ -56,6 +56,10 @@ if(isset($_GET['alert'])){
     case '1014':
       $alert ='Tilbakemelding slettet.';
       $alert_type = 'success';
+      break;
+    case '1015':
+      $alert = 'Du må logge inn for å bruke denne funksjonen.';
+      $alert_type = "danger";
       break;
   }
 }

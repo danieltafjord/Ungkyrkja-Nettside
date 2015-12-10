@@ -1,8 +1,10 @@
 <?php
+include('error.php');
 # connect to database
 $con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 if($con->connect_errno){
-  die('Connect Error: '. $con->connect_errno);
+  error::report('upload.php', $con->connect_errno, 'fatal', $_SERVER['REMOTE_ADDR'], date('Y-m-d h:i:sa'));
+  header('location: /?alert=1010');
 }
 
 // Check user
@@ -13,11 +15,11 @@ if(isset($_COOKIE['auth-u']) && isset($_COOKIE['auth'])){
   $user = $con->query("SELECT user, pass, role FROM users WHERE user LIKE '$auth_u'")->fetch_array();
 
   if($auth_u != $user['user'] || $auth != $user['pass'] || $user['role'] < 1){
-    die('User not authorized!');
+    header('location: /?alert=1015');
   }
 }
 else{
-  die('User not logged in!');
+  header('location: ../?alert=1009');
 }
 
 # if superglobal post['desc'] is set run upload script
