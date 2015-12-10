@@ -3,11 +3,14 @@
 # TODO
 
 John Ingve:
-- bilder overhaul
 - add something for "min profil" for users
+- implement grupper.php
+- add easter egg
 
 Daniel:
-
+- fix upload.php
+- fix bilder.php
+- add error reporting on stuff
 
 # Using error class
 
