@@ -11,13 +11,12 @@ Daniel:
 
 # Using error class
 
-<p>Add this</p>
-```PHP
-use Project\Error\error;
-include('error.php');
-```
 ```PHP
 error::report('File name', 'Error message', 'Error type', 'IP', 'date');
+```
+<p>Add this</p>
+```PHP
+include('error.php');
 ```
 <p>Example:</p>
 ```PHP
