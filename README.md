@@ -7,7 +7,7 @@ John Ingve:
 - add something for "min profil" for users
 
 Daniel:
-- Make error reporting work again
+
 
 # Using error class
 
