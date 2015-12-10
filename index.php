@@ -82,10 +82,23 @@ $islogged = true;
     <!--Import navbar-->
     <?php
     $site_location = '/index.php';
-    include 'components/navbar.php';
     include 'components/alert.php';
     ?>
 
+<?php if(empty($_COOKIE['auth-u'])): ?>
+	<div class="top-container">
+		<div class="menu-anchor">
+			<a href="#nav"><img src="img/menu.png" /></a>
+		</div>
+		<div class="mid-img">
+			<img src="img/uk.png" />
+		</div>
+	</div>
+	<div class="main-container" id="nav">
+<?php endif; ?>
+
+
+	<?php include 'components/navbar.php'; ?>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
 
@@ -240,6 +253,9 @@ if($role > 0){
       </div>
     </div>
   </div>
+<?php if(empty($_COOKIE['auth-u'])): ?>
+</div>
+<?php endif; ?>
 <?php
 }
 ?>
@@ -286,5 +302,6 @@ if($role > 0){
     $(document).ready(main);
     </script>
     <script type="text/javascript">$('.carousel').carousel({interval: 10000, keyboard:true});</script>
+		<script src="js/app.js"></script>
   </body>
 </html>
