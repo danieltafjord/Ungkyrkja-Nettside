@@ -17,7 +17,7 @@ function navBack($num_nav_back){
 }
 ?>
 <!-- Header -->
-<nav class="navbar navbar-inverse navbar-fixed-top" id="nav-main">
+<nav class="navbar navbar-inverse" id="nav-main">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -29,11 +29,11 @@ function navBack($num_nav_back){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'heim'; ?>">Heim</a></li>
-        <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'program'; ?>">Program</a></li>
-        <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'kontakt'; ?>">Kontakt</a></li>
+        <li class="<?php if($location == '/index.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'index.php'; ?>">Heim</a></li>
+        <li class="<?php if($location == '/program.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'program.php'; ?>">Program</a></li>
+        <li class="<?php if($location == '/kontakt.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'kontakt.php'; ?>">Kontakt</a></li>
         <li><a href="#" data-toggle="modal" data-target="#tilbakemelding">Tilbakemelding</a></li>
-        <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'bilder'; ?>">Bilder</a></li>
+        <li class="<?php if($location == '/bilder.php'){ echo 'active'; } ?>"><a href="<?php echo navBack($distance_from_root) . 'bilder.php'; ?>">Bilder</a></li>
 
         <!-- If logged in show username -->
         <?php if(!empty($_COOKIE['auth-u'])) : ?>
