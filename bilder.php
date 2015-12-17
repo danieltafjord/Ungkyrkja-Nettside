@@ -45,23 +45,6 @@ if (!empty($_COOKIE['auth-u'])) {
     <link rel="import" href="components/header-imports.html">
   </head>
   <style media="screen">
-    .photos {
-      line-height: 0;
-      -webkit-column-count: 5;
-      -webkit-column-gap:   0px;
-      -moz-column-count:    5;
-      -moz-column-gap:      0px;
-      column-count:         5;
-      column-gap:           0px;
-    }
-
-    .g-img {
-      width: 100% !important;
-      height: auto !important;
-      padding: 5px;
-      -webkit-transition: opacity 650ms ease-in-out;
-      transition: opacity 650ms ease-in-out;
-    }
     .p-div {
       margin-top: 20px;
       margin-left: auto;
@@ -86,22 +69,24 @@ if (!empty($_COOKIE['auth-u'])) {
     ?>
 
     <!--Content here-->
-    <section class="photos" align="center">
-      <?php
-        $images = mysqli_query($con, "SELECT * FROM bilder");
+    <section align="center">
+			<div class="row">
+	      <?php
+	        $images = mysqli_query($con, "SELECT * FROM bilder");
 
-        # check if img is not set
-        if(!isset($_GET['img'])) {
-          while($rows = mysqli_fetch_array($images)) {
-            #if file exist show image
-            if(file_exists('bilder/' . $rows['img'])) {
-              echo "<a href='?img=" . $rows['id'] . "'><img class='g-img' src='bilder/" . htmlentities($rows['img']) . "'></a>";
-            } else {
-              //echo "<p>Fant ingen bilder!</p>";
-            }
-          }
-        }
-      ?>
+	        # check if img is not set
+	        if(!isset($_GET['img'])) {
+	          while($rows = mysqli_fetch_array($images)) {
+	            #if file exist show image
+	            if(file_exists('bilder/' . $rows['img'])) {
+								echo "<div class='col-md-3' style='margin-bottom:40px;'><a href='bilder/" . $rows['img'] . "' data-lightbox='1'><img src='bilder/" . $rows['img'] . "'></a></div>";
+	            } else {
+	              echo "<p>Fant ingen bilder!</p>";
+	            }
+	          }
+	        }
+	      ?>
+			</div>
     </section>
     <?php
 

@@ -15,10 +15,10 @@
 	error_reporting(0);
 
 	# Get error logging class
-	include('error.php');
+	#include('error.php');
 
 	# connect to database
-	$con = mysqli_connect('localhost','root','','blog');
+	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 	if(!$con){
 		# Repport error
 		error::report($_SERVER['PHP_SELF'],'Failed to connect to database: ' . mysqli_error($con), 'Fatal', $_SERVER['REMOTE_ADDR'], date('Y-m-d h:i:sa'));
@@ -131,6 +131,7 @@
 								echo '<hr>';
 								echo '<ul>';
 								echo "<li><a href='#' data-toggle='modal' data-target='#newpass'>Endre passord.</a></li>";
+								echo "<li><a href='#' data-toggle='modal' data-target='#newpass'>Endre brukerinformasjon.</a></li>";
 								echo '</ul>';
 						?>
 					</div>

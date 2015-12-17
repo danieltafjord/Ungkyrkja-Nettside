@@ -2,12 +2,13 @@
 	include_once('account/login.php');
 	//error_reporting(0);
 	# if username cookie is set
+	$authu = '';
 	if (!empty($_COOKIE['auth-u'])) {
 			$authu = $_COOKIE['auth-u'];
 	}
 
 	# Connect to database
-	$con = mysqli_connect('localhost','root','','blog');
+	$con = mysqli_connect('localhost','ungkyrkja','ungkyrkja','ungkyrkja');
 	if(!$con){
 		die('Failed to connect to database: ' . mysqli_error($con));
 	}
@@ -84,7 +85,7 @@
 						echo "<div class='col-md-3'>";
 							echo "<div class='panel panel-default'>";
 								echo "<div class='panel-body'>";
-									if ($rows['user'] == $row['user'] && $row['role'] == 1) {
+									if ($rows['user'] == $row['user'] && $row['role'] > 0) {
 										echo "<a style='float:right;font-size:15px;' href='rediger_kontakt?id=" . $row['id'] . "'><span class='glyphicon glyphicon-cog' aria-hidden='true'></span></a>";
 									}
 									echo "<div><img class='kontakt-img' src='img/" . htmlentities($rows['img']) . "'></div>";
