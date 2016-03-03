@@ -9,8 +9,6 @@
 	# Include login.php
 	include_once('login.php');
 
-	include_once('../components/alert.php');
-
 	# Turning of basic error reporting
 	error_reporting(0);
 
@@ -102,6 +100,7 @@
 		<?php
 			$site_location = '/account/index.php';
 			include '../components/navbar.php';
+			include('../components/alert.php');
 		?>
 
 		<!-- Container section -->

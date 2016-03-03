@@ -8,7 +8,14 @@ html {
   position: relative;
   min-height: 100%;
 }
-
+.box {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  padding:20px;
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+}
 .row {
   overflow-x: hidden;
 }
@@ -74,8 +81,16 @@ footer #copyright li{
   right: 15px;
   bottom: 15px;
   z-index: 100;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: none;
+  background-color: #F44336;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-
+.fab-main i{
+  vertical-align: middle;
+}
 .top-container {
 	position: absolute;
 	width: 100%;

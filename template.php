@@ -1,9 +1,5 @@
 <?php
 include_once('account/login.php');
-$islogged = false;
-if(!empty($_COOKIE['auth-logged'])) {
-$islogged = true;
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +25,7 @@ $islogged = true;
     <meta name="theme-color" content="#222">
     <title>Ungkyrkja</title>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="component/header-imports.html">
+    <link rel="import" href="components/header-imports.html">
   </head>
   <body>
     <!--Import navbar-->

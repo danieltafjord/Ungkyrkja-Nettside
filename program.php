@@ -50,17 +50,6 @@ include_once('account/login.php');
       float: left;
       margin-right: 8px;
     }
-    .fab-main{
-      width: 60px;
-      height: 60px;
-      border-radius: 100%;
-      border: none;
-      background-color: #F44336;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
-    .fab-main i{
-      vertical-align: middle;
-    }
     .btn-icon{
       border: none;
       background-color: #fff;
@@ -245,22 +234,6 @@ include_once('account/login.php');
 
 		<script>
     var main = function(){
-    	$('.event-panel').click(function(){
-    		//Highlight the clicked element
-    		if($(this).hasClass('panel-primary')){
-    			$('.event-panel').removeClass('panel-primary').addClass('panel-default');
-    			$('.btn-edit').addClass('hidden');
-    		}
-    		else{
-    			$('.event-panel').removeClass('panel-primary').addClass('panel-default');
-    			$(this).removeClass('panel-default').addClass('panel-primary');
-    			$('.btn-edit').addClass('hidden');
-    			$('.btn-edit', this).removeClass('hidden');
-    		}
-
-    		//show the edit button in the clicked element
-
-    	});
     	$('.btn-edit').click(function(){
     		var url = window.location.href;
     		var id = $(this).closest('div[id]').attr('id');
